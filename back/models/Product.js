@@ -32,8 +32,8 @@ Product.init(
       type: S.ARRAY(S.STRING)
     },
     rating: {
-      type: S.VIRTUAL,
-      get() {}
+      type: S.INT,
+      defaultValue: 0     //needs to be changed for a getter or setter.
     },
     active: {
       type: S.BOOLEAN,
@@ -43,14 +43,14 @@ Product.init(
       }
     }
   },
-  { sequelize: "db", modelName: "product" }
+  { sequelize: db, modelName: "product" }
 );
 
-Product.belongsToMany(Cart, {
-  through: "Product_Cart",
-  foreignKey: "cartId",
-  otherKey: "productId"
-});
+// Product.belongsToMany(Cart, {
+//   through: "Product_Cart",
+//   foreignKey: "cartId",
+//   otherKey: "productId"
+// });
 
 Product.hasMany(Review);
 

@@ -16,8 +16,8 @@ User.init(
     email: {
       type: S.STRING,
       notEmpty: true,
-      isEmail: true,
-      unique: true
+      isEmail: true
+      // unique: true    to have multiple guests with the same email.
     },
     password: {
       type: S.STRING,
@@ -26,9 +26,9 @@ User.init(
     salt: {
       type: S.STRING
     },
-    guest: {
-      type: S.BOOLEAN,
-      defaultValue: true
+    userType: {
+      type: S.ENUM("guest", "user", "admin"),
+      defaultValue: "guest"
     },
     address: {
       type: S.TEXT
@@ -36,6 +36,10 @@ User.init(
   },
   { sequelize: db, modelName: "user" }
 );
+
+User.beforeUpdate(user => {
+  if (user.userType === "guest") user.userType = "user"; // setDataValue() could be good practice
+});
 
 User.prototype.hashPassword = function(password) {
   return crypto
@@ -58,9 +62,9 @@ User.beforeCreate(user => {
   user.password = user.hashPassword(user.password);
 });
 
-User.hasOne(Cart, { as: "currentCart" });
+//User.hasOne(Cart, { as: "currentCart" });
 
-User.hasMany(Cart, { as: "history" });
-User.hasMany(Review);
+// User.hasMany(Cart, { as: "history" });
+// User.hasMany(Review);
 
 module.exports = User;

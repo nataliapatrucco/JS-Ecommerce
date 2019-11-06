@@ -1,5 +1,4 @@
 const Sequelize = require("sequelize");
+const config = require('./dbconfig.json')
 
-const db = new Sequelize("ecommerce", { logging: false });
-
-module.exports = db;
+module.exports = new Sequelize(config.database, config.username, config.password, config);
