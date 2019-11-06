@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Search from "../components/Search";
 import { fetchProducts } from "../store/actions/product";
+import Search from "../components/Search";
 
 export class HomeContainers extends Component {
   constructor(props) {

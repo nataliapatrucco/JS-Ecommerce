@@ -1,9 +1,7 @@
 import React from "react";
 import Popup from "reactjs-popup";
-import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
-  console.log(props);
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       {props.user ? (

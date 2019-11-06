@@ -9,7 +9,7 @@ export default function Search(props) {
             <h1 className="text-center display-4">JS</h1>
             <form>
               <input
-                onChange={props.handleChange}
+                // onChange={props.handleChange}
                 className=" active-purple-3 active-purple-4 mb-4 form-control"
                 type="text"
                 placeholder="Search"
