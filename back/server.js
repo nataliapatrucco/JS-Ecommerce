@@ -6,10 +6,11 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const app = express();
 const chalk = require("chalk");
-//const db = require("./config/db")
-//const passportConfig = require("./config/passport")
-//const routes = require("./routes")
-//const User = require('./models/User');
+const db = require("./config/db");
+const passportConfig = require("./config/passport");
+const routes = require("./routes");
+const User = require("./models/User");
+require("dotenv").config();
 
 app.set("view engine", "html");
 
@@ -24,21 +25,21 @@ app.use(session({ secret: "yo!", resave: true, saveUninitialized: true }));
 // app.use(passportConfig.initialize());
 // app.use(passportConfig.session());
 
-//app.use("/api", routes);
-app.get("/*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./public/index.html"));
-});
+app.use("/api", routes);
+
+// 404 error catch
 
 db.sync({ force: false })
   .then(() => {
     console.log(chalk.bgGreen(chalk.black("Connected to database." + "")));
-    app.listen(PORT, () =>
+    app.listen(process.env.PORT, () =>
       console.log(
         chalk.bgBlack(
-          `Server listening now on ` + chalk.bgBlue(`port ${PORT}`) + ""
+          `Server listening now on ` +
+            chalk.bgBlue(`port ${process.env.PORT}`) +
+            ""
         )
       )
     );
   })
   .catch(err => console.log(chalk.red(`Problem starting the app`, err)));
-// app.listen(3000, () => {});

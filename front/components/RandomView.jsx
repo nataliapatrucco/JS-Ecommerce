@@ -11,7 +11,6 @@ export default function RandomView({ products }) {
             <Card.Body>
               <Card.Title>{product.name}</Card.Title>
               <Card.Title>{product.price}</Card.Title>
-              <Card.Title>Cart</Card.Title>
             </Card.Body>
             <Card.Footer>
               <small className="text-muted">
@@ -22,6 +21,7 @@ export default function RandomView({ products }) {
                 />
               </small>
             </Card.Footer>
+            <button onClick={props.handleAdd}>Add to cart</button>
           </Card>
         ))}
       </CardDeck>

@@ -19,6 +19,8 @@ export class HomeContainers extends Component {
     this.setState({ text: event.target.value });
   }
 
+  handleAdd() {}
+
   render() {
     return (
       <div>
