@@ -14,7 +14,10 @@ Product.init(
     },
     price: {
       type: S.INTEGER,
-      notEmpty: true
+      notEmpty: true,
+      get() {
+        return "$" + this.getDataValue("price");
+      }
     },
     description: {
       type: S.TEXT,
@@ -33,7 +36,7 @@ Product.init(
     },
     rating: {
       type: S.INTEGER,
-      defaultValue: 0     //needs to be changed for a getter or setter.
+      defaultValue: 0 //needs to be changed for a getter or setter.
     },
     active: {
       type: S.BOOLEAN,
@@ -46,12 +49,6 @@ Product.init(
   { sequelize: db, modelName: "product" }
 );
 
-// Product.belongsToMany(Cart, {
-//   through: "Product_Cart",
-//   foreignKey: "cartId",
-//   otherKey: "productId"
-// });
-
 Product.hasMany(Review);
 
-module.exports = Cart;
+module.exports = Product;
