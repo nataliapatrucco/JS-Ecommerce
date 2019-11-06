@@ -4,9 +4,9 @@ import { Switch, Route } from "react-router-dom";
 import store from "../store/store";
 import Footer from "../components/Footer";
 import NavbarContainer from "../containers/NavbarContainer";
-import RegisterContainer from "../containers/RegisterContainer";
-import LoginContainer from "../containers/LoginContainer";
 import { connect } from "react-redux";
+import HomeContainer from "../containers/HomeContainers";
+import StarRatings from "./react-star-ratings";
 
 class Main extends Component {
   render() {
@@ -14,20 +14,23 @@ class Main extends Component {
       <div id="main container-fluid">
         <NavbarContainer />
         <Switch>
-          <Route
+          <Route exact path="/">
+            {HomeContainer}
+          </Route>
+          {/* <Route
             exact
             path="/register"
             render={() => {
               return <RegisterContainer />;
             }}
-          />
-          <Route
+          /> */}
+          {/* <Route
             exact
             path="/login"
             render={() => {
               return <LoginContainer />;
             }}
-          />
+          /> */}
         </Switch>
         <Footer />
       </div>

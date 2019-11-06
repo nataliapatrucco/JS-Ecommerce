@@ -10,13 +10,15 @@ class NavbarContainer extends Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      name: ""
     };
-    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogIn = this.handleLogIn.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
     this.handleSubmitRegister = this.handleSubmitRegister.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.handleEmailInput = this.handleEmailInput.bind(this);
+    this.handleNameInput = this.handleNameInput.bind(this);
   }
 
   handleSubmitRegister(event) {
@@ -43,10 +45,19 @@ class NavbarContainer extends Component {
     this.setState({ password: e.target.value });
   }
 
+  handleNameInput(e) {
+    this.setState({
+      name: e.target.value
+    });
+  }
+
   render() {
     return (
       <div>
         <Navbar
+          user={this.props.user}
+          handleLogIn={this.handleLogIn}
+          handleNameInput={this.handleNameInput}
           handleEmailInput={this.handleEmailInput}
           handlePasswordInput={this.handlePasswordInput}
           handleLogOut={this.handleLogOut}
@@ -58,14 +69,16 @@ class NavbarContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  username: state.user ? state.user.data : ""
+  user: state.user.user
 });
 
 const mapDispatchToProps = {
-  userLogOut
+  userLogOut,
+  userRegUser,
+  userLogIn
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Navbar);
+)(NavbarContainer);
