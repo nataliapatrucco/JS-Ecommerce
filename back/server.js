@@ -10,6 +10,7 @@ const db = require("./config/db");
 const passportConfig = require("./config/passport");
 const routes = require("./routes");
 const User = require("./models/User");
+const Product = require('./models/Product')
 require("dotenv").config();
 
 app.set("view engine", "html");
