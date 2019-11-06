@@ -32,7 +32,7 @@ Product.init(
       type: S.ARRAY(S.STRING)
     },
     rating: {
-      type: S.INT,
+      type: S.INTEGER,
       defaultValue: 0     //needs to be changed for a getter or setter.
     },
     active: {

@@ -27,13 +27,7 @@ app.use(passportConfig.session());
 
 app.use("/api", routes);
 
-// creates and logs in guest
-app.get("/*", function(req, res) {
-  console.log("enter /*");
-    res.send('hola');
-    
-    //File(path.join(__dirname, "./public/index.html"));
-  });
+// 404 error catch
 
 db.sync({ force: false })
   .then(() => {

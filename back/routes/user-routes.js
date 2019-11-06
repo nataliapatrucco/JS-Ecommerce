@@ -6,12 +6,7 @@ const passportConfig = require("../config/passport");
 // register (create) user
 router.post("/register", function(req, res) {
   //req.user.update(req.body);
-
   User.create(req.body).then(user => res.status(201).send(user));
-
-  // User.update(req.body, {where: {id: req.user.id}}).then((user)=>{
-  //    res.status(201).send(user);
-  //})
 });
 
 //login
