@@ -22,8 +22,8 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(session({ secret: "yo!", resave: true, saveUninitialized: true }));
-app.use(passportConfig.initialize());
-app.use(passportConfig.session());
+// app.use(passportConfig.initialize());
+// app.use(passportConfig.session());
 
 app.use("/api", routes);
 
