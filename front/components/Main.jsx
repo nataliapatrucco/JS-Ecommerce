@@ -11,7 +11,6 @@ class Main extends Component {
     this.props.fetchUser();
   }
   render() {
-    console.log("entre al main");
     return (
       <div id="main container-fluid">
         <NavbarContainer />

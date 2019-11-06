@@ -10,6 +10,7 @@ const db = require("./config/db");
 const passportConfig = require("./config/passport");
 const routes = require("./routes");
 const User = require("./models/User");
+const Product = require("./models/Product");
 require("dotenv").config();
 
 app.set("view engine", "html");
@@ -25,9 +26,14 @@ app.use(session({ secret: "yo!", resave: true, saveUninitialized: true }));
 app.use(passportConfig.initialize());
 app.use(passportConfig.session());
 
-app.use("/api", routes);
+app.use("/api", hola, routes);
 
 // 404 error catch
+
+function hola(req, res, next) {
+  console.log("hola");
+  next();
+}
 
 db.sync({ force: false })
   .then(() => {

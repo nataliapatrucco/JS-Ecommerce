@@ -185,7 +185,6 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log("entre al main");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "main container-fluid"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_NavbarContainer__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -308,20 +307,18 @@ __webpack_require__.r(__webpack_exports__);
 function RandomView(_ref) {
   var products = _ref.products;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, products.map(function (product) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Card, {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
       key: product.id
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Card.Img, {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Img, {
       variant: "top",
-      src: "holder.js/100px160"
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Card.Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Card.Title, null, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Card.Title, null, product.price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Card.Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+      src: product.image
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Title, null, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Title, null, product.price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
       className: "text-muted"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default.a, {
       rating: product.rating,
       starDimension: "40px",
       starSpacing: "15px"
-    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: props.handleAdd
-    }, "Add to cart"));
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Add to cart"));
   })));
 }
 
@@ -418,7 +415,7 @@ function (_Component) {
   _createClass(HomeContainers, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      Object(_store_actions_product__WEBPACK_IMPORTED_MODULE_2__["fetchProducts"])();
+      this.props.fetchProducts();
     }
   }, {
     key: "handleChange",
@@ -442,9 +439,10 @@ function (_Component) {
   }]);
 
   return HomeContainers;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // const mapDispatchToProps = dispatch => ({
-//   test: text => dispatch(text)
-// });
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+var mapDispatchToProps = {
+  fetchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["fetchProducts"]
+};
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -452,7 +450,7 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, null)(HomeContainers));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(HomeContainers));
 
 /***/ }),
 
@@ -58669,6 +58667,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProducts", function() { return getProducts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProducts", function() { return fetchProducts; });
 /* harmony import */ var _constants_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/index */ "./store/constants/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
 
 var getProducts = function getProducts(products) {
   return {
@@ -58679,7 +58680,7 @@ var getProducts = function getProducts(products) {
 
 var fetchProducts = function fetchProducts() {
   return function (dispatch) {
-    return axios.get("/api/product/home").then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/product/home").then(function (res) {
       return dispatch(getProducts(res.data));
     })["catch"](function (err) {
       return console.log(err);

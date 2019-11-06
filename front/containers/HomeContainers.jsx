@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchProducts } from "../store/actions/product";
 import Search from "../components/Search";
 import RandomView from "../components/RandomView";
+
 export class HomeContainers extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +13,7 @@ export class HomeContainers extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
-    fetchProducts();
+    this.props.fetchProducts();
   }
 
   handleChange(event) {
@@ -31,13 +32,13 @@ export class HomeContainers extends Component {
   }
 }
 
-// const mapDispatchToProps = dispatch => ({
-//   test: text => dispatch(text)
-// });
+const mapDispatchToProps = {
+  fetchProducts
+};
 const mapStateToProps = state => ({
   products: state.products.products
 });
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(HomeContainers);

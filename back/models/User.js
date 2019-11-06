@@ -27,8 +27,7 @@ User.init(
       type: S.STRING
     },
     userType: {
-      type: S.ENUM("guest", "user", "admin"),
-      defaultValue: "guest"
+      type: S.ENUM("user", "admin")
     },
     address: {
       type: S.TEXT
@@ -62,9 +61,9 @@ User.beforeCreate(user => {
   user.password = user.hashPassword(user.password);
 });
 
-//User.hasOne(Cart, { as: "currentCart" });
+User.hasOne(Cart, { as: "currentCart" });
 
-// User.hasMany(Cart, { as: "history" });
-// User.hasMany(Review);
+User.hasMany(Cart, { as: "history" });
+User.hasMany(Review);
 
 module.exports = User;
