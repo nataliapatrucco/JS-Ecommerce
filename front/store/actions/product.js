@@ -1,4 +1,4 @@
-import GET_PRODUCTS from "../constants/index";
+import { GET_PRODUCTS } from "../constants/index";
 
 export const getProducts = products => ({
   type: GET_PRODUCTS,

@@ -1,5 +1,6 @@
 import React from "react";
-import StarRatings from "./react-star-ratings";
+import StarRatings from "react-star-ratings";
+import { CardDeck } from "react-bootstrap";
 
 export default function RandomView({ products }) {
   return (

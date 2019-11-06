@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/actions/product";
 import Search from "../components/Search";
-
+import RandomView from "../components/RandomView";
 export class HomeContainers extends Component {
   constructor(props) {
     super(props);
@@ -39,5 +39,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(MovieContainer);
+  null
+)(HomeContainers);
