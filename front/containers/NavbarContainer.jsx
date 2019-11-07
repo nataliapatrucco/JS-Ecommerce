@@ -23,20 +23,24 @@ class NavbarContainer extends Component {
 
   handleSubmitRegister(event) {
     event.preventDefault();
-    this.props
-      .userRegUser(this.state.email, this.state.password)
-      .then(() => this.props.history.push("/"));
+    this.props.userRegUser(
+      this.state.name,
+      this.state.email,
+      this.state.password
+    );
+    // .then(() => this.props.history.push("/"));
   }
 
   handleLogOut(event) {
     event.preventDefault();
-    this.props.userLogOut().then(() => this.props.history.push("/"));
+    this.props.userLogOut();
+    //.then(() => this.props.history.push("/"));
   }
   handleLogIn(event) {
     event.preventDefault();
-    this.props
-      .userLogIn(this.state.email, this.state.password)
-      .then(() => this.props.history.push("/"));
+    console.log(this.state, "///////////////////////");
+    this.props.userLogIn(this.state.email, this.state.password);
+    // .then(() => this.props.history.push("/"));
   }
   handleEmailInput(e) {
     this.setState({ email: e.target.value });

@@ -3,7 +3,7 @@ const db = require("../config/db");
 
 const Product = require("./Product");
 
-class Cart extends S.Model{}
+class Cart extends S.Model {}
 
 Cart.init(
   {
@@ -26,5 +26,4 @@ Cart.init(
   },
   { sequelize: db, modelName: "cart" }
 );
-
 module.exports = Cart;

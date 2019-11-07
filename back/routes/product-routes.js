@@ -1,7 +1,7 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const { Product } = require("../models");
-const S = require("sequelize");
+const { Product } = require('../models');
+const S = require('sequelize');
 const Op = S.Op;
 
 //get all products
@@ -33,12 +33,12 @@ router.get("/filtered/", function(req, res) {
 
 //get 9 random products
 router.get("/random/:number", function(req, res) {
-  Product.findAll({}).then(products => {
+  Product.findAll().then(products => {
     let numProducts = req.params.number;
     let length = products.length;
     let randProducts = [];
     for (let i = 0; i < numProducts; i++) {
-      randProducts.push(products.splice(Math.floor(Math.random() * length), 1));
+      randProducts.push(products.splice(Math.floor(Math.random() * length), 1)[0]);
       length--;
     }
     res.status(200).send(randProducts);

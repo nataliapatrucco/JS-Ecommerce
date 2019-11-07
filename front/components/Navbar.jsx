@@ -4,21 +4,21 @@ import Popup from "reactjs-popup";
 export default function Navbar(props) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      {props.user ? (
+      {Object.keys(props.user).length ? (
         <div>
           <button onClick={props.handleLogOut}>Log Out</button>Hello{" "}
-          {prop.user.name}
+          {props.user.name}
         </div>
       ) : (
         <div>
-          <Popup trigger={<button>Register</button>} position="right center">
+          <Popup trigger={<button>Register</button>} position="bottom left">
             <form onSubmit={props.handleSubmitRegister}>
               <h3>Register</h3>
 
               <div className="form-group">
                 <label>Name</label>
                 <input
-                  onClick={props.handleNameImput}
+                  onChange={props.handleNameInput}
                   name="name"
                   type="text"
                   className="form-control"
@@ -29,7 +29,7 @@ export default function Navbar(props) {
               <div className="form-group">
                 <label>Email address</label>
                 <input
-                  onClick={props.handleEmailInput}
+                  onChange={props.handleEmailInput}
                   name="email"
                   type="email"
                   className="form-control"
@@ -40,7 +40,7 @@ export default function Navbar(props) {
               <div className="form-group">
                 <label>Password</label>
                 <input
-                  onClick={props.handlePasswordInput}
+                  onChange={props.handlePasswordInput}
                   name="password"
                   type="password"
                   className="form-control"
@@ -54,14 +54,14 @@ export default function Navbar(props) {
             </form>
           </Popup>
 
-          <Popup trigger={<button>Login</button>} position="right center">
+          <Popup trigger={<button>Login</button>} position="bottom left">
             <form onSubmit={props.handleLogIn}>
               <h3>LogIn</h3>
 
               <div className="form-group">
                 <label>Email address</label>
                 <input
-                  onClick={props.handleEmailInput}
+                  onChange={props.handleEmailInput}
                   name="email"
                   type="email"
                   className="form-control"
@@ -72,7 +72,7 @@ export default function Navbar(props) {
               <div className="form-group">
                 <label>Password</label>
                 <input
-                  onClick={props.handlePasswordInput}
+                  onChange={props.handlePasswordInput}
                   name="password"
                   type="password"
                   className="form-control"

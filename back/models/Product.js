@@ -1,8 +1,8 @@
-const S = require("sequelize");
-const db = require("../config/db");
+const S = require('sequelize');
+const db = require('../config/db');
 
-const Cart = require("./Cart");
-const Review = require("./Review");
+const Cart = require('./Cart');
+const Review = require('./Review');
 
 class Product extends S.Model {}
 
@@ -16,7 +16,7 @@ Product.init(
       type: S.INTEGER,
       notEmpty: true,
       get() {
-        return "$" + this.getDataValue("price");
+        return '$' + this.getDataValue('price');
       }
     },
     description: {
@@ -31,9 +31,6 @@ Product.init(
       type: S.TEXT,
       notEmpty: true
     },
-    category: {
-      type: S.ARRAY(S.STRING)
-    },
     rating: {
       type: S.INTEGER,
       defaultValue: 0 //needs to be changed for a getter or setter.
@@ -41,12 +38,12 @@ Product.init(
     active: {
       type: S.BOOLEAN,
       set() {
-        if (this.getDataValue("stock") === 0)
-          this.setDataValue("active", false);
+        if (this.getDataValue('stock') === 0)
+          this.setDataValue('active', false);
       }
     }
   },
-  { sequelize: db, modelName: "product" }
+  { sequelize: db, modelName: 'product' }
 );
 
 module.exports = Product;

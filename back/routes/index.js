@@ -10,4 +10,4 @@ router.use('/product', productRoutes);
 //router.use('/review', reviewRoutes);
 //router.use('/cart', cartRoutes);
 
-module.exports = router  //add review and carts later
+module.exports = router; //add review and carts later

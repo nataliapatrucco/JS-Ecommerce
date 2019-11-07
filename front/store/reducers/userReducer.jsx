@@ -7,11 +7,11 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case REG_USER:
-      return { ...state, user: action.user };
+      return state;
     case LOG_USER:
       return { ...state, user: action.user };
     case LOG_OUT:
-      return state;
+      return { ...state, user: {} };
     default:
       return state;
   }

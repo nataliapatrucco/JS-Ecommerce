@@ -1,13 +1,15 @@
 import React from "react";
-import StarRatings from "./react-star-ratings";
+import StarRatings from "react-star-ratings";
+import { CardDeck, Card } from "react-bootstrap";
 
 export default function RandomView({ products }) {
+  {console.log(products)}
   return (
     <div>
       <CardDeck>
         {products.map(product => (
           <Card key={product.id}>
-            <Card.Img variant="top" src="holder.js/100px160" />
+            <Card.Img variant="top" src={product.image} />
             <Card.Body>
               <Card.Title>{product.name}</Card.Title>
               <Card.Title>{product.price}</Card.Title>
@@ -21,7 +23,7 @@ export default function RandomView({ products }) {
                 />
               </small>
             </Card.Footer>
-            <button onClick={props.handleAdd}>Add to cart</button>
+            <button>Add to cart</button>
           </Card>
         ))}
       </CardDeck>
