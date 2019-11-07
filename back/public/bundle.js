@@ -222,10 +222,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function Navbar(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-    className: "navbar navbar-expand-lg navbar-dark bg-dark"
+    className: "navbar navbar-expand-lg navbar-dark"
   }, Object.keys(props.user).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: props.handleLogOut
-  }, "Log Out"), "Hello", " ", props.user.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactjs_popup__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "Log Out"), "Hello", ' ', props.user.name) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactjs_popup__WEBPACK_IMPORTED_MODULE_1__["default"], {
     trigger: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Register"),
     position: "bottom left"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -319,11 +319,32 @@ function RandomView(_ref) {
       className: "text-muted"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default.a, {
       rating: product.rating,
-      starDimension: "40px",
-      starSpacing: "15px"
+      starDimension: "11px",
+      starSpacing: "4px"
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Add to cart"));
   })));
-}
+} // import React from 'react';
+// import StarRatings from 'react-star-ratings';
+// import { CardColumns, Card } from 'react-bootstrap';
+// export default function RandomView({ products }) {
+//   return (
+//     <div className="productsContainer">
+//       {products.map(product => (
+//         <div className="singleProductListView">
+//           <article key={product.id}>
+//             <div>
+//               <img src={product.image} />
+//             </div>
+//             <span>
+//               {product.name} {product.price}
+//             </span>
+//           </article>
+//           <button>Add to cart</button>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
 
 /***/ }),
 
@@ -341,10 +362,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 function Search(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "jumbotron-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "jumbotron jumbotron-fluid"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container"
+    className: "container inJumbo"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "text-center display-4"
   }, "JS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -353,7 +376,7 @@ function Search(props) {
     type: "text",
     placeholder: "Search",
     "aria-label": "Search"
-  }))))));
+  })))));
 }
 
 /***/ }),

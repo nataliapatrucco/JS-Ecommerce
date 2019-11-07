@@ -1,9 +1,11 @@
-import React from "react";
-import StarRatings from "react-star-ratings";
-import { CardDeck, Card } from "react-bootstrap";
+import React from 'react';
+import StarRatings from 'react-star-ratings';
+import { CardDeck, Card } from 'react-bootstrap';
 
 export default function RandomView({ products }) {
-  {console.log(products)}
+  {
+    console.log(products);
+  }
   return (
     <div>
       <CardDeck>
@@ -18,8 +20,8 @@ export default function RandomView({ products }) {
               <small className="text-muted">
                 <StarRatings
                   rating={product.rating}
-                  starDimension="40px"
-                  starSpacing="15px"
+                  starDimension="11px"
+                  starSpacing="4px"
                 />
               </small>
             </Card.Footer>
@@ -30,3 +32,27 @@ export default function RandomView({ products }) {
     </div>
   );
 }
+// import React from 'react';
+// import StarRatings from 'react-star-ratings';
+// import { CardColumns, Card } from 'react-bootstrap';
+
+// export default function RandomView({ products }) {
+//   return (
+//     <div className="productsContainer">
+//       {products.map(product => (
+//         <div className="singleProductListView">
+//           <article key={product.id}>
+//             <div>
+//               <img src={product.image} />
+//             </div>
+//             <span>
+//               {product.name} {product.price}
+//             </span>
+//           </article>
+
+//           <button>Add to cart</button>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }

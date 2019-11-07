@@ -1,0 +1,78 @@
+$jsWhite: #eae7dc;
+$jsBeige: #d8c3a5;
+$jsGray: #8e8d8a;
+$jsSalmon: #e98074;
+$jsTuna: #e85a4f;
+$banner: 'http://auxanographicdesigns.com/media/wysiwyg/auxano/digital-marketing-services/web-designing-services/blue-color-technical-banner-design-in-ps-photoshop-psd-format.jpg';
+
+* {
+  box-sizing: border-box;
+}
+
+.navbar {
+  background-color: $jsSalmon;
+  height: 6vh;
+  //   position: fixed;
+  //   float: left;
+}
+
+.productsContainer {
+  margin: 1%;
+}
+
+.singleProductListView {
+  height: 28vh;
+  display: inline-block;
+  border: 3px solid $jsSalmon;
+  width: 28vw;
+  overflow: hidden;
+}
+
+.singleProductListView img {
+  max-width: 350px;
+}
+
+.card {
+  border: 1px $jsBeige solid;
+}
+
+.card-deck {
+  padding: 1%;
+}
+
+.card-deck .card {
+  margin-right: 7.5px;
+  margin-left: 7.5px;
+}
+
+.card-img-top {
+  height: 58.5%;
+}
+
+.card button {
+  display: inline-block;
+}
+
+.card-footer {
+  display: inline-block;
+}
+
+.h5 {
+  font-size: 1rem;
+}
+
+#jumbotron-container {
+  //background-image: url($banner);
+  background-color: $jsGray;
+  height: 54.5vh;
+}
+
+.jumbotron {
+  background-color: rgba(0, 0, 0, 0);
+  padding-top: 12rem;
+}
+
+.container {
+  padding-left: 22rem;
+  padding-right: 22rem;
+}

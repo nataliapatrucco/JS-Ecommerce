@@ -1,0 +1,70 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.navbar {
+  background-color: #e98074;
+  height: 6vh;
+}
+
+.productsContainer {
+  margin: 1%;
+}
+
+.singleProductListView {
+  height: 28vh;
+  display: inline-block;
+  border: 3px solid #e98074;
+  width: 28vw;
+  overflow: hidden;
+}
+
+.singleProductListView img {
+  max-width: 350px;
+}
+
+.card {
+  border: 1px #d8c3a5 solid;
+}
+
+.card-deck {
+  padding: 1%;
+}
+
+.card-deck .card {
+  margin-right: 7.5px;
+  margin-left: 7.5px;
+}
+
+.card-img-top {
+  height: 58.5%;
+}
+
+.card button {
+  display: inline-block;
+}
+
+.card-footer {
+  display: inline-block;
+}
+
+.h5 {
+  font-size: 1rem;
+}
+
+#jumbotron-container {
+  background-color: #8e8d8a;
+  height: 54.5vh;
+}
+
+.jumbotron {
+  background-color: rgba(0, 0, 0, 0);
+  padding-top: 12rem;
+}
+
+.container {
+  padding-left: 22rem;
+  padding-right: 22rem;
+}
+/*# sourceMappingURL=globalStyle.css.map */

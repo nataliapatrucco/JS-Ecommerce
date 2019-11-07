@@ -1,12 +1,12 @@
-import React from "react";
-import Popup from "reactjs-popup";
+import React from 'react';
+import Popup from 'reactjs-popup';
 
 export default function Navbar(props) {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark">
       {Object.keys(props.user).length ? (
         <div>
-          <button onClick={props.handleLogOut}>Log Out</button>Hello{" "}
+          <button onClick={props.handleLogOut}>Log Out</button>Hello{' '}
           {props.user.name}
         </div>
       ) : (
