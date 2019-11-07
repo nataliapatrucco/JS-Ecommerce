@@ -306,10 +306,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function RandomView(_ref) {
   var products = _ref.products;
-  {
-    console.log(products);
-  }
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, products.map(function (product) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, products.map(function (product) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
       key: product.id
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Img, {
@@ -322,7 +319,7 @@ function RandomView(_ref) {
       starDimension: "40px",
       starSpacing: "15px"
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Add to cart"));
-  })));
+  }));
 }
 
 /***/ }),
@@ -347,8 +344,10 @@ function Search(props) {
     className: "container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "text-center display-4"
-  }, "JS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    // onChange={props.handleChange}
+  }, "JS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: props.handleSubmit
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    onChange: props.handleChange,
     className: " active-purple-3 active-purple-4 mb-4 form-control",
     type: "text",
     placeholder: "Search",
@@ -397,6 +396,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var HomeContainers =
 /*#__PURE__*/
 function (_Component) {
@@ -412,6 +412,7 @@ function (_Component) {
       text: ""
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -428,12 +429,19 @@ function (_Component) {
       });
     }
   }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.searchProducts(this.state.text);
+    }
+  }, {
     key: "handleAdd",
     value: function handleAdd() {}
   }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        handleSubmit: this.handleSubmit,
         handleChange: this.handleChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_RandomView__WEBPACK_IMPORTED_MODULE_4__["default"], {
         products: this.props.products
@@ -444,7 +452,8 @@ function (_Component) {
   return HomeContainers;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 var mapDispatchToProps = {
-  fetchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["fetchProducts"]
+  fetchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["fetchProducts"],
+  searchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["searchProducts"]
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -50235,7 +50244,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58662,13 +58671,15 @@ module.exports = function(originalModule) {
 /*!**********************************!*\
   !*** ./store/actions/product.js ***!
   \**********************************/
-/*! exports provided: getProducts, fetchProducts */
+/*! exports provided: getProducts, getSearchProducts, fetchProducts, searchProducts */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProducts", function() { return getProducts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSearchProducts", function() { return getSearchProducts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProducts", function() { return fetchProducts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchProducts", function() { return searchProducts; });
 /* harmony import */ var _constants_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/index */ "./store/constants/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
@@ -58679,12 +58690,27 @@ var getProducts = function getProducts(products) {
     type: _constants_index__WEBPACK_IMPORTED_MODULE_0__["GET_PRODUCTS"],
     products: products
   };
+};
+var getSearchProducts = function getSearchProducts(products) {
+  return {
+    type: _constants_index__WEBPACK_IMPORTED_MODULE_0__["SEARCH_PRODUCTS"],
+    products: products
+  };
 }; //Para esta funcion necesito en el back una ruta a /products con un FindAll() que me traiga todos los productos que estan en la db (por ahora serian solo 9 que estan cargados)
 
 var fetchProducts = function fetchProducts() {
   return function (dispatch) {
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/product/random/9").then(function (res) {
       return dispatch(getProducts(res.data));
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  };
+};
+var searchProducts = function searchProducts(search) {
+  return function (dispatch) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/product/filtered/".concat(search)).then(function (res) {
+      return dispatch(getSearchProducts(res.data));
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -58789,7 +58815,7 @@ var fetchUser = function fetchUser() {
 /*!**********************************!*\
   !*** ./store/constants/index.js ***!
   \**********************************/
-/*! exports provided: REG_USER, LOG_USER, LOG_OUT, GET_PRODUCTS */
+/*! exports provided: REG_USER, LOG_USER, LOG_OUT, GET_PRODUCTS, SEARCH_PRODUCTS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58798,10 +58824,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_USER", function() { return LOG_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT", function() { return LOG_OUT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_PRODUCTS", function() { return GET_PRODUCTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SEARCH_PRODUCTS", function() { return SEARCH_PRODUCTS; });
 var REG_USER = "REG_USER";
 var LOG_USER = "LOG_USER";
 var LOG_OUT = "LOG_OUT";
 var GET_PRODUCTS = "GET_PRODUCTS";
+var SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 
 /***/ }),
 
@@ -58853,6 +58881,11 @@ var initialState = {
 
   switch (action.type) {
     case _constants_index__WEBPACK_IMPORTED_MODULE_0__["GET_PRODUCTS"]:
+      return _objectSpread({}, state, {
+        products: action.products
+      });
+
+    case _constants_index__WEBPACK_IMPORTED_MODULE_0__["SEARCH_PRODUCTS"]:
       return _objectSpread({}, state, {
         products: action.products
       });

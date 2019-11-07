@@ -7,9 +7,9 @@ export default function Search(props) {
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
             <h1 className="text-center display-4">JS</h1>
-            <form>
+            <form onSubmit={props.handleSubmit}>
               <input
-                // onChange={props.handleChange}
+                onChange={props.handleChange}
                 className=" active-purple-3 active-purple-4 mb-4 form-control"
                 type="text"
                 placeholder="Search"
