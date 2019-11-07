@@ -49,6 +49,4 @@ Product.init(
   { sequelize: db, modelName: "product" }
 );
 
-Product.hasMany(Review);
-
 module.exports = Product;

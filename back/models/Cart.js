@@ -27,15 +27,4 @@ Cart.init(
   { sequelize: db, modelName: "cart" }
 );
 
-Cart.belongsToMany(Product, {
-  through: "Product_Cart",
-  // foreignKey: "cartId",
-  // otherKey: "productId"
-});
-Product.belongsToMany(Cart, {
-  through: "Product_Cart"
-  // foreignKey: "cartId",
-  // otherKey: "productId"
-});
-
 module.exports = Cart;

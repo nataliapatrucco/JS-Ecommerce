@@ -9,8 +9,9 @@ const chalk = require("chalk");
 const db = require("./config/db");
 const passportConfig = require("./config/passport");
 const routes = require("./routes");
-const User = require("./models/User");
-const Product = require('./models/Product')
+//const User = require("./models/User");
+//const Product = require('./models/Product')
+//const {Cart, User, Product, Review} = require('./models/index')
 require("dotenv").config();
 
 app.set("view engine", "html");
@@ -28,7 +29,7 @@ app.use(session({ secret: "yo!", resave: true, saveUninitialized: true }));
 
 app.use("/api", routes);
 
-// 404 error catch
+//TODO ADD CATCHES TO ROUTES
 
 db.sync({ force: false })
   .then(() => {

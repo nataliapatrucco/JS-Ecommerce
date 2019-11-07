@@ -4,35 +4,46 @@ const { Product } = require("../models");
 const S = require("sequelize");
 const Op = S.Op;
 
-//get all products (with or without filter)
-router.get("/:search", function(req, res) {
-  let { search } = req.params;
-  if (search === "")
-    Product.findAll({}).then(products => res.status(200).send(products));
+//get all products
+router.get("/", function(req, res) {
+  Product.findAll({}).then(products => res.status(200).send(products));
+});
+
+//get all products with filter
+router.get("/filtered/:query", function(req, res) {
+  let search = req.params.query;
+  if (!search)
+    Product.findAll({}).then(products => {
+      res.status(200).send(products)
+    });
   else
     Product.findAll({
       where: {
         [Op.or]: [{ name: search }, { category: { [Op.contains]: [search] } }]
       }
-    }).then( products =>
-        res.status(200).send(products)
-    );
+    }).then(products => res.status(200).send(products));
 });
 
-//get 9 random products
-router.get("/home", function(req,res) {
+//get all products with filter
+router.get("/filtered/", function(req, res) {
     Product.findAll({}).then(products => {
-        let length = products.length;
-        let prodIndexes = [];
-        for(let i = 0; i<9; i++){
-            prodIndexes.push(Math.floor(Math.random()*length-1))        //check this soon
-        }
-
-        let randomProducts = prodIndexes.map(index=>products[index])
-
-        res.status(200).send(randomProducts)
-    });
+      res.status(200).send(products)
+  });
 })
+
+//get 9 random products
+router.get("/random/:number", function(req, res) {
+  Product.findAll({}).then(products => {
+    let numProducts = req.params.number;
+    let length = products.length;
+    let randProducts = [];
+    for (let i = 0; i < numProducts; i++) {
+      randProducts.push(products.splice(Math.floor(Math.random() * length), 1));
+      length--;
+    }
+    res.status(200).send(randProducts);
+  });
+});
 
 //get single product
 
