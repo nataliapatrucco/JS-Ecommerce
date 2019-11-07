@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchProducts } from "../store/actions/product";
 import Search from "../components/Search";
 import RandomView from "../components/RandomView";
+import { searchProducts } from "../store/actions/product";
 
 export class HomeContainers extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export class HomeContainers extends Component {
       text: ""
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     this.props.fetchProducts();
@@ -20,12 +22,20 @@ export class HomeContainers extends Component {
     this.setState({ text: event.target.value });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.searchProducts(this.state.text);
+  }
+
   handleAdd() {}
 
   render() {
     return (
       <div>
-        <Search handleChange={this.handleChange} />
+        <Search
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+        />
         <RandomView products={this.props.products} />
       </div>
     );
@@ -33,7 +43,8 @@ export class HomeContainers extends Component {
 }
 
 const mapDispatchToProps = {
-  fetchProducts
+  fetchProducts,
+  searchProducts
 };
 const mapStateToProps = state => ({
   products: state.products.products
