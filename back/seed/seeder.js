@@ -1,59 +1,59 @@
-const Product = require('../models/Product');
+const Product = require("../models/Product");
 
 Product.bulkCreate([
   {
-    name: 'Black Shirt',
+    name: "black shirt",
     price: 15,
-    description: 'A nice black shirt that never gets dirty',
-    image: './images/blackshirt.jpg'
+    description: "A nice black shirt that never gets dirty",
+    image: "./images/blackshirt.jpg"
   },
   {
-    name: 'Red Shirt',
+    name: "red shirt",
     price: 15,
-    description: 'A nice red shirt that looks cool',
-    image: './images/redshirt.jpg'
+    description: "A nice red shirt that looks cool",
+    image: "./images/redshirt.jpg"
   },
   {
-    name: 'White Shirt',
+    name: "white shirt",
     price: 15,
-    description: 'A nice white shirt',
-    image: './images/whiteshirt.jpg'
+    description: "A nice white shirt",
+    image: "./images/whiteshirt.jpg"
   },
   {
-    name: 'Gold Pants',
+    name: "gold pants",
     price: 40,
-    description: 'Stylish gold pants for looking cool',
-    image: './images/goldpants.jpg'
+    description: "Stylish gold pants for looking cool",
+    image: "./images/goldpants.jpg"
   },
   {
-    name: 'Grey Pants',
+    name: "grey pants",
     price: 25,
-    description: 'Comfortable sweatpants for home or the streets',
-    image: './images/greypants.jpg'
+    description: "Comfortable sweatpants for home or the streets",
+    image: "./images/greypants.jpg"
   },
   {
-    name: 'Brown Pants',
+    name: "brown pants",
     price: 35,
-    description: 'Standard pants for whatever',
-    image: './images/brownpants.jpg'
+    description: "Standard pants for whatever",
+    image: "./images/brownpants.jpg"
   },
   {
-    name: 'Black Dress',
+    name: "black dress",
     price: 40,
-    description: 'A nice conservative black dress for any occasion',
-    image: './images/blackdress.jpg'
+    description: "A nice conservative black dress for any occasion",
+    image: "./images/blackdress.jpg"
   },
   {
-    name: 'Red Dress',
+    name: "red dress",
     price: 65,
-    description: 'A eye-catching red dress for those special occasions',
-    image: './images/reddress.jpg'
+    description: "A eye-catching red dress for those special occasions",
+    image: "./images/reddress.jpg"
   },
   {
-    name: 'Green Dress',
+    name: "green dress",
     price: 40,
-    description: 'A cool green dress for hanging out',
-    image: './images/greendress.jpg'
+    description: "A cool green dress for hanging out",
+    image: "./images/greendress.jpg"
   }
 ])
   .then(() => {

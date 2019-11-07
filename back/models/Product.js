@@ -1,8 +1,8 @@
-const S = require('sequelize');
-const db = require('../config/db');
+const S = require("sequelize");
+const db = require("../config/db");
 
-const Cart = require('./Cart');
-const Review = require('./Review');
+const Cart = require("./Cart");
+const Review = require("./Review");
 
 class Product extends S.Model {}
 
@@ -10,13 +10,23 @@ Product.init(
   {
     name: {
       type: S.STRING,
-      notEmpty: true
+      notEmpty: true,
+      get() {
+        let sArray = this.getDataValue("name").split(" ");
+        sArray = sArray.map(word => {
+          let eachWord = word.split("");
+          eachWord[0] = eachWord[0].toUpperCase();
+          eachWord = eachWord.join("");
+          return eachWord;
+        });
+        return sArray.join(" ");
+      }
     },
     price: {
       type: S.INTEGER,
       notEmpty: true,
       get() {
-        return '$' + this.getDataValue('price');
+        return "$" + this.getDataValue("price");
       }
     },
     description: {
@@ -38,14 +48,12 @@ Product.init(
     active: {
       type: S.BOOLEAN,
       set() {
-        if (this.getDataValue('stock') === 0)
-          this.setDataValue('active', false);
+        if (this.getDataValue("stock") === 0)
+          this.setDataValue("active", false);
       }
     }
   },
-  { sequelize: db, modelName: 'product' }
+  { sequelize: db, modelName: "product" }
 );
-
-Product.hasMany(Review);
 
 module.exports = Product;
