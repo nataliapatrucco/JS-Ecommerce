@@ -34,15 +34,15 @@ app.use(passportConfig.session());
 
 app.use("/api", routes);
 
+let pepe = Math.ceil(Math.random() * 10000);
+
 db.sync({ force: false })
   .then(() => {
     console.log(chalk.bgGreen(chalk.black("Connected to database." + "")));
-    app.listen(process.env.PORT, () =>
+    app.listen(pepe, () =>
       console.log(
         chalk.bgBlack(
-          `Server listening now on ` +
-            chalk.bgBlue(`port ${process.env.PORT}`) +
-            ""
+          `Server listening now on ` + chalk.bgBlue(`port ${pepe}`) + ""
         )
       )
     );

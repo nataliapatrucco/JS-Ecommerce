@@ -316,8 +316,8 @@ function RandomView(_ref) {
       className: "text-muted"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default.a, {
       rating: product.rating,
-      starDimension: "11px",
-      starSpacing: "4px"
+      starDimension: "40px",
+      starSpacing: "15px"
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Add to cart"));
   }));
 }
@@ -338,12 +338,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 function Search(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "jumbotron-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "jumbotron jumbotron-fluid"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container inJumbo"
+    className: "container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "text-center display-4"
   }, "JS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -354,7 +352,7 @@ function Search(props) {
     type: "text",
     placeholder: "Search",
     "aria-label": "Search"
-  })))));
+  }))))));
 }
 
 /***/ }),
