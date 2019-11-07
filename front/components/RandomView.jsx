@@ -17,8 +17,8 @@ export default function RandomView({ products }) {
               <small className="text-muted">
                 <StarRatings
                   rating={product.rating}
-                  starDimension="40px"
-                  starSpacing="15px"
+                  starDimension="11px"
+                  starSpacing="4px"
                 />
               </small>
             </Card.Footer>
