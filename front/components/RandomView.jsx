@@ -3,6 +3,7 @@ import StarRatings from "react-star-ratings";
 import { CardDeck, Card } from "react-bootstrap";
 
 export default function RandomView({ products }) {
+  {console.log(products)}
   return (
     <div>
       <CardDeck>

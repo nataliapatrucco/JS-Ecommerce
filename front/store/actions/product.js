@@ -10,7 +10,7 @@ export const getProducts = products => ({
 
 export const fetchProducts = () => dispatch => {
   axios
-    .get("/api/product/home")
+    .get("/api/product/random/9")
     .then(res => dispatch(getProducts(res.data)))
     .catch(err => console.log(err));
 };
