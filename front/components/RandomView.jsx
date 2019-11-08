@@ -1,6 +1,7 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 import { CardDeck, Card } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 export default function RandomView({ products }) {
   return (
@@ -8,7 +9,9 @@ export default function RandomView({ products }) {
       <CardDeck>
         {products.map(product => (
           <Card key={product.id}>
-            <Card.Img variant="top" src={product.image} />
+            <Link to={`/product/${product.id}`}>
+              <Card.Img variant="top" src={product.image} />
+            </Link>
             <Card.Body>
               <Card.Title>{product.name}</Card.Title>
               <Card.Title>{product.price}</Card.Title>
