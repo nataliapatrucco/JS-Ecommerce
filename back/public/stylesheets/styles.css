@@ -19,6 +19,10 @@ button {
 
 .jumbotron {
   background-color: #e1e1e1;
+  background-image: url("../images/diamondBackground.png");
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: 50%;
   padding-bottom: 43px;
   padding-top: 43px;
 }
