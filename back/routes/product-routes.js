@@ -9,6 +9,7 @@ router.get("/", function(req, res) {
   Product.findAll({}).then(products => res.status(200).send(products));
 });
 
+
 //get all products with filter
 router.get("/filtered/:query", function(req, res) {
   let search = req.params.query;
@@ -38,19 +39,26 @@ router.get("/random/:number", function(req, res) {
     for (let i = 0; i < numProducts; i++) {
       randProducts.push(
         products.splice(Math.floor(Math.random() * length), 1)[0]
-      );
-      length--;
-    }
-    res.status(200).send(randProducts);
+        );
+        length--;
+      }
+      res.status(200).send(randProducts);
+    });
   });
-});
+  
+  //get single product
 
-//get single product
-
-//create new product
-
-//edit product
-
-//delete product
+  router.get("/:productId", function(req, res, next) {
+    Product.findByPk(req.params.productId)
+    .then(product => {
+      res.send(product)
+    })
+  })
+  
+  //create new product
+  
+  //edit product
+  
+  //delete product
 
 module.exports = router;
