@@ -28,6 +28,9 @@ class NavbarContainer extends Component {
       this.state.email,
       this.state.password
     );
+    document.querySelector("#registerForm").reset();
+    document.querySelector("#registerClose").click();
+
     // .then(() => this.props.history.push("/"));
   }
 
@@ -38,8 +41,9 @@ class NavbarContainer extends Component {
   }
   handleLogIn(event) {
     event.preventDefault();
-    console.log(this.state, "///////////////////////");
+    document.querySelector("#loginClose").click();
     this.props.userLogIn(this.state.email, this.state.password);
+
     // .then(() => this.props.history.push("/"));
   }
   handleEmailInput(e) {
