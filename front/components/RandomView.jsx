@@ -4,7 +4,7 @@ import { CardDeck, Card } from "react-bootstrap";
 
 export default function RandomView({ products }) {
   return (
-    <div>
+    <div id="randomViewContainer">
       <CardDeck>
         {products.map(product => (
           <Card key={product.id}>

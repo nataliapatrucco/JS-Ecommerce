@@ -101,25 +101,65 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
-function Footer() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card text-center footer"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-header"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "card-title"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/"
-  }), "Contact"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "card-text"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/"
-  }), "About Us")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-footer text-muted"
-  }));
+/*
+export default function Footer() {
+  return (
+    <div className="card text-center footer">
+      <div className="card-header"></div>
+      <div className="card-body">
+        <h5 className="card-title">
+          <Link to="/"></Link>Contact
+        </h5>
+        <p className="card-text">
+          <Link to="/"></Link>About Us
+        </p>
+      </div>
+      <div className="card-footer text-muted"></div>
+    </div>
+  );
 }
+*/
+
+function Footer() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiHolder"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, "Work with us"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, "About JS Clothing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, "Our Mission"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, "Support"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, "My account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, "Contact us"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "natiFooter"
+  }, " ")));
+} // <div className="jsClothingFooter">
+// <p className="footerTextHolderA">
+//   Work with us <br /> About JS Clothing <br />
+//   Our mission
+//   <br />
+// </p>
+// <p className="footerTextHolderB">
+//   Support
+//   <br /> My account <br /> Contact Us
+// </p>
+// <div className="belowFooter">asdasdas</div>
+// </div>
 
 /***/ }),
 
@@ -382,7 +422,9 @@ __webpack_require__.r(__webpack_exports__);
 
 function RandomView(_ref) {
   var products = _ref.products;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, products.map(function (product) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "randomViewContainer"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, products.map(function (product) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
       key: product.id
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Img, {
@@ -54201,7 +54243,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
