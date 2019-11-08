@@ -316,8 +316,8 @@ function RandomView(_ref) {
       className: "text-muted"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default.a, {
       rating: product.rating,
-      starDimension: "40px",
-      starSpacing: "15px"
+      starDimension: "12px",
+      starSpacing: "4px"
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Add to cart"));
   }));
 }
@@ -341,7 +341,7 @@ function Search(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "jumbotron jumbotron-fluid"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container"
+    className: "container inJumbo"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "text-center display-4"
   }, "JS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -351,7 +351,10 @@ function Search(props) {
     className: " active-purple-3 active-purple-4 mb-4 form-control",
     type: "text",
     placeholder: "Search",
-    "aria-label": "Search"
+    "aria-label": "Search",
+    style: {
+      textAlign: "center"
+    }
   }))))));
 }
 
@@ -50244,7 +50247,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

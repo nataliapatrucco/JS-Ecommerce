@@ -5,7 +5,7 @@ export default function Search(props) {
     <div>
       <div>
         <div className="jumbotron jumbotron-fluid">
-          <div className="container">
+          <div className="container inJumbo">
             <h1 className="text-center display-4">JS</h1>
             <form onSubmit={props.handleSubmit}>
               <input
@@ -14,6 +14,7 @@ export default function Search(props) {
                 type="text"
                 placeholder="Search"
                 aria-label="Search"
+                style={{ textAlign: "center" }}
               />
             </form>
           </div>
