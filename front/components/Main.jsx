@@ -28,7 +28,9 @@ class Main extends Component {
           {console.log(this.props)}
 
           <Route exact path="/product/:id" component={SingleProductContainer}/>
-          
+          {/* <Route exact path="/search" component={ */}
+
+          }
           <Route exact path="/" component={HomeContainer} />
         </Switch>
         <Footer />
