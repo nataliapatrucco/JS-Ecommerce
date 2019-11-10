@@ -1,4 +1,4 @@
-import { CHECK_IS_HOME } from "../constants/index";
+import { CHECK_IS_HOME } from '../constants/index';
 
 export const fetchProduct = id => dispatch => {
   axios
@@ -7,13 +7,11 @@ export const fetchProduct = id => dispatch => {
     .then(product => dispatch(selectedProduct(product)));
 };
 
-export const checkIsHome = isHome => ({
+export const checkIsHome = home => ({
   type: CHECK_IS_HOME,
-  isHome
+  home
 });
 
-export const isHome = matchLocationVsLocationPathname => dispatch => {
-  console.log("checkishome", checkIsHome);
-  dispatch(checkIsHome(matchLocationVsLocationPathname));
-};
+export const isHome = urlMatch => dispatch => dispatch(checkIsHome(urlMatch));
+
 //this.props.match.location !== window.location.pathname
