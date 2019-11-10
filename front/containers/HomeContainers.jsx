@@ -30,14 +30,14 @@ export class HomeContainers extends Component {
   handleAdd() {}
 
   render() {
-    console.log('!----! HOME CONTAINERS PROPS', this.props);
+    const { products } = this.props;
     return (
       <div>
         <Search
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
-        <RandomView products={this.props.products} />
+        <RandomView products={products} />
       </div>
     );
   }
@@ -47,6 +47,7 @@ const mapDispatchToProps = {
   fetchProducts,
   searchProducts
 };
+
 const mapStateToProps = state => ({
   products: state.products.products
 });

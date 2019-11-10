@@ -16,9 +16,7 @@ class NavbarContainer extends Component {
     this.handleLogIn = this.handleLogIn.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
     this.handleSubmitRegister = this.handleSubmitRegister.bind(this);
-    this.handlePasswordInput = this.handlePasswordInput.bind(this);
-    this.handleEmailInput = this.handleEmailInput.bind(this);
-    this.handleNameInput = this.handleNameInput.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
 
   handleSubmitRegister(event) {
@@ -46,30 +44,21 @@ class NavbarContainer extends Component {
 
     // .then(() => this.props.history.push("/"));
   }
-  handleEmailInput(e) {
-    this.setState({ email: e.target.value });
-  }
-  handlePasswordInput(e) {
-    this.setState({ password: e.target.value });
-  }
 
-  handleNameInput(e) {
-    this.setState({
-      name: e.target.value
-    });
+  handleInput(e) {
+    const tag = e.target.name.toLowerCase();
+    this.setState({ [tag]: e.target.value });
   }
 
   render() {
-    console.log('navbarcontainer', this.props);
+    const { user, isUrlHome } = this.props;
     return (
       <div>
         <Navbar
-          user={this.props.user}
-          isUrlHome={this.props.isUrlHome}
+          user={user}
+          isUrlHome={isUrlHome}
           handleLogIn={this.handleLogIn}
-          handleNameInput={this.handleNameInput}
-          handleEmailInput={this.handleEmailInput}
-          handlePasswordInput={this.handlePasswordInput}
+          handleInput={this.handleInput}
           handleLogOut={this.handleLogOut}
           handleSubmitRegister={this.handleSubmitRegister}
         />

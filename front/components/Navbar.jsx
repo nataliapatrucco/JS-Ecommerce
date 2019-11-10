@@ -3,14 +3,10 @@ import { Link } from 'react-router-dom';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 export default function Navbar(props) {
-  console.log('navbarprops', props);
-
   const {
-    handleEmailInput,
+    handleInput,
     handleLogIn,
     handleLogOut,
-    handleNameInput,
-    handlePasswordInput,
     handleSubmitRegister,
     isUrlHome,
     user
@@ -71,7 +67,7 @@ export default function Navbar(props) {
                       <div className="form-group">
                         <label>Name</label>
                         <input
-                          onChange={handleNameInput}
+                          onChange={handleInput}
                           name="name"
                           type="text"
                           className="form-control"
@@ -82,7 +78,7 @@ export default function Navbar(props) {
                       <div className="form-group">
                         <label>Email address</label>
                         <input
-                          onChange={handleEmailInput}
+                          onChange={handleInput}
                           name="email"
                           type="email"
                           className="form-control"
@@ -93,7 +89,7 @@ export default function Navbar(props) {
                       <div className="form-group">
                         <label>Password</label>
                         <input
-                          onChange={handlePasswordInput}
+                          onChange={handleInput}
                           name="password"
                           type="password"
                           className="form-control"
@@ -161,7 +157,7 @@ export default function Navbar(props) {
                       <div className="form-group">
                         <label>Email address</label>
                         <input
-                          onChange={handleEmailInput}
+                          onChange={handleInput}
                           name="email"
                           type="email"
                           className="form-control"
@@ -172,7 +168,7 @@ export default function Navbar(props) {
                       <div className="form-group">
                         <label>Password</label>
                         <input
-                          onChange={handlePasswordInput}
+                          onChange={handleInput}
                           name="password"
                           type="password"
                           className="form-control"

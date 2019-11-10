@@ -7,11 +7,12 @@ export const fetchProduct = id => dispatch => {
     .then(product => dispatch(selectedProduct(product)));
 };
 
-export const checkIsHome = home => ({
+export const homeBoolean = home => ({
   type: CHECK_IS_HOME,
   home
 });
 
-export const isHome = urlMatch => dispatch => dispatch(checkIsHome(urlMatch));
+export const testForHome = urlMatch => dispatch =>
+  dispatch(homeBoolean(urlMatch));
 
 //this.props.match.location !== window.location.pathname
