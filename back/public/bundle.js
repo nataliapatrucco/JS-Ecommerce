@@ -229,7 +229,7 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "main container-fluid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_NavbarContainer__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, console.log(this.props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_NavbarContainer__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
         path: "/product/:id",
         component: _containers_SingleProductContainer__WEBPACK_IMPORTED_MODULE_7__["default"]
@@ -273,11 +273,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function Navbar(props) {
   var _React$createElement;
 
-  var _window$location = window.location,
-      origin = _window$location.origin,
-      href = _window$location.href;
-  var home = origin + "/";
-  console.log("PROPSS!!", props);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     className: "navbar navbar-expand-md navbar-dark bg-light"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -356,13 +351,13 @@ function Navbar(props) {
     className: "btn btn-light",
     "data-toggle": "modal",
     "data-target": "#login"
-  }, "LOGIN"), home === href ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "LOGIN"), props.isHome ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "brandLogoMiniDiv"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "brandLogoMini"
-  }, "JS")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "JS")))) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "modal fade",
     id: "login",
     tabIndex: "-1",
@@ -576,6 +571,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_actions_product__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/actions/product */ "./store/actions/product.js");
 /* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Search */ "./components/Search.jsx");
 /* harmony import */ var _components_RandomView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/RandomView */ "./components/RandomView.jsx");
+/* harmony import */ var _store_actions_navbar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/actions/navbar */ "./store/actions/navbar.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -593,6 +589,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -625,6 +622,11 @@ function (_Component) {
       this.props.fetchProducts();
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState, snapshot) {
+      this.props.isHome(this.props.location.pathname === window.location.pathname);
+    }
+  }, {
     key: "handleChange",
     value: function handleChange(event) {
       this.setState({
@@ -643,7 +645,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props);
+      console.log("!----! HOME CONTAINERS PROPS", this.props);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_3__["default"], {
         handleSubmit: this.handleSubmit,
         handleChange: this.handleChange
@@ -657,12 +659,14 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 var mapDispatchToProps = {
   fetchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["fetchProducts"],
-  searchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["searchProducts"]
+  searchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["searchProducts"],
+  isHome: _store_actions_navbar__WEBPACK_IMPORTED_MODULE_5__["isHome"]
 };
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    products: state.products.products
+    products: state.products.products,
+    isHome: state.isHome
   };
 };
 
@@ -869,7 +873,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log('holaaaaaaaaaaaaaaaa', this.props);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SingleProduct__WEBPACK_IMPORTED_MODULE_2__["default"], {
         selectedProduct: this.props.selectedProduct
       }));
@@ -63785,6 +63788,44 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./store/actions/navbar.js":
+/*!*********************************!*\
+  !*** ./store/actions/navbar.js ***!
+  \*********************************/
+/*! exports provided: fetchProduct, checkIsHome, isHome */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProduct", function() { return fetchProduct; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkIsHome", function() { return checkIsHome; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isHome", function() { return isHome; });
+/* harmony import */ var _constants_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/index */ "./store/constants/index.js");
+
+var fetchProduct = function fetchProduct(id) {
+  return function (dispatch) {
+    axios.get("/api/product/".concat(id)).then(function (res) {
+      return res.data;
+    }).then(function (product) {
+      return dispatch(selectedProduct(product));
+    });
+  };
+};
+var checkIsHome = function checkIsHome(isHome) {
+  return {
+    type: _constants_index__WEBPACK_IMPORTED_MODULE_0__["CHECK_IS_HOME"],
+    isHome: isHome
+  };
+};
+var isHome = function isHome(matchLocationVsLocationPathname) {
+  return function (dispatch) {
+    console.log("checkishome", checkIsHome);
+    dispatch(checkIsHome(matchLocationVsLocationPathname));
+  };
+}; //this.props.match.location !== window.location.pathname
+
+/***/ }),
+
 /***/ "./store/actions/product.js":
 /*!**********************************!*\
   !*** ./store/actions/product.js ***!
@@ -63950,7 +63991,7 @@ var fetchUser = function fetchUser() {
 /*!**********************************!*\
   !*** ./store/constants/index.js ***!
   \**********************************/
-/*! exports provided: REG_USER, LOG_USER, LOG_OUT, GET_PRODUCTS, SEARCH_PRODUCTS, SELECTED_PRODUCT */
+/*! exports provided: REG_USER, LOG_USER, LOG_OUT, GET_PRODUCTS, SEARCH_PRODUCTS, SELECTED_PRODUCT, CHECK_IS_HOME */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63961,12 +64002,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_PRODUCTS", function() { return GET_PRODUCTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SEARCH_PRODUCTS", function() { return SEARCH_PRODUCTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SELECTED_PRODUCT", function() { return SELECTED_PRODUCT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHECK_IS_HOME", function() { return CHECK_IS_HOME; });
 var REG_USER = "REG_USER";
 var LOG_USER = "LOG_USER";
 var LOG_OUT = "LOG_OUT";
 var GET_PRODUCTS = "GET_PRODUCTS";
 var SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 var SELECTED_PRODUCT = "SELECTED_PRODUCT";
+var CHECK_IS_HOME = "CHECK_IS_HOME";
 
 /***/ }),
 
@@ -63982,13 +64025,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _reducers_productsReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reducers/productsReducer */ "./store/reducers/productsReducer.jsx");
 /* harmony import */ var _reducers_userReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/userReducer */ "./store/reducers/userReducer.jsx");
+/* harmony import */ var _reducers_navBarReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/navBarReducer */ "./store/reducers/navBarReducer.jsx");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   products: _reducers_productsReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  user: _reducers_userReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  user: _reducers_userReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  navbar: _reducers_navBarReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
+
+/***/ }),
+
+/***/ "./store/reducers/navBarReducer.jsx":
+/*!******************************************!*\
+  !*** ./store/reducers/navBarReducer.jsx ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/index */ "./store/constants/index.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var initialState = {
+  isHome: true
+};
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _constants_index__WEBPACK_IMPORTED_MODULE_0__["CHECK_IS_HOME"]:
+      return _objectSpread({}, state, {
+        isHome: action.isHome
+      });
+
+    default:
+      return state;
+  }
+});
 
 /***/ }),
 

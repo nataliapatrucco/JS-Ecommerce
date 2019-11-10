@@ -19,7 +19,6 @@ router.get("/filtered/:query", function(req, res) {
       name: { [Op.like]: `%${searchLow}%` }
     }
   }).then(products => {
-    console.log(products);
     res.status(200).send(products);
   });
 });

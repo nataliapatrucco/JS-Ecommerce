@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export default function Navbar(props) {
-  const { origin, href } = window.location;
-  const home = origin + "/";
-  console.log("PROPSS!!", props);
-
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-light">
       <div className="container-fluid">
@@ -114,9 +110,7 @@ export default function Navbar(props) {
               LOGIN
             </button>
 
-            {home === href ? (
-              ""
-            ) : (
+            {props.isHome ? (
               <Link to={`/`}>
                 <label>
                   <div className="brandLogoMiniDiv">
@@ -124,6 +118,8 @@ export default function Navbar(props) {
                   </div>
                 </label>
               </Link>
+            ) : (
+              ""
             )}
 
             <div

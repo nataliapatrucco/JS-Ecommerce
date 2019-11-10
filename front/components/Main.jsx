@@ -25,7 +25,6 @@ class Main extends Component {
       <div id="main container-fluid">
         <NavbarContainer />
         <Switch>
-          {console.log(this.props)}
 
           <Route exact path="/product/:id" component={SingleProductContainer}/>
           

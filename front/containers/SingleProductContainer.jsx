@@ -1,40 +1,39 @@
-import React from "react"
+import React from "react";
 import { connect } from "react-redux";
-import SingleProduct from "../components/SingleProduct"
-import { fetchProduct } from "../store/actions/product"
-
-
+import SingleProduct from "../components/SingleProduct";
+import { fetchProduct } from "../store/actions/product";
 
 class SingleProductContainer extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {}
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-    componentDidMount() {
+  componentDidMount() {
+    this.props.fetchProduct(this.props.match.params.id);
+  }
 
-        this.props.fetchProduct(this.props.match.params.id)
-    }
-
-    render() {
-        console.log('holaaaaaaaaaaaaaaaa',this.props)
-        return (
-            <div>
-                <SingleProduct selectedProduct={this.props.selectedProduct}/>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <SingleProduct selectedProduct={this.props.selectedProduct} />
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = ({ products }) => {
-    console.log(products)
-    return ({
-        selectedProduct: products.selectedProduct
-    })
-}
+  console.log(products);
+  return {
+    selectedProduct: products.selectedProduct
+  };
+};
 
 const mapDispatchToProps = {
-    fetchProduct,
-  };
+  fetchProduct
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProductContainer)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleProductContainer);

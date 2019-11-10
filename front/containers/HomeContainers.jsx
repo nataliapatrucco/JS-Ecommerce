@@ -4,6 +4,7 @@ import { fetchProducts } from "../store/actions/product";
 import Search from "../components/Search";
 import RandomView from "../components/RandomView";
 import { searchProducts } from "../store/actions/product";
+import { isHome } from "../store/actions/navbar";
 
 export class HomeContainers extends Component {
   constructor(props) {
@@ -18,6 +19,12 @@ export class HomeContainers extends Component {
     this.props.fetchProducts();
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.isHome(
+      this.props.location.pathname === window.location.pathname
+    );
+  }
+
   handleChange(event) {
     this.setState({ text: event.target.value });
   }
@@ -30,7 +37,7 @@ export class HomeContainers extends Component {
   handleAdd() {}
 
   render() {
-    console.log(this.props)
+    console.log("!----! HOME CONTAINERS PROPS", this.props);
     return (
       <div>
         <Search
@@ -45,11 +52,14 @@ export class HomeContainers extends Component {
 
 const mapDispatchToProps = {
   fetchProducts,
-  searchProducts
+  searchProducts,
+  isHome
 };
 const mapStateToProps = state => ({
-  products: state.products.products
+  products: state.products.products,
+  isHome: state.isHome
 });
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
