@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchProducts } from "../store/actions/product";
-import Search from "../components/Search";
-import RandomView from "../components/RandomView";
-import { searchProducts } from "../store/actions/product";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchProducts } from '../store/actions/product';
+import Search from '../components/Search';
+import RandomView from '../components/RandomView';
+import { searchProducts } from '../store/actions/product';
 
 export class HomeContainers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ""
+      text: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,7 +30,7 @@ export class HomeContainers extends Component {
   handleAdd() {}
 
   render() {
-    console.log(this.props)
+    console.log('!----! HOME CONTAINERS PROPS', this.props);
     return (
       <div>
         <Search
@@ -50,6 +50,7 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   products: state.products.products
 });
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

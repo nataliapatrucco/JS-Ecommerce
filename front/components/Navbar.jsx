@@ -1,17 +1,31 @@
-import React from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 export default function Navbar(props) {
+  console.log('navbarprops', props);
+
+  const {
+    handleEmailInput,
+    handleLogIn,
+    handleLogOut,
+    handleNameInput,
+    handlePasswordInput,
+    handleSubmitRegister,
+    isUrlHome,
+    user
+  } = props;
+
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-light">
       <div className="container-fluid">
-        {Object.keys(props.user).length ? (
+        {Object.keys(user).length ? (
           <div>
             <button
               className="navbar-toggler"
               type="button"
               className="btn btn-light"
-              onClick={props.handleLogOut}
+              onClick={handleLogOut}
             >
               LOG OUT
             </button>
@@ -53,14 +67,11 @@ export default function Navbar(props) {
                     </button>
                   </div>
                   <div className="modal-body">
-                    <form
-                      id="registerForm"
-                      onSubmit={props.handleSubmitRegister}
-                    >
+                    <form id="registerForm" onSubmit={handleSubmitRegister}>
                       <div className="form-group">
                         <label>Name</label>
                         <input
-                          onChange={props.handleNameInput}
+                          onChange={handleNameInput}
                           name="name"
                           type="text"
                           className="form-control"
@@ -71,7 +82,7 @@ export default function Navbar(props) {
                       <div className="form-group">
                         <label>Email address</label>
                         <input
-                          onChange={props.handleEmailInput}
+                          onChange={handleEmailInput}
                           name="email"
                           type="email"
                           className="form-control"
@@ -82,7 +93,7 @@ export default function Navbar(props) {
                       <div className="form-group">
                         <label>Password</label>
                         <input
-                          onChange={props.handlePasswordInput}
+                          onChange={handlePasswordInput}
                           name="password"
                           type="password"
                           className="form-control"
@@ -109,6 +120,18 @@ export default function Navbar(props) {
               LOGIN
             </button>
 
+            {isUrlHome ? (
+              ''
+            ) : (
+              <Link to={`/`}>
+                <label>
+                  <div className="brandLogoMiniDiv">
+                    <p className="brandLogoMini">JS</p>
+                  </div>
+                </label>
+              </Link>
+            )}
+
             <div
               className="modal fade"
               id="login"
@@ -134,11 +157,11 @@ export default function Navbar(props) {
                     </button>
                   </div>
                   <div className="modal-body">
-                    <form onSubmit={props.handleLogIn}>
+                    <form onSubmit={handleLogIn}>
                       <div className="form-group">
                         <label>Email address</label>
                         <input
-                          onChange={props.handleEmailInput}
+                          onChange={handleEmailInput}
                           name="email"
                           type="email"
                           className="form-control"
@@ -149,7 +172,7 @@ export default function Navbar(props) {
                       <div className="form-group">
                         <label>Password</label>
                         <input
-                          onChange={props.handlePasswordInput}
+                          onChange={handlePasswordInput}
                           name="password"
                           type="password"
                           className="form-control"
@@ -169,10 +192,10 @@ export default function Navbar(props) {
           </div>
         )}
         <div>
-          {Object.keys(props.user).length ? (
-            <span id="helloUser">Hello {props.user.name}</span>
+          {Object.keys(user).length ? (
+            <span id="helloUser">Hello {user.name}</span>
           ) : (
-            ""
+            ''
           )}
 
           <button id="cartButton">

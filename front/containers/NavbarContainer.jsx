@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import Navbar from "../components/Navbar";
-import { connect } from "react-redux";
-import { userRegUser } from "../store/actions/user";
-import { userLogOut } from "../store/actions/user";
-import { userLogIn } from "../store/actions/user";
+import React, { Component } from 'react';
+import Navbar from '../components/Navbar';
+import { connect } from 'react-redux';
+import { userRegUser } from '../store/actions/user';
+import { userLogOut } from '../store/actions/user';
+import { userLogIn } from '../store/actions/user';
 
 class NavbarContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      name: ""
+      email: '',
+      password: '',
+      name: ''
     };
     this.handleLogIn = this.handleLogIn.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
@@ -28,8 +28,8 @@ class NavbarContainer extends Component {
       this.state.email,
       this.state.password
     );
-    document.querySelector("#registerForm").reset();
-    document.querySelector("#registerClose").click();
+    document.querySelector('#registerForm').reset();
+    document.querySelector('#registerClose').click();
 
     // .then(() => this.props.history.push("/"));
   }
@@ -41,7 +41,7 @@ class NavbarContainer extends Component {
   }
   handleLogIn(event) {
     event.preventDefault();
-    document.querySelector("#loginClose").click();
+    document.querySelector('#loginClose').click();
     this.props.userLogIn(this.state.email, this.state.password);
 
     // .then(() => this.props.history.push("/"));
@@ -60,10 +60,12 @@ class NavbarContainer extends Component {
   }
 
   render() {
+    console.log('navbarcontainer', this.props);
     return (
       <div>
         <Navbar
           user={this.props.user}
+          isUrlHome={this.props.isUrlHome}
           handleLogIn={this.handleLogIn}
           handleNameInput={this.handleNameInput}
           handleEmailInput={this.handleEmailInput}
