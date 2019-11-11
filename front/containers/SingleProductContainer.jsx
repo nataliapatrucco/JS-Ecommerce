@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import SingleProduct from "../components/SingleProduct";
-import { fetchProduct } from "../store/actions/product";
+import React from 'react';
+import { connect } from 'react-redux';
+import SingleProduct from '../components/SingleProduct';
+import { fetchProduct } from '../store/actions/product';
 
 class SingleProductContainer extends React.Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class SingleProductContainer extends React.Component {
 }
 
 const mapStateToProps = ({ products }) => {
-  console.log(products);
   return {
     selectedProduct: products.selectedProduct
   };

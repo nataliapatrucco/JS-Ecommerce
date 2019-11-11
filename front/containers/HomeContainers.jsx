@@ -1,28 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchProducts } from "../store/actions/product";
-import Search from "../components/Search";
-import RandomView from "../components/RandomView";
-import { searchProducts } from "../store/actions/product";
-import { isHome } from "../store/actions/navbar";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchProducts } from '../store/actions/product';
+import Search from '../components/Search';
+import RandomView from '../components/RandomView';
+import { searchProducts } from '../store/actions/product';
 
 export class HomeContainers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ""
+      text: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     this.props.fetchProducts();
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.isHome(
-      this.props.location.pathname === window.location.pathname
-    );
   }
 
   handleChange(event) {
@@ -37,14 +30,14 @@ export class HomeContainers extends Component {
   handleAdd() {}
 
   render() {
-    console.log("!----! HOME CONTAINERS PROPS", this.props);
+    const { products } = this.props;
     return (
       <div>
         <Search
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
-        <RandomView products={this.props.products} />
+        <RandomView products={products} />
       </div>
     );
   }
@@ -52,12 +45,11 @@ export class HomeContainers extends Component {
 
 const mapDispatchToProps = {
   fetchProducts,
-  searchProducts,
-  isHome
+  searchProducts
 };
+
 const mapStateToProps = state => ({
-  products: state.products.products,
-  isHome: state.isHome
+  products: state.products.products
 });
 
 export default connect(
