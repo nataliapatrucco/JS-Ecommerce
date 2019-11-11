@@ -34,7 +34,7 @@ export const userRegUser = (name, email, password) => dispatch =>
 
 export const userLogIn = (email, password) => dispatch =>
   axios
-    .post("/api/user/login", { email, password })
+    .post("/api/user/login", { email, password, localStorage })
     .then(res => res.data)
     .then(user => dispatch(logUser(user)))
     .catch(err => console.log(err));

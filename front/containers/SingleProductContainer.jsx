@@ -2,13 +2,13 @@ import React from "react"
 import { connect } from "react-redux";
 import SingleProduct from "../components/SingleProduct"
 import { fetchProduct } from "../store/actions/product"
-
-
+import { fetchAndAddToCart } from "../store/actions/cart"
 
 class SingleProductContainer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {}
+        this.addProduct = this.addProduct.bind(this)
     }
 
     componentDidMount() {
@@ -16,25 +16,31 @@ class SingleProductContainer extends React.Component {
         this.props.fetchProduct(this.props.match.params.id)
     }
 
+    addProduct(product) {
+        
+        this.props.fetchAndAddToCart(product, this.props.user)
+    }
+
     render() {
-        console.log('holaaaaaaaaaaaaaaaa',this.props)
         return (
             <div>
-                <SingleProduct selectedProduct={this.props.selectedProduct}/>
+                <SingleProduct addProduct={this.addProduct} selectedProduct={this.props.selectedProduct}/>
             </div>
         )
     }
 }
 
-const mapStateToProps = ({ products }) => {
+const mapStateToProps = ({ products, user }) => {
     console.log(products)
     return ({
+        user: user.user,
         selectedProduct: products.selectedProduct
     })
 }
 
 const mapDispatchToProps = {
     fetchProduct,
+    fetchAndAddToCart
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProductContainer)

@@ -4,7 +4,7 @@ import { CardDeck, Card } from "react-bootstrap";
 import StarRatings from "react-star-ratings";
 
 
-export default ({ selectedProduct }) => {
+export default ({ selectedProduct, addProduct }) => {
     if (selectedProduct.image) {
         let urlImg = selectedProduct.image.slice(1)    
     return ( 
@@ -18,7 +18,6 @@ export default ({ selectedProduct }) => {
                 <Card.Title>{selectedProduct.name}</Card.Title>
                 <Card.Title>{selectedProduct.price}</Card.Title>
                 <Card.Title>{selectedProduct.description}</Card.Title>
-
                 </Card.Body>
                 <Card.Footer>
                 <small className="text-muted">
@@ -29,7 +28,7 @@ export default ({ selectedProduct }) => {
                     />
                 </small>
                 </Card.Footer>
-                <button>Add to cart</button>
+                <button onClick={() => addProduct(selectedProduct)}>Add to cart</button>
             </Card>
             </div>
     )

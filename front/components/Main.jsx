@@ -5,6 +5,7 @@ import NavbarContainer from "../containers/NavbarContainer";
 import { connect } from "react-redux";
 import HomeContainer from "../containers/HomeContainers";
 import { fetchUser } from "../store/actions/user";
+import { fetchCart } from "../store/actions/cart";
 import SingleProductContainer from "../containers/SingleProductContainer"
 
 
@@ -17,6 +18,7 @@ class Main extends Component {
 
   componentDidMount() {
     this.props.fetchUser();
+    this.props.fetchCart(this.props.user)
   }
 
 
@@ -31,17 +33,24 @@ class Main extends Component {
           
           <Route exact path="/" component={HomeContainer} />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ user }) => {
+  return ({
+    user: user.user
+  })
+}
+
 const mapDispatchToProps = {
   fetchUser,
+  fetchCart
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Main);

@@ -11,7 +11,7 @@ const passportConfig = require("./config/passport");
 const routes = require("./routes");
 
 //run this code if seed doesn't run
-const { Cart, User, Product, Review } = require("./models/index");
+const { Cart, User, Product, Review, Product_cart } = require("./models/index");
 
 require("dotenv").config();
 
@@ -33,7 +33,7 @@ app.use(passportConfig.session());
 //TODO ADD CATCHES TO ROUTES
 
 app.use("/api", routes);
-app.get("/*", function(req, res, next) {
+app.use("/*", function(req, res, next) {
   res.sendFile(path.join(__dirname, "./public/index.html"))
 })
 
