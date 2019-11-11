@@ -63,6 +63,7 @@ class NavbarContainer extends Component {
     return (
       <div>
         <Navbar
+          location = {this.props.location}
           user={this.props.user}
           handleLogIn={this.handleLogIn}
           handleNameInput={this.handleNameInput}

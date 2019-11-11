@@ -178,9 +178,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Footer */ "./components/Footer.jsx");
 /* harmony import */ var _containers_NavbarContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../containers/NavbarContainer */ "./containers/NavbarContainer.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _containers_HomeContainers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../containers/HomeContainers */ "./containers/HomeContainers.jsx");
+/* harmony import */ var _containers_HomeContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../containers/HomeContainer */ "./containers/HomeContainer.jsx");
 /* harmony import */ var _store_actions_user__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../store/actions/user */ "./store/actions/user.js");
 /* harmony import */ var _containers_SingleProductContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../containers/SingleProductContainer */ "./containers/SingleProductContainer.jsx");
+/* harmony import */ var _containers_SearchResultsContainer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../containers/SearchResultsContainer */ "./containers/SearchResultsContainer.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -198,6 +199,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -229,14 +231,27 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "main container-fluid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_NavbarContainer__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, console.log(this.props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_NavbarContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        location: this.props.location
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
         path: "/product/:id",
         component: _containers_SingleProductContainer__WEBPACK_IMPORTED_MODULE_7__["default"]
-      }), "}", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        exact: true,
+        path: "/:query",
+        render: function render(_ref) {
+          var match = _ref.match,
+              history = _ref.history;
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_SearchResultsContainer__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            searchQuery: match.params.query,
+            history: history
+          });
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
         path: "/",
-        component: _containers_HomeContainers__WEBPACK_IMPORTED_MODULE_5__["default"]
+        component: _containers_HomeContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
@@ -264,7 +279,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-icons/ai */ "./node_modules/react-icons/ai/index.esm.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -349,7 +366,9 @@ function Navbar(props) {
     className: "btn btn-light",
     "data-toggle": "modal",
     "data-target": "#login"
-  }, "LOGIN"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "LOGIN"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/"
+  }, "JS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "modal fade",
     id: "login",
     tabIndex: "-1",
@@ -506,6 +525,66 @@ function Search(props) {
 
 /***/ }),
 
+/***/ "./components/SearchResults.jsx":
+/*!**************************************!*\
+  !*** ./components/SearchResults.jsx ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SearchResults; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-star-ratings */ "./node_modules/react-star-ratings/build/index.js");
+/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_star_ratings__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_icons_ti__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/ti */ "./node_modules/react-icons/ti/index.esm.js");
+
+
+
+
+
+function SearchResults(_ref) {
+  var products = _ref.products;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "randomViewContainer"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, products.map(function (product) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
+      className: "card text-center",
+      id: "productCard",
+      key: product.id
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+      to: "/product/".concat(product.id)
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Img, {
+      variant: "top",
+      src: product.image
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, {
+      id: "prodBody"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Title, {
+      id: "productName"
+    }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Title, {
+      id: "productPrice"
+    }, product.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+      className: "text-muted"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      rating: product.rating,
+      starDimension: "11px",
+      starSpacing: "4px",
+      starRatedColor: "rgb(188, 100, 100)"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+      to: "/product/".concat(product.id)
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      id: "plusBtn",
+      className: "btn btn-light"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ti__WEBPACK_IMPORTED_MODULE_4__["TiPlus"], null), " info"))));
+  })));
+}
+
+/***/ }),
+
 /***/ "./components/SingleProduct.jsx":
 /*!**************************************!*\
   !*** ./components/SingleProduct.jsx ***!
@@ -547,10 +626,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./containers/HomeContainers.jsx":
-/*!***************************************!*\
-  !*** ./containers/HomeContainers.jsx ***!
-  \***************************************/
+/***/ "./containers/HomeContainer.jsx":
+/*!**************************************!*\
+  !*** ./containers/HomeContainer.jsx ***!
+  \**************************************/
 /*! exports provided: HomeContainers, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -559,10 +638,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeContainers", function() { return HomeContainers; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_actions_product__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/actions/product */ "./store/actions/product.js");
-/* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Search */ "./components/Search.jsx");
-/* harmony import */ var _components_RandomView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/RandomView */ "./components/RandomView.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_actions_product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/actions/product */ "./store/actions/product.js");
+/* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Search */ "./components/Search.jsx");
+/* harmony import */ var _components_RandomView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/RandomView */ "./components/RandomView.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -587,6 +667,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var HomeContainers =
 /*#__PURE__*/
 function (_Component) {
@@ -599,7 +680,7 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HomeContainers).call(this, props));
     _this.state = {
-      text: ""
+      searchQuery: ""
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -615,14 +696,15 @@ function (_Component) {
     key: "handleChange",
     value: function handleChange(event) {
       this.setState({
-        text: event.target.value
+        searchQuery: event.target.value
       });
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault();
-      this.props.searchProducts(this.state.text);
+      e.preventDefault(); // this.props.searchProducts(this.state.searchQuery);
+
+      this.props.history.push("/".concat(this.state.searchQuery));
     }
   }, {
     key: "handleAdd",
@@ -630,11 +712,10 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_4__["default"], {
         handleSubmit: this.handleSubmit,
         handleChange: this.handleChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_RandomView__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_RandomView__WEBPACK_IMPORTED_MODULE_5__["default"], {
         products: this.props.products
       }));
     }
@@ -643,8 +724,8 @@ function (_Component) {
   return HomeContainers;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 var mapDispatchToProps = {
-  fetchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["fetchProducts"],
-  searchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["searchProducts"]
+  fetchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_3__["fetchProducts"],
+  searchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_3__["searchProducts"]
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -653,7 +734,7 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(HomeContainers));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(HomeContainers));
 
 /***/ }),
 
@@ -767,6 +848,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        location: this.props.location,
         user: this.props.user,
         handleLogIn: this.handleLogIn,
         handleNameInput: this.handleNameInput,
@@ -793,6 +875,83 @@ var mapDispatchToProps = {
   userLogIn: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userLogIn"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(NavbarContainer));
+
+/***/ }),
+
+/***/ "./containers/SearchResultsContainer.jsx":
+/*!***********************************************!*\
+  !*** ./containers/SearchResultsContainer.jsx ***!
+  \***********************************************/
+/*! exports provided: SearchResultsContainer, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchResultsContainer", function() { return SearchResultsContainer; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_SearchResults__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SearchResults */ "./components/SearchResults.jsx");
+/* harmony import */ var _store_actions_product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/actions/product */ "./store/actions/product.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var SearchResultsContainer =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(SearchResultsContainer, _Component);
+
+  function SearchResultsContainer(props) {
+    var _this;
+
+    _classCallCheck(this, SearchResultsContainer);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchResultsContainer).call(this, props));
+    props.searchProducts(props.searchQuery);
+    return _this;
+  }
+
+  _createClass(SearchResultsContainer, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchResults__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        products: this.props.products
+      }));
+    }
+  }]);
+
+  return SearchResultsContainer;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+var mapDispatchToProps = {
+  searchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_3__["searchProducts"]
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    products: state.products.products
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(SearchResultsContainer));
 
 /***/ }),
 
@@ -856,7 +1015,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log('holaaaaaaaaaaaaaaaa', this.props);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SingleProduct__WEBPACK_IMPORTED_MODULE_2__["default"], {
         selectedProduct: this.props.selectedProduct
       }));
@@ -868,7 +1026,6 @@ function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(_ref) {
   var products = _ref.products;
-  console.log(products);
   return {
     selectedProduct: products.selectedProduct
   };

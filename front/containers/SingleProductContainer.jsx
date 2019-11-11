@@ -17,7 +17,6 @@ class SingleProductContainer extends React.Component {
     }
 
     render() {
-        console.log('holaaaaaaaaaaaaaaaa',this.props)
         return (
             <div>
                 <SingleProduct selectedProduct={this.props.selectedProduct}/>
@@ -27,7 +26,6 @@ class SingleProductContainer extends React.Component {
 }
 
 const mapStateToProps = ({ products }) => {
-    console.log(products)
     return ({
         selectedProduct: products.selectedProduct
     })

@@ -4,7 +4,7 @@ import { CardDeck, Card } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { TiPlus } from "react-icons/ti";
 
-export default function RandomView({ products }) {
+export default function SearchResults({ products }) {
   return (
     <div id="randomViewContainer">
       <CardDeck>

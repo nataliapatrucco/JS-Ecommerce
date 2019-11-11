@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Redirect} from "react-router-dom"
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/actions/product";
 import Search from "../components/Search";
@@ -9,28 +10,29 @@ export class HomeContainers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ""
+      searchQuery: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   componentDidMount() {
     this.props.fetchProducts();
   }
 
   handleChange(event) {
-    this.setState({ text: event.target.value });
+    this.setState({ searchQuery: event.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.searchProducts(this.state.text);
+    // this.props.searchProducts(this.state.searchQuery);
+    this.props.history.push(`/${this.state.searchQuery}`);
   }
 
   handleAdd() {}
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <Search

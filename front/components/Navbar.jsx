@@ -1,5 +1,6 @@
 import React from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
   return (
@@ -109,6 +110,8 @@ export default function Navbar(props) {
               LOGIN
             </button>
 
+            <Link to={"/"}>JS</Link> 
+
             <div
               className="modal fade"
               id="login"
@@ -174,6 +177,19 @@ export default function Navbar(props) {
           ) : (
             ""
           )}
+
+          {/* code for adding searchbar to navbar */}
+
+          {/* {props.location.pathname !== "/" && 
+          <input
+              onChange={props.handleChange}
+              className=" active-purple-3 active-purple-4 form-control navSearch"
+              type="text"
+              placeholder="search"
+              aria-label="Search"
+              style={{ textAlign: "center" }}
+            />
+          } */} 
 
           <button id="cartButton">
             <AiOutlineShoppingCart />

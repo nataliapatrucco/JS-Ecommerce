@@ -3,34 +3,36 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Footer from "../components/Footer";
 import NavbarContainer from "../containers/NavbarContainer";
 import { connect } from "react-redux";
-import HomeContainer from "../containers/HomeContainers";
+import HomeContainer from "../containers/HomeContainer";
 import { fetchUser } from "../store/actions/user";
-import SingleProductContainer from "../containers/SingleProductContainer"
-
-
+import SingleProductContainer from "../containers/SingleProductContainer";
+import SearchResultsContainer from "../containers/SearchResultsContainer";
 
 class Main extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   componentDidMount() {
     this.props.fetchUser();
   }
 
-
   render() {
     return (
       <div id="main container-fluid">
-        <NavbarContainer />
+        <NavbarContainer location={this.props.location}/>
         <Switch>
-          {console.log(this.props)}
-
-          <Route exact path="/product/:id" component={SingleProductContainer}/>
-          {/* <Route exact path="/search" component={ */}
-
-          }
+          <Route exact path="/product/:id" component={SingleProductContainer} />
+          <Route
+            exact
+            path="/:query"
+            render={({ match, history }) => (
+              <SearchResultsContainer
+                searchQuery={match.params.query}
+                history={history}
+              />
+            )}
+          />
           <Route exact path="/" component={HomeContainer} />
         </Switch>
         <Footer />
@@ -40,7 +42,7 @@ class Main extends Component {
 }
 
 const mapDispatchToProps = {
-  fetchUser,
+  fetchUser
 };
 
 export default connect(
