@@ -824,6 +824,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Navbar */ "./components/Navbar.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_actions_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/actions/user */ "./store/actions/user.js");
+/* harmony import */ var _store_actions_cart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/actions/cart */ "./store/actions/cart.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -843,6 +844,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -886,7 +888,8 @@ function (_Component) {
     key: "handleLogOut",
     value: function handleLogOut(event) {
       event.preventDefault();
-      this.props.userLogOut(); //.then(() => this.props.history.push("/"));
+      this.props.userLogOut();
+      this.props.userLogOutCart(); //.then(() => this.props.history.push("/"));
     }
   }, {
     key: "handleLogIn",
@@ -929,6 +932,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = {
   userLogOut: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userLogOut"],
+  userLogOutCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_4__["userLogOutCart"],
   userRegUser: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userRegUser"],
   userLogIn: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userLogIn"]
 };
@@ -56345,7 +56349,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64027,12 +64031,14 @@ module.exports = function(originalModule) {
 /*!*******************************!*\
   !*** ./store/actions/cart.js ***!
   \*******************************/
-/*! exports provided: setCart, fetchCart, fetchAndAddToCart */
+/*! exports provided: setCart, logOutCart, userLogOutCart, fetchCart, fetchAndAddToCart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCart", function() { return setCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logOutCart", function() { return logOutCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userLogOutCart", function() { return userLogOutCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCart", function() { return fetchCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAndAddToCart", function() { return fetchAndAddToCart; });
 /* harmony import */ var _constants_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/index */ "./store/constants/index.js");
@@ -64044,6 +64050,17 @@ var setCart = function setCart(cart) {
   return {
     type: _constants_index__WEBPACK_IMPORTED_MODULE_0__["SET_CART"],
     cart: cart
+  };
+};
+var logOutCart = function logOutCart() {
+  return {
+    type: _constants_index__WEBPACK_IMPORTED_MODULE_0__["LOG_OUT_CART"],
+    cart: {}
+  };
+};
+var userLogOutCart = function userLogOutCart() {
+  return function (dispatch) {
+    dispatch(logOutCart());
   };
 };
 var fetchCart = function fetchCart(user) {
@@ -64267,7 +64284,7 @@ var fetchUser = function fetchUser() {
 /*!**********************************!*\
   !*** ./store/constants/index.js ***!
   \**********************************/
-/*! exports provided: REG_USER, LOG_USER, LOG_OUT, GET_PRODUCTS, SEARCH_PRODUCTS, SELECTED_PRODUCT, CHECK_IS_HOME, SET_CART */
+/*! exports provided: REG_USER, LOG_USER, LOG_OUT, GET_PRODUCTS, SEARCH_PRODUCTS, SELECTED_PRODUCT, CHECK_IS_HOME, SET_CART, LOG_OUT_CART */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64280,6 +64297,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SELECTED_PRODUCT", function() { return SELECTED_PRODUCT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHECK_IS_HOME", function() { return CHECK_IS_HOME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CART", function() { return SET_CART; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOG_OUT_CART", function() { return LOG_OUT_CART; });
 var REG_USER = "REG_USER";
 var LOG_USER = "LOG_USER";
 var LOG_OUT = "LOG_OUT";
@@ -64288,6 +64306,7 @@ var SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 var SELECTED_PRODUCT = "SELECTED_PRODUCT";
 var CHECK_IS_HOME = "CHECK_IS_HOME";
 var SET_CART = "SET_CART";
+var LOG_OUT_CART = "LOG_OUT_CART";
 
 /***/ }),
 
@@ -64317,6 +64336,11 @@ var initialState = {
 
   switch (action.type) {
     case _constants_index__WEBPACK_IMPORTED_MODULE_0__["SET_CART"]:
+      return _objectSpread({}, state, {
+        cart: action.cart
+      });
+
+    case _constants_index__WEBPACK_IMPORTED_MODULE_0__["LOG_OUT_CART"]:
       return _objectSpread({}, state, {
         cart: action.cart
       });

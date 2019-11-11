@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { userRegUser } from '../store/actions/user';
 import { userLogOut } from '../store/actions/user';
 import { userLogIn } from '../store/actions/user';
+import { userLogOutCart } from "../store/actions/cart"
 
 class NavbarContainer extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class NavbarContainer extends Component {
   handleLogOut(event) {
     event.preventDefault();
     this.props.userLogOut();
+    this.props.userLogOutCart();
     //.then(() => this.props.history.push("/"));
   }
   handleLogIn(event) {
@@ -73,6 +75,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   userLogOut,
+  userLogOutCart,
   userRegUser,
   userLogIn
 };

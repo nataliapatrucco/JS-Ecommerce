@@ -1,10 +1,19 @@
-import { SET_CART } from "../constants/index";
+import { SET_CART, LOG_OUT_CART } from "../constants/index";
 import axios from "axios";
 
 export const setCart = (cart) => ({
     type: SET_CART,
     cart
 }) 
+
+export const logOutCart = () => ({
+    type: LOG_OUT_CART,
+    cart: {}
+})
+
+export const userLogOutCart = () => dispatch => {
+    dispatch(logOutCart())
+}
 
 
 export const fetchCart = (user) => dispatch => {
