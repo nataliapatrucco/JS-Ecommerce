@@ -56,7 +56,7 @@ router.get("/random/:number", function(req, res) {
 
   router.get("/:productId", function(req, res, next) {
     Product.findByPk(req.params.productId)
-    .then(async product => {
+    .then(product => {
       product.getReviews().then(reviews=>{
         let numReviews = reviews.length;
         let sum = 0;

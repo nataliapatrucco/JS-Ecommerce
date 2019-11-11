@@ -31,7 +31,6 @@ app.use(passportConfig.initialize());
 app.use(passportConfig.session());
 
 //TODO ADD CATCHES TO ROUTES
-
 app.use("/api", routes);
 app.get("/*", function(req, res, next) {
   res.sendFile(path.join(__dirname, "./public/index.html"));
