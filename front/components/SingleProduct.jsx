@@ -2,6 +2,9 @@ import React from "react";
 import StarRatings from "react-star-ratings";
 
 export default ({ selectedProduct }) => {
+  {
+    console.log("selecteddddd//////////", selectedProduct);
+  }
   if (selectedProduct.image) {
     let urlImg = selectedProduct.image.slice(1);
     return (
