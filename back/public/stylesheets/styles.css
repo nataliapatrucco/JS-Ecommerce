@@ -16,16 +16,10 @@ button {
   font-size: 86px;
 }
 
-<<<<<<< HEAD
-.navSearch{
+.navSearch {
   width: auto;
   margin: 0px;
   display: inline-block;
-=======
-.card-title {
-  padding: 2px;
-  margin: 10px;
->>>>>>> cb8da3906640b1a8a88640066e91e7b3782534a1
 }
 
 .jumbotron {
@@ -56,6 +50,24 @@ button {
   margin: 2px;
   border-radius: 0px;
   border-color: white;
+}
+
+#catMenu {
+  font-family: Andale Mono, monospace;
+  margin-left: 15px;
+  color: #a86b6b;
+}
+#homeSubmenu {
+  margin-left: 20px;
+}
+
+#singleCat {
+  font-size: 15px;
+  font-family: Andale Mono, monospace;
+  color: #a86b6b;
+}
+#logoutButton {
+  color: #a86b6b;
 }
 
 .modal-title {
