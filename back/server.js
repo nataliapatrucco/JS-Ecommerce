@@ -11,7 +11,7 @@ const passportConfig = require("./config/passport");
 const routes = require("./routes");
 
 //run this code if seed doesn't run
-const { Cart, User, Product, Review } = require("./models/index");
+const { Cart, User, Product, Review, Category } = require("./models/index");
 
 require("dotenv").config();
 
