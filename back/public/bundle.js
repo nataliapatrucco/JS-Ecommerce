@@ -64002,7 +64002,7 @@ var fetchProduct = function fetchProduct(id) {
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/product/".concat(id)).then(function (res) {
       return res.data;
     }).then(function (product) {
-      return dispatch(selectedProduct(product));
+      dispatch(selectedProduct(product));
     });
   };
 };
