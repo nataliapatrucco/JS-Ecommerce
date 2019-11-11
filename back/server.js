@@ -36,7 +36,7 @@ app.use("/*", function(req, res, next) {
   res.sendFile(path.join(__dirname, "./public/index.html"))
 })
 
-db.sync({ force: true })
+db.sync({ force: false })
   .then(() => {
     console.log(chalk.bgGreen(chalk.black("Connected to database." + "")));
     app.listen(process.env.PORT, () =>

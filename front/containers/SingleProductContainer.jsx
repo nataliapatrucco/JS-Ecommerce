@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-import React from 'react';
-import { connect } from 'react-redux';
-import SingleProduct from '../components/SingleProduct';
-import { fetchProduct } from '../store/actions/product';
-=======
 import React from "react"
 import { connect } from "react-redux";
 import SingleProduct from "../components/SingleProduct"
 import { fetchProduct } from "../store/actions/product"
 import { fetchAndAddToCart } from "../store/actions/cart"
->>>>>>> 5a8dcdb9299a71c8926517f2a8627a0fcfeae1ff
 
 class SingleProductContainer extends React.Component {
     constructor(props) {
@@ -36,12 +29,7 @@ class SingleProductContainer extends React.Component {
     }
 }
 
-<<<<<<< HEAD
-const mapStateToProps = ({ products }) => {
-=======
 const mapStateToProps = ({ products, user }) => {
-    console.log(products)
->>>>>>> 5a8dcdb9299a71c8926517f2a8627a0fcfeae1ff
     return ({
         user: user.user,
         selectedProduct: products.selectedProduct
@@ -49,14 +37,9 @@ const mapStateToProps = ({ products, user }) => {
 }
 
 const mapDispatchToProps = {
-<<<<<<< HEAD
-  fetchProduct
-};
-=======
     fetchProduct,
     fetchAndAddToCart
   };
->>>>>>> 5a8dcdb9299a71c8926517f2a8627a0fcfeae1ff
 
 export default connect(
   mapStateToProps,

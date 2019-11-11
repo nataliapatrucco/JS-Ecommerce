@@ -47,11 +47,6 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => {
-  return ({
-    user: user.user
-  })
-}
 
 const mapDispatchToProps = {
   fetchUser,
