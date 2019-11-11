@@ -86,6 +86,49 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./components/CategorySidebar.jsx":
+/*!****************************************!*\
+  !*** ./components/CategorySidebar.jsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CategorySidebar; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function CategorySidebar(_ref) {
+  var selectFilter = _ref.selectFilter;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    id: "sidebar"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "list-unstyled components"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "active"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#homeSubmenu",
+    "data-toggle": "collapse",
+    "aria-expanded": "false",
+    className: "dropdown-toggle"
+  }, "Categories"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "collapse list-unstyled",
+    id: "homeSubmenu"
+  }, ["dress", "pants", "shirts", "black", "red", "white", "brown", "blue"].map(function (category, i) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: i
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      onClick: selectFilter,
+      name: "".concat(category)
+    }, "".concat(category.toUpperCase())));
+  })))))));
+}
+
+/***/ }),
+
 /***/ "./components/Footer.jsx":
 /*!*******************************!*\
   !*** ./components/Footer.jsx ***!
@@ -100,25 +143,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-
-/*
-export default function Footer() {
-  return (
-    <div className="card text-center footer">
-      <div className="card-header"></div>
-      <div className="card-body">
-        <h5 className="card-title">
-          <Link to="/"></Link>Contact
-        </h5>
-        <p className="card-text">
-          <Link to="/"></Link>About Us
-        </p>
-      </div>
-      <div className="card-footer text-muted"></div>
-    </div>
-  );
-}
-*/
 
 function Footer() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -148,18 +172,7 @@ function Footer() {
   }, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "natiFooter"
   }, " ")));
-} // <div className="jsClothingFooter">
-// <p className="footerTextHolderA">
-//   Work with us <br /> About JS Clothing <br />
-//   Our mission
-//   <br />
-// </p>
-// <p className="footerTextHolderB">
-//   Support
-//   <br /> My account <br /> Contact Us
-// </p>
-// <div className="belowFooter">asdasdas</div>
-// </div>
+}
 
 /***/ }),
 
@@ -567,10 +580,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function SearchResults(_ref) {
-  var products = _ref.products;
+  var catFilter = _ref.catFilter,
+      products = _ref.products;
+  var filteredProducts = products;
+  catFilter ? filteredProducts = products.filter(function (product) {
+    return product.category.includes(catFilter);
+  }) : null;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "randomViewContainer"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, products.map(function (product) {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, filteredProducts.map(function (product) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
       className: "card text-center",
       id: "productCard",
@@ -922,6 +940,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _components_SearchResults__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SearchResults */ "./components/SearchResults.jsx");
 /* harmony import */ var _store_actions_product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/actions/product */ "./store/actions/product.js");
+/* harmony import */ var _components_CategorySidebar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/CategorySidebar */ "./components/CategorySidebar.jsx");
+/* harmony import */ var react_icons_ti__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/ti */ "./node_modules/react-icons/ti/index.esm.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -932,13 +952,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
 
 
 
@@ -955,14 +977,34 @@ function (_Component) {
     _classCallCheck(this, SearchResultsContainer);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchResultsContainer).call(this, props));
+    _this.state = {
+      catFilter: ""
+    };
+    _this.handleFilter = _this.handleFilter.bind(_assertThisInitialized(_this));
+    _this.selectFilter = _this.selectFilter.bind(_assertThisInitialized(_this));
     props.searchProducts(props.searchQuery);
     return _this;
   }
 
   _createClass(SearchResultsContainer, [{
+    key: "handleFilter",
+    value: function handleFilter() {
+      this.props.products.filter(function (product) {});
+    }
+  }, {
+    key: "selectFilter",
+    value: function selectFilter(e) {
+      this.setState({
+        catFilter: e.target.name
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchResults__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CategorySidebar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        selectFilter: this.selectFilter
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchResults__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        catFilter: this.state.catFilter,
         products: this.props.products
       }));
     }

@@ -1,14 +1,21 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 import { CardDeck, Card } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { TiPlus } from "react-icons/ti";
 
-export default function SearchResults({ products }) {
+export default function SearchResults({ catFilter, products }) {
+  let filteredProducts = products;
+  catFilter
+    ? (filteredProducts = products.filter(product =>
+        product.category.includes(catFilter)
+      ))
+    : null;
+
   return (
     <div id="randomViewContainer">
       <CardDeck>
-        {products.map(product => (
+        {filteredProducts.map(product => (
           <Card className="card text-center" id="productCard" key={product.id}>
             <Link to={`/product/${product.id}`}>
               <Card.Img variant="top" src={product.image} />

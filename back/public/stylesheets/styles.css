@@ -16,16 +16,10 @@ button {
   font-size: 86px;
 }
 
-<<<<<<< HEAD
-.navSearch{
+.navSearch {
   width: auto;
   margin: 0px;
   display: inline-block;
-=======
-.card-title {
-  padding: 2px;
-  margin: 10px;
->>>>>>> cb8da3906640b1a8a88640066e91e7b3782534a1
 }
 
 .jumbotron {
