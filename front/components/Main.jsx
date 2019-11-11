@@ -18,6 +18,7 @@ class Main extends Component {
   }
 
   render() {
+    const { isUrlHome } = this.props;
     return (
       <div id="main container-fluid">
         <NavbarContainer location={this.props.location}/>
@@ -45,7 +46,12 @@ const mapDispatchToProps = {
   fetchUser
 };
 
+const mapStateToProps = state => ({
+  user: state.user.user,
+  isUrlHome: state.navbar.home
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Main);

@@ -229,6 +229,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var isUrlHome = this.props.isUrlHome;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "main container-fluid"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_NavbarContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -262,7 +263,15 @@ function (_Component) {
 var mapDispatchToProps = {
   fetchUser: _store_actions_user__WEBPACK_IMPORTED_MODULE_6__["fetchUser"]
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(null, mapDispatchToProps)(Main));
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.user.user,
+    isUrlHome: state.navbar.home
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, mapDispatchToProps)(Main));
 
 /***/ }),
 
@@ -288,14 +297,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function Navbar(props) {
   var _React$createElement;
 
+  var handleInput = props.handleInput,
+      handleLogIn = props.handleLogIn,
+      handleLogOut = props.handleLogOut,
+      handleSubmitRegister = props.handleSubmitRegister,
+      location = props.location,
+      user = props.user;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     className: "navbar navbar-expand-md navbar-dark bg-light"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container-fluid"
-  }, Object.keys(props.user).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", (_React$createElement = {
+  }, Object.keys(user).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", (_React$createElement = {
     className: "navbar-toggler",
     type: "button"
-  }, _defineProperty(_React$createElement, "className", "btn btn-light"), _defineProperty(_React$createElement, "onClick", props.handleLogOut), _React$createElement), "LOG OUT")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, _defineProperty(_React$createElement, "className", "btn btn-light"), _defineProperty(_React$createElement, "onClick", handleLogOut), _React$createElement), "LOG OUT")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn btn-light",
     "data-toggle": "modal",
@@ -330,11 +345,11 @@ function Navbar(props) {
     className: "modal-body"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     id: "registerForm",
-    onSubmit: props.handleSubmitRegister
+    onSubmit: handleSubmitRegister
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    onChange: props.handleNameInput,
+    onChange: handleInput,
     name: "name",
     type: "text",
     className: "form-control",
@@ -342,7 +357,7 @@ function Navbar(props) {
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Email address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    onChange: props.handleEmailInput,
+    onChange: handleInput,
     name: "email",
     type: "email",
     className: "form-control",
@@ -350,7 +365,7 @@ function Navbar(props) {
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    onChange: props.handlePasswordInput,
+    onChange: handleInput,
     name: "password",
     type: "password",
     className: "form-control",
@@ -366,9 +381,13 @@ function Navbar(props) {
     className: "btn btn-light",
     "data-toggle": "modal",
     "data-target": "#login"
-  }, "LOGIN"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  }, "LOGIN"), location.pathname === '/' ? '' : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/"
-  }, "JS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "brandLogoMiniDiv"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "brandLogoMini"
+  }, "JS")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "modal fade",
     id: "login",
     tabIndex: "-1",
@@ -396,11 +415,11 @@ function Navbar(props) {
   }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "modal-body"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: props.handleLogIn
+    onSubmit: handleLogIn
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Email address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    onChange: props.handleEmailInput,
+    onChange: handleInput,
     name: "email",
     type: "email",
     className: "form-control",
@@ -408,7 +427,7 @@ function Navbar(props) {
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    onChange: props.handlePasswordInput,
+    onChange: handleInput,
     name: "password",
     type: "password",
     className: "form-control",
@@ -418,9 +437,9 @@ function Navbar(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "submit",
     className: "btn btn-dark"
-  }, "Login")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object.keys(props.user).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, "Login")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object.keys(user).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     id: "helloUser"
-  }, "Hello ", props.user.name) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Hello ", user.name) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "cartButton"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_1__["AiOutlineShoppingCart"], null)))));
 }
@@ -596,12 +615,8 @@ function SearchResults(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
-/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-star-ratings */ "./node_modules/react-star-ratings/build/index.js");
-/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_star_ratings__WEBPACK_IMPORTED_MODULE_3__);
-
-
+/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-star-ratings */ "./node_modules/react-star-ratings/build/index.js");
+/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_star_ratings__WEBPACK_IMPORTED_MODULE_1__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
@@ -609,18 +624,48 @@ __webpack_require__.r(__webpack_exports__);
 
   if (selectedProduct.image) {
     var urlImg = selectedProduct.image.slice(1);
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/"
-    }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Img, {
-      variant: "top",
-      src: "".concat(window.location.origin).concat(urlImg)
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Title, null, selectedProduct.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Title, null, selectedProduct.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Title, null, selectedProduct.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"].Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "singleView",
+      className: "container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "singleProdImg",
+      className: "col-8 card card-body"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: "".concat(window.location.origin).concat(urlImg),
+      className: "thumbnail",
+      alt: "Image"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "col-6"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+      className: "mb-4"
+    }, selectedProduct.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      className: "list-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      id: "singlePrice",
+      className: "list-group-item"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, selectedProduct.price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      className: "list-group-item"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, selectedProduct.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      className: "list-group-item"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
       className: "text-muted"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_star_ratings__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default.a, {
       rating: selectedProduct.rating,
       starDimension: "11px",
-      starSpacing: "4px"
-    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Add to cart")));
+      starSpacing: "4px",
+      starRatedColor: "rgb(188, 100, 100)"
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      className: "list-group-item"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Product Reviews:"), "......................... ")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "card card-body bg-dark my-5 text-light"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      className: "btn btn-default text-light"
+    }, "Add to Cart")))));
   } else return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading...");
 });
 
@@ -638,11 +683,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeContainers", function() { return HomeContainers; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_actions_product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/actions/product */ "./store/actions/product.js");
-/* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Search */ "./components/Search.jsx");
-/* harmony import */ var _components_RandomView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/RandomView */ "./components/RandomView.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_actions_product__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/actions/product */ "./store/actions/product.js");
+/* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Search */ "./components/Search.jsx");
+/* harmony import */ var _components_RandomView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/RandomView */ "./components/RandomView.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -660,7 +704,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -712,10 +755,10 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Search__WEBPACK_IMPORTED_MODULE_3__["default"], {
         handleSubmit: this.handleSubmit,
         handleChange: this.handleChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_RandomView__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_RandomView__WEBPACK_IMPORTED_MODULE_4__["default"], {
         products: this.props.products
       }));
     }
@@ -724,8 +767,8 @@ function (_Component) {
   return HomeContainers;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 var mapDispatchToProps = {
-  fetchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_3__["fetchProducts"],
-  searchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_3__["searchProducts"]
+  fetchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["fetchProducts"],
+  searchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["searchProducts"]
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -734,7 +777,7 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(HomeContainers));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(HomeContainers));
 
 /***/ }),
 
@@ -753,6 +796,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_actions_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/actions/user */ "./store/actions/user.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -789,16 +834,14 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(NavbarContainer).call(this, props));
     _this.state = {
-      email: "",
-      password: "",
-      name: ""
+      email: '',
+      password: '',
+      name: ''
     };
     _this.handleLogIn = _this.handleLogIn.bind(_assertThisInitialized(_this));
     _this.handleLogOut = _this.handleLogOut.bind(_assertThisInitialized(_this));
     _this.handleSubmitRegister = _this.handleSubmitRegister.bind(_assertThisInitialized(_this));
-    _this.handlePasswordInput = _this.handlePasswordInput.bind(_assertThisInitialized(_this));
-    _this.handleEmailInput = _this.handleEmailInput.bind(_assertThisInitialized(_this));
-    _this.handleNameInput = _this.handleNameInput.bind(_assertThisInitialized(_this));
+    _this.handleInput = _this.handleInput.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -807,8 +850,8 @@ function (_Component) {
     value: function handleSubmitRegister(event) {
       event.preventDefault();
       this.props.userRegUser(this.state.name, this.state.email, this.state.password);
-      document.querySelector("#registerForm").reset();
-      document.querySelector("#registerClose").click(); // .then(() => this.props.history.push("/"));
+      document.querySelector('#registerForm').reset();
+      document.querySelector('#registerClose').click(); // .then(() => this.props.history.push("/"));
     }
   }, {
     key: "handleLogOut",
@@ -820,40 +863,26 @@ function (_Component) {
     key: "handleLogIn",
     value: function handleLogIn(event) {
       event.preventDefault();
-      document.querySelector("#loginClose").click();
+      document.querySelector('#loginClose').click();
       this.props.userLogIn(this.state.email, this.state.password); // .then(() => this.props.history.push("/"));
     }
   }, {
-    key: "handleEmailInput",
-    value: function handleEmailInput(e) {
-      this.setState({
-        email: e.target.value
-      });
-    }
-  }, {
-    key: "handlePasswordInput",
-    value: function handlePasswordInput(e) {
-      this.setState({
-        password: e.target.value
-      });
-    }
-  }, {
-    key: "handleNameInput",
-    value: function handleNameInput(e) {
-      this.setState({
-        name: e.target.value
-      });
+    key: "handleInput",
+    value: function handleInput(e) {
+      var tag = e.target.name.toLowerCase();
+      this.setState(_defineProperty({}, tag, e.target.value));
     }
   }, {
     key: "render",
     value: function render() {
+      var _this$props = this.props,
+          user = _this$props.user,
+          location = _this$props.location;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        location: this.props.location,
-        user: this.props.user,
+        location: location,
+        user: user,
         handleLogIn: this.handleLogIn,
-        handleNameInput: this.handleNameInput,
-        handleEmailInput: this.handleEmailInput,
-        handlePasswordInput: this.handlePasswordInput,
+        handleInput: this.handleInput,
         handleLogOut: this.handleLogOut,
         handleSubmitRegister: this.handleSubmitRegister
       }));
@@ -64094,7 +64123,7 @@ var fetchUser = function fetchUser() {
 /*!**********************************!*\
   !*** ./store/constants/index.js ***!
   \**********************************/
-/*! exports provided: REG_USER, LOG_USER, LOG_OUT, GET_PRODUCTS, SEARCH_PRODUCTS, SELECTED_PRODUCT */
+/*! exports provided: REG_USER, LOG_USER, LOG_OUT, GET_PRODUCTS, SEARCH_PRODUCTS, SELECTED_PRODUCT, CHECK_IS_HOME */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64105,12 +64134,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_PRODUCTS", function() { return GET_PRODUCTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SEARCH_PRODUCTS", function() { return SEARCH_PRODUCTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SELECTED_PRODUCT", function() { return SELECTED_PRODUCT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHECK_IS_HOME", function() { return CHECK_IS_HOME; });
 var REG_USER = "REG_USER";
 var LOG_USER = "LOG_USER";
 var LOG_OUT = "LOG_OUT";
 var GET_PRODUCTS = "GET_PRODUCTS";
 var SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 var SELECTED_PRODUCT = "SELECTED_PRODUCT";
+var CHECK_IS_HOME = "CHECK_IS_HOME";
 
 /***/ }),
 
@@ -64126,13 +64157,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _reducers_productsReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reducers/productsReducer */ "./store/reducers/productsReducer.jsx");
 /* harmony import */ var _reducers_userReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/userReducer */ "./store/reducers/userReducer.jsx");
+/* harmony import */ var _reducers_navBarReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/navBarReducer */ "./store/reducers/navBarReducer.jsx");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   products: _reducers_productsReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  user: _reducers_userReducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  user: _reducers_userReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  navbar: _reducers_navBarReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
+
+/***/ }),
+
+/***/ "./store/reducers/navBarReducer.jsx":
+/*!******************************************!*\
+  !*** ./store/reducers/navBarReducer.jsx ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/index */ "./store/constants/index.js");
+
+var initialState = {
+  home: true
+};
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _constants_index__WEBPACK_IMPORTED_MODULE_0__["CHECK_IS_HOME"]:
+      return Object.assign({}, state, {
+        home: action.home
+      });
+
+    default:
+      return state;
+  }
+});
 
 /***/ }),
 

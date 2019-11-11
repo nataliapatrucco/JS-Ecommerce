@@ -3,16 +3,25 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
+  const {
+    handleInput,
+    handleLogIn,
+    handleLogOut,
+    handleSubmitRegister,
+    location,
+    user
+  } = props;
+
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-light">
       <div className="container-fluid">
-        {Object.keys(props.user).length ? (
+        {Object.keys(user).length ? (
           <div>
             <button
               className="navbar-toggler"
               type="button"
               className="btn btn-light"
-              onClick={props.handleLogOut}
+              onClick={handleLogOut}
             >
               LOG OUT
             </button>
@@ -54,14 +63,11 @@ export default function Navbar(props) {
                     </button>
                   </div>
                   <div className="modal-body">
-                    <form
-                      id="registerForm"
-                      onSubmit={props.handleSubmitRegister}
-                    >
+                    <form id="registerForm" onSubmit={handleSubmitRegister}>
                       <div className="form-group">
                         <label>Name</label>
                         <input
-                          onChange={props.handleNameInput}
+                          onChange={handleInput}
                           name="name"
                           type="text"
                           className="form-control"
@@ -72,7 +78,7 @@ export default function Navbar(props) {
                       <div className="form-group">
                         <label>Email address</label>
                         <input
-                          onChange={props.handleEmailInput}
+                          onChange={handleInput}
                           name="email"
                           type="email"
                           className="form-control"
@@ -83,7 +89,7 @@ export default function Navbar(props) {
                       <div className="form-group">
                         <label>Password</label>
                         <input
-                          onChange={props.handlePasswordInput}
+                          onChange={handleInput}
                           name="password"
                           type="password"
                           className="form-control"
@@ -109,8 +115,18 @@ export default function Navbar(props) {
             >
               LOGIN
             </button>
-
-            <Link to={"/"}>JS</Link> 
+            
+            { location.pathname === '/' ? (
+              ''
+            ) : (
+              <Link to={`/`}>
+                <label>
+                  <div className="brandLogoMiniDiv">
+                    <p className="brandLogoMini">JS</p>
+                  </div>
+                </label>
+              </Link>
+            )}
 
             <div
               className="modal fade"
@@ -137,11 +153,11 @@ export default function Navbar(props) {
                     </button>
                   </div>
                   <div className="modal-body">
-                    <form onSubmit={props.handleLogIn}>
+                    <form onSubmit={handleLogIn}>
                       <div className="form-group">
                         <label>Email address</label>
                         <input
-                          onChange={props.handleEmailInput}
+                          onChange={handleInput}
                           name="email"
                           type="email"
                           className="form-control"
@@ -152,7 +168,7 @@ export default function Navbar(props) {
                       <div className="form-group">
                         <label>Password</label>
                         <input
-                          onChange={props.handlePasswordInput}
+                          onChange={handleInput}
                           name="password"
                           type="password"
                           className="form-control"
@@ -172,10 +188,10 @@ export default function Navbar(props) {
           </div>
         )}
         <div>
-          {Object.keys(props.user).length ? (
-            <span id="helloUser">Hello {props.user.name}</span>
+          {Object.keys(user).length ? (
+            <span id="helloUser">Hello {user.name}</span>
           ) : (
-            ""
+            ''
           )}
 
           {/* code for adding searchbar to navbar */}
