@@ -1,7 +1,7 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 
-export default ({ selectedProduct }) => {
+export default ({ selectedProduct, addProduct }) => {
   if (selectedProduct.image) {
     let urlImg = selectedProduct.image.slice(1);
     return (
@@ -45,7 +45,7 @@ export default ({ selectedProduct }) => {
           </div>
           <div className="row">
             <div className="card card-body bg-dark my-5 text-light">
-              <button type="button" className="btn btn-default text-light">
+              <button onClick={() => addProduct(selectedProduct)} type="button" className="btn btn-default text-light">
                 Add to Cart
               </button>
             </div>
