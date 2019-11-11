@@ -22,7 +22,6 @@ export const fetchProduct = (id) => dispatch => {
   axios.get(`/api/product/${id}`)
   .then(res => res.data)
   .then(product => {
-    console.log("FETCHPRODUCT" , product);
     dispatch(selectedProduct(product))
   })
 }
