@@ -9,6 +9,17 @@ button {
 #loginButton {
   margin-left: 15px;
 }
+.brandLogo {
+  font-family: "Cinzel", serif;
+  color: rgb(188, 100, 100);
+  margin-bottom: 25px;
+  font-size: 86px;
+}
+
+.card-title {
+  padding: 2px;
+  margin: 10px;
+}
 
 .jumbotron {
   background-color: #e1e1e1;
@@ -26,14 +37,6 @@ button {
   color: #a86b6b;
 }
 
-.modal-title {
-  color: #a86b6b;
-}
-
-.card-title {
-  color: #797979;
-}
-
 #cartButton {
   border: solid 1px rgba(0, 0, 0, 0.2);
 }
@@ -48,17 +51,31 @@ button {
   border-color: white;
 }
 
+.modal-title {
+  color: #a86b6b;
+}
+
+.card-title {
+  color: #797979;
+}
+
 .card-img-top {
   border-radius: 0px;
+}
+
+#singleProdImg {
+  height: 50%;
+  width: 50%;
+}
+
+#loginButton {
+  margin-left: 15px;
 }
 
 #productName {
   font-weight: bold;
   justify-content: center;
 }
-/* #productPrice {
-  font-size: 50px;
-} */
 
 #prodBody {
   padding-bottom: 15px;
@@ -67,11 +84,10 @@ button {
   justify-content: center;
 }
 
-.card-title {
-  padding: 2px;
-  margin: 10px;
-}
-
 #plusBtn {
   text-align: center;
+}
+
+#singlePrice {
+  font-size: 30px;
 }
