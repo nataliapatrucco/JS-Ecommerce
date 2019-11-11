@@ -9,11 +9,12 @@ export default function CategorySidebar({ selectFilter }) {
             <li className="active">
               <a
                 href="#homeSubmenu"
+                id="catMenu"
                 data-toggle="collapse"
                 aria-expanded="false"
                 className="dropdown-toggle"
               >
-                Categories
+                CATEGORIES
               </a>
               <ul className="collapse list-unstyled" id="homeSubmenu">
                 {[
@@ -26,7 +27,7 @@ export default function CategorySidebar({ selectFilter }) {
                   "brown",
                   "blue"
                 ].map((category, i) => (
-                  <li key={i}>
+                  <li id="singleCat" key={i}>
                     <a onClick={selectFilter} name={`${category}`}>
                       {`${category.toUpperCase()}`}
                     </a>

@@ -111,14 +111,16 @@ function CategorySidebar(_ref) {
     className: "active"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#homeSubmenu",
+    id: "catMenu",
     "data-toggle": "collapse",
     "aria-expanded": "false",
     className: "dropdown-toggle"
-  }, "Categories"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, "CATEGORIES"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "collapse list-unstyled",
     id: "homeSubmenu"
   }, ["dress", "pants", "shirts", "black", "red", "white", "brown", "blue"].map(function (category, i) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      id: "singleCat",
       key: i
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       onClick: selectFilter,
@@ -322,7 +324,8 @@ function Navbar(props) {
     className: "container-fluid"
   }, Object.keys(user).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", (_React$createElement = {
     className: "navbar-toggler",
-    type: "button"
+    type: "button",
+    id: "logoutButton"
   }, _defineProperty(_React$createElement, "className", "btn btn-light"), _defineProperty(_React$createElement, "onClick", handleLogOut), _React$createElement), "LOG OUT")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn btn-light",
@@ -394,7 +397,7 @@ function Navbar(props) {
     className: "btn btn-light",
     "data-toggle": "modal",
     "data-target": "#login"
-  }, "LOGIN"), location.pathname === '/' ? '' : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  }, "LOGIN"), location.pathname === "/" ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "brandLogoMiniDiv"
@@ -452,7 +455,7 @@ function Navbar(props) {
     className: "btn btn-dark"
   }, "Login")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object.keys(user).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     id: "helloUser"
-  }, "Hello ", user.name) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Hello ", user.name) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "cartButton"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_1__["AiOutlineShoppingCart"], null)))));
 }

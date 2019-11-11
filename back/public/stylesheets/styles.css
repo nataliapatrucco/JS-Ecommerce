@@ -52,6 +52,24 @@ button {
   border-color: white;
 }
 
+#catMenu {
+  font-family: Andale Mono, monospace;
+  margin-left: 15px;
+  color: #a86b6b;
+}
+#homeSubmenu {
+  margin-left: 20px;
+}
+
+#singleCat {
+  font-size: 15px;
+  font-family: Andale Mono, monospace;
+  color: #a86b6b;
+}
+#logoutButton {
+  color: #a86b6b;
+}
+
 .modal-title {
   color: #a86b6b;
 }

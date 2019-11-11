@@ -20,6 +20,7 @@ export default function Navbar(props) {
             <button
               className="navbar-toggler"
               type="button"
+              id="logoutButton"
               className="btn btn-light"
               onClick={handleLogOut}
             >
@@ -115,9 +116,9 @@ export default function Navbar(props) {
             >
               LOGIN
             </button>
-            
-            { location.pathname === '/' ? (
-              ''
+
+            {location.pathname === "/" ? (
+              ""
             ) : (
               <Link to={`/`}>
                 <label>
@@ -191,7 +192,7 @@ export default function Navbar(props) {
           {Object.keys(user).length ? (
             <span id="helloUser">Hello {user.name}</span>
           ) : (
-            ''
+            ""
           )}
 
           {/* code for adding searchbar to navbar */}
@@ -205,7 +206,7 @@ export default function Navbar(props) {
               aria-label="Search"
               style={{ textAlign: "center" }}
             />
-          } */} 
+          } */}
 
           <button id="cartButton">
             <AiOutlineShoppingCart />
