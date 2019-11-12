@@ -1,7 +1,6 @@
 const S = require("sequelize");
 const db = require("../config/db");
 
-const Product = require("./Product");
 
 class Cart extends S.Model {}
 
@@ -12,7 +11,8 @@ Cart.init(
       allowNull: false
     },
     state: {
-      type: S.ENUM("proceso", "cancelado", "completado")
+      type: S.ENUM("proceso", "cancelado", "completado"),
+      defaultValue: "proceso"
     },
     guestID: {
       type: S.INTEGER
@@ -22,8 +22,11 @@ Cart.init(
       //TODO:   get(){
       //      return
       // }
-    }
+    },
+
   },
   { sequelize: db, modelName: "cart" }
 );
 module.exports = Cart;
+
+

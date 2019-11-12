@@ -10,23 +10,24 @@ Category.belongsToMany(Product, { as: "Product",
 Product.belongsToMany(Category, {
   through: "Product_Category"
 });
+const Product_cart = require("./Product_cart")
 
 Cart.belongsToMany(Product, {
-    through: "Product_Cart",
+    through: "product_cart",
     // foreignKey: "cartId",
     // otherKey: "productId"
   });
 Product.belongsToMany(Cart, {
-    through: "Product_Cart"
-  //   // foreignKey: "cartId",
-  //   // otherKey: "productId"
+    through: "product_cart",
+    // foreignKey: "productId",
+    // otherKey: "productId"
   });
 
 Product.hasMany(Review);
 
-User.hasOne(Cart, { as: "currentCart" });
+User.hasOne(Cart, { as: "CurrentUserCart" });
 
-User.hasMany(Cart, { as: "history" });
+User.hasMany(Cart, { as: "history", foreignKey: "history" });
 User.hasMany(Review);
 
-module.exports = {Cart, Product, Review, User, Category};
+module.exports = {Product_cart, Cart, Product, Review, User, Category};

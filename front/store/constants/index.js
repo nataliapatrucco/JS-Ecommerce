@@ -4,5 +4,6 @@ export const LOG_OUT = "LOG_OUT";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 export const SELECTED_PRODUCT = "SELECTED_PRODUCT";
-
 export const CHECK_IS_HOME = "CHECK_IS_HOME";
+export const SET_CART = "SET_CART"
+export const LOG_OUT_CART = "LOG_OUT_CART"

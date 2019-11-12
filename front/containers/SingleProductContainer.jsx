@@ -1,8 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react"
+import { connect } from "react-redux";
 import axios from 'axios';
-import SingleProduct from '../components/SingleProduct';
-import { fetchProduct } from '../store/actions/product';
+import SingleProduct from "../components/SingleProduct"
+import { fetchProduct } from "../store/actions/product"
+import { fetchAndAddToCart } from "../store/actions/cart"
 
 class SingleProductContainer extends React.Component {
     constructor(props) {
@@ -11,7 +12,11 @@ class SingleProductContainer extends React.Component {
             reviews : []
         }
         this.getReviews = this.getReviews.bind(this);
-        props.fetchProduct(this.props.match.params.id)
+        this.addProduct = this.addProduct.bind(this)
+        
+    }
+    componentDidMount() {
+        this.props.fetchProduct(this.props.match.params.id)
     }
 
     componentDidUpdate() {
@@ -25,27 +30,31 @@ class SingleProductContainer extends React.Component {
               });
         })
     }
+    
+    addProduct(product) {
+        this.props.fetchAndAddToCart(product, this.props.user)
+    }
 
     render() {
         return (
             <div>
-                {console.log(this.state)}
-                {console.log(this.props.selectedProduct)}
-                <SingleProduct selectedProduct={this.props.selectedProduct} reviews = {this.state.reviews}/>
+                <SingleProduct addProduct={this.addProduct} selectedProduct={this.props.selectedProduct} reviews = {this.state.reviews}/>
             </div>
         )
     }
 }
 
-const mapStateToProps = ({ products }) => {
+const mapStateToProps = ({ products, user }) => {
     return ({
+        user: user.user,
         selectedProduct: products.selectedProduct
     })
 }
 
 const mapDispatchToProps = {
-  fetchProduct
-};
+    fetchProduct,
+    fetchAndAddToCart
+  };
 
 export default connect(
   mapStateToProps,

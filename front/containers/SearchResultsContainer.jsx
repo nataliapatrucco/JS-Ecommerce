@@ -3,31 +3,40 @@ import { connect } from "react-redux";
 import SearchResults from "../components/SearchResults";
 import { searchProducts } from "../store/actions/product";
 import CategorySideBar from "../components/CategorySidebar";
-import { TiFilter } from "react-icons/ti";
 
 export class SearchResultsContainer extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       catFilter: ""
     };
-    this.handleFilter = this.handleFilter.bind(this);
     this.selectFilter = this.selectFilter.bind(this);
+    this.filteredCategories = this.filteredCategories.bind(this);
     props.searchProducts(props.searchQuery);
-  }
-
-  handleFilter() {
-    this.props.products.filter(product => {});
   }
 
   selectFilter(e) {
     this.setState({ catFilter: e.target.name });
   }
 
+  filteredCategories() {
+    const filters = [];
+    this.props.products.map(product =>
+      product.category.map(category => {
+        if (!filters.includes(category)) filters.push(category);
+      })
+    );
+    return filters;
+  }
+
   render() {
     return (
       <div>
-        <CategorySideBar selectFilter={this.selectFilter} />
+        <CategorySideBar
+          selectFilter={this.selectFilter}
+          filterCategories={this.filteredCategories()}
+        />
         <SearchResults
           catFilter={this.state.catFilter}
           products={this.props.products}
