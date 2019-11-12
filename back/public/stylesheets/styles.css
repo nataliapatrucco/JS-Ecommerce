@@ -107,6 +107,11 @@ button {
   text-align: center;
 }
 
+#cartBtn {
+  text-align: center;
+  margin-top: 10px;
+}
+
 #singlePrice {
   font-size: 30px;
 }

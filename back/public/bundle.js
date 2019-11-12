@@ -100,7 +100,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 function CategorySidebar(_ref) {
-  var selectFilter = _ref.selectFilter;
+  var selectFilter = _ref.selectFilter,
+      filterCategories = _ref.filterCategories;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "wrapper"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
@@ -118,7 +119,7 @@ function CategorySidebar(_ref) {
   }, "CATEGORIES"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "collapse list-unstyled",
     id: "homeSubmenu"
-  }, ["dress", "pants", "shirts", "black", "red", "white", "brown", "blue"].map(function (category, i) {
+  }, filterCategories.map(function (category, i) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       id: "singleCat",
       key: i
@@ -483,6 +484,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_icons_ti__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/ti */ "./node_modules/react-icons/ti/index.esm.js");
+/* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/ai */ "./node_modules/react-icons/ai/index.esm.js");
+
 
 
 
@@ -520,7 +523,10 @@ function RandomView(_ref) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       id: "plusBtn",
       className: "btn btn-light"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ti__WEBPACK_IMPORTED_MODULE_4__["TiPlus"], null), " info"))));
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ti__WEBPACK_IMPORTED_MODULE_4__["TiPlus"], null), " info")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "btn btn-light",
+      id: "cartBtn"
+    }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_5__["AiOutlineShoppingCart"], null))));
   })));
 }
 
@@ -956,7 +962,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_SearchResults__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SearchResults */ "./components/SearchResults.jsx");
 /* harmony import */ var _store_actions_product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/actions/product */ "./store/actions/product.js");
 /* harmony import */ var _components_CategorySidebar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/CategorySidebar */ "./components/CategorySidebar.jsx");
-/* harmony import */ var react_icons_ti__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/ti */ "./node_modules/react-icons/ti/index.esm.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -980,7 +985,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var SearchResultsContainer =
 /*#__PURE__*/
 function (_Component) {
@@ -995,18 +999,13 @@ function (_Component) {
     _this.state = {
       catFilter: ""
     };
-    _this.handleFilter = _this.handleFilter.bind(_assertThisInitialized(_this));
     _this.selectFilter = _this.selectFilter.bind(_assertThisInitialized(_this));
+    _this.filteredCategories = _this.filteredCategories.bind(_assertThisInitialized(_this));
     props.searchProducts(props.searchQuery);
     return _this;
   }
 
   _createClass(SearchResultsContainer, [{
-    key: "handleFilter",
-    value: function handleFilter() {
-      this.props.products.filter(function (product) {});
-    }
-  }, {
     key: "selectFilter",
     value: function selectFilter(e) {
       this.setState({
@@ -1014,10 +1013,22 @@ function (_Component) {
       });
     }
   }, {
+    key: "filteredCategories",
+    value: function filteredCategories() {
+      var filters = [];
+      this.props.products.map(function (product) {
+        return product.category.map(function (category) {
+          if (!filters.includes(category)) filters.push(category);
+        });
+      });
+      return filters;
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CategorySidebar__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        selectFilter: this.selectFilter
+        selectFilter: this.selectFilter,
+        filterCategories: this.filteredCategories()
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchResults__WEBPACK_IMPORTED_MODULE_2__["default"], {
         catFilter: this.state.catFilter,
         products: this.props.products
@@ -64155,8 +64166,7 @@ var selectedProduct = function selectedProduct(product) {
     type: _constants_index__WEBPACK_IMPORTED_MODULE_0__["SELECTED_PRODUCT"],
     product: product
   };
-}; //Para esta funcion necesito en el back una ruta a /products con un FindAll() que me traiga todos los productos que estan en la db (por ahora serian solo 9 que estan cargados)
-
+};
 var fetchProduct = function fetchProduct(id) {
   return function (dispatch) {
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/product/".concat(id)).then(function (res) {

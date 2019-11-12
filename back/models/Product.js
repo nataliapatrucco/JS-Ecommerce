@@ -43,7 +43,7 @@ Product.init(
     },
     rating: {
       type: S.INTEGER,
-      defaultValue: 0
+      defaultValue: 1
     },
     active: {
       type: S.BOOLEAN,
@@ -58,17 +58,5 @@ Product.init(
   },
   { sequelize: db, modelName: "product" }
 );
-
-
-// Product.prototype.getRating = async function(){
-//   const reviews = await this.getReviews();
-//     let numReviews = reviews.length;
-//     let sum = 0;
-//     reviews.map((review)=>{
-//       sum += review.rating;
-//     })
-//       console.log("PRODUCTGETTER",Math.round((sum / numReviews)) / 2)
-//       return (Math.round((sum / numReviews)) / 2)
-//   }
 
 module.exports = Product;

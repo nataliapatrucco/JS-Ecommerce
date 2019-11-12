@@ -11,9 +11,9 @@ class SingleProductContainer extends React.Component {
         this.addProduct = this.addProduct.bind(this)
     }
 
-    componentDidMount() {
-        this.props.fetchProduct(this.props.match.params.id)
-    }
+  componentDidMount() {
+    this.props.fetchProduct(this.props.match.params.id);
+  }
 
     addProduct(product) {
         
