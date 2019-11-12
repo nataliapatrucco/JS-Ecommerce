@@ -3,23 +3,31 @@ import { connect } from "react-redux";
 
 import Cart from "../components/Cart";
 
-import { fetchCart, fetchAndAddToCart } from "../store/actions/cart";
+import {
+  fetchCart,
+  fetchAndAddToCart,
+  fetchAndSubstractFromCart
+} from "../store/actions/cart";
 
 class CartContainer extends C {
   constructor(props) {
     super(props);
     this.quantAddOne = this.quantAddOne.bind(this);
-    // this.quantRemoveOne = this.quantRemoveOne.bind(this)
+    this.quantSubOne = this.quantSubOne.bind(this);
     // this.removeItem = this.removeItem.bind(this)
   }
 
-  async componentDidMount() {
-    //refresh cart
-    this.props.fetchCart();
-  }
+  // componentDidMount() {
+  //  //refresh cart
+  //  this.props.fetchCart();
+  // }
 
   quantAddOne(product) {
     this.props.fetchAndAddToCart(product, this.props.user);
+  }
+
+  quantSubOne(product) {
+    this.props.fetchAndSubstractFromCart(product, this.props.user);
   }
   /*
   quantRemoveOne(product){
@@ -34,7 +42,11 @@ class CartContainer extends C {
 
     return (
       <div>
-        <Cart cart={cart} quantAddOne={this.quantAddOne} />
+        <Cart
+          cart={cart}
+          quantAddOne={this.quantAddOne}
+          quantSubOne={this.quantSubOne}
+        />
       </div>
     );
   }
@@ -45,9 +57,10 @@ const mapStateToProps = state => ({
   cart: state.cart.cart
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = {
   fetchCart,
-  fetchAndAddToCart
-});
+  fetchAndAddToCart,
+  fetchAndSubstractFromCart
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);

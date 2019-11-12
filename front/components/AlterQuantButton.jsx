@@ -2,14 +2,12 @@ import React from "react";
 
 export default function AlterQuantButton(props) {
   console.log("BUTTONPROPS!!!!!!!!!!!!", props);
-  const { product, quantity, quantAddOne } = props;
+  const { product, quantity, quantAddOne, quantSubOne } = props;
   return (
     <div id="alterQuant">
-      <button>-</button>
+      <button onClick={() => quantSubOne(product)}>-</button>
       <span>{quantity}</span>
-      <button type="button" onClick={() => quantAddOne(product)}>
-        +
-      </button>
+      <button onClick={() => quantAddOne(product)}>+</button>
     </div>
   );
 }

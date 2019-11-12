@@ -103,11 +103,15 @@ function AlterQuantButton(props) {
   console.log("BUTTONPROPS!!!!!!!!!!!!", props);
   var product = props.product,
       quantity = props.quantity,
-      quantAddOne = props.quantAddOne;
+      quantAddOne = props.quantAddOne,
+      quantSubOne = props.quantSubOne;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "alterQuant"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "-"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: function onClick() {
+      return quantSubOne(product);
+    }
+  }, "-"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick() {
       return quantAddOne(product);
     }
@@ -134,7 +138,8 @@ __webpack_require__.r(__webpack_exports__);
 function Cart(props) {
   console.log("cartpropppppppppps", props);
   var cart = props.cart,
-      quantAddOne = props.quantAddOne;
+      quantAddOne = props.quantAddOne,
+      quantSubOne = props.quantSubOne;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "cartItemContainer"
   }, cart.map(function (cartItem) {
@@ -145,7 +150,7 @@ function Cart(props) {
         quantity = cartItem.quantity;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "singleItemInCart",
-      key: "".concat(cartItem, "_id#").concat(id)
+      key: "".concat(cartItem, "_").concat(id)
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: image,
       alt: "".concat(name, " image")
@@ -154,7 +159,8 @@ function Cart(props) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AlterQuantButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
       product: cartItem,
       quantity: quantity,
-      quantAddOne: quantAddOne
+      quantAddOne: quantAddOne,
+      quantSubOne: quantSubOne
     })));
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "cosa"
@@ -841,33 +847,25 @@ function (_C) {
     _classCallCheck(this, CartContainer);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CartContainer).call(this, props));
-    _this.quantAddOne = _this.quantAddOne.bind(_assertThisInitialized(_this)); // this.quantRemoveOne = this.quantRemoveOne.bind(this)
-    // this.removeItem = this.removeItem.bind(this)
+    _this.quantAddOne = _this.quantAddOne.bind(_assertThisInitialized(_this));
+    _this.quantSubOne = _this.quantSubOne.bind(_assertThisInitialized(_this)); // this.removeItem = this.removeItem.bind(this)
 
     return _this;
-  }
+  } // componentDidMount() {
+  //  //refresh cart
+  //  this.props.fetchCart();
+  // }
+
 
   _createClass(CartContainer, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      return regeneratorRuntime.async(function componentDidMount$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              //refresh cart
-              this.props.fetchCart();
-
-            case 1:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, null, this);
-    }
-  }, {
     key: "quantAddOne",
     value: function quantAddOne(product) {
       this.props.fetchAndAddToCart(product, this.props.user);
+    }
+  }, {
+    key: "quantSubOne",
+    value: function quantSubOne(product) {
+      this.props.fetchAndSubstractFromCart(product, this.props.user);
     }
     /*
     quantRemoveOne(product){
@@ -882,7 +880,8 @@ function (_C) {
       var cart = this.props.cart;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Cart__WEBPACK_IMPORTED_MODULE_2__["default"], {
         cart: cart,
-        quantAddOne: this.quantAddOne
+        quantAddOne: this.quantAddOne,
+        quantSubOne: this.quantSubOne
       }));
     }
   }]);
@@ -897,13 +896,11 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    fetchCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_3__["fetchCart"],
-    fetchAndAddToCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_3__["fetchAndAddToCart"]
-  };
+var mapDispatchToProps = {
+  fetchCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_3__["fetchCart"],
+  fetchAndAddToCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_3__["fetchAndAddToCart"],
+  fetchAndSubstractFromCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_3__["fetchAndSubstractFromCart"]
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(CartContainer));
 
 /***/ }),
@@ -64241,7 +64238,7 @@ module.exports = function(originalModule) {
 /*!*******************************!*\
   !*** ./store/actions/cart.js ***!
   \*******************************/
-/*! exports provided: setCart, logOutCart, userLogOutCart, fetchCart, fetchAndAddToCart */
+/*! exports provided: setCart, logOutCart, userLogOutCart, fetchAndSubstractFromCart, fetchCart, fetchAndAddToCart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64249,6 +64246,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCart", function() { return setCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logOutCart", function() { return logOutCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userLogOutCart", function() { return userLogOutCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAndSubstractFromCart", function() { return fetchAndSubstractFromCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCart", function() { return fetchCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAndAddToCart", function() { return fetchAndAddToCart; });
 /* harmony import */ var _constants_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/index */ "./store/constants/index.js");
@@ -64271,6 +64269,33 @@ var logOutCart = function logOutCart() {
 var userLogOutCart = function userLogOutCart() {
   return function (dispatch) {
     dispatch(logOutCart());
+  };
+};
+var fetchAndSubstractFromCart = function fetchAndSubstractFromCart(product, user) {
+  return function (dispatch) {
+    if (user.name) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart/substract", product).then(function (res) {
+        return res.data;
+      }).then(function (cart) {
+        dispatch(setCart(cart));
+      });
+    } else {
+      if (window.localStorage.getItem(product.id)) {
+        var productToSubFrom = JSON.parse(window.localStorage.getItem(product.id));
+        productToSubFrom.quantity = productToSubFrom.quantity - 1;
+        window.localStorage.setItem(productToSubFrom.id, JSON.stringify(productToSubFrom));
+      }
+
+      var values = [];
+      var keys = Object.keys(window.localStorage);
+      var i = keys.length;
+
+      while (i--) {
+        values.push(JSON.parse(window.localStorage.getItem(keys[i])));
+      }
+
+      dispatch(setCart(values));
+    }
   };
 };
 var fetchCart = function fetchCart(user) {
