@@ -27,6 +27,17 @@ export default function Navbar(props) {
             >
               LOG OUT
             </button>
+            {location.pathname === "/" ? (
+              ""
+            ) : (
+              <Link to={`/`}>
+                <label>
+                  <div className="brandLogoMiniDiv">
+                    <p className="brandLogoMini">JS</p>
+                  </div>
+                </label>
+              </Link>
+            )}
           </div>
         ) : (
           <div>
