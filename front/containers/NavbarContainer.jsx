@@ -12,9 +12,10 @@ class NavbarContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      name: ''
+      email: "",
+      password: "",
+      name: "",
+      wrongUser: ""
     };
     this.handleLogIn = this.handleLogIn.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
@@ -29,8 +30,8 @@ class NavbarContainer extends Component {
       this.state.email,
       this.state.password
     );
-    document.querySelector('#registerForm').reset();
-    document.querySelector('#registerClose').click();
+    document.querySelector("#registerForm").reset();
+    document.querySelector("#registerClose").click();
 
     // .then(() => this.props.history.push("/"));
   }
@@ -45,13 +46,16 @@ class NavbarContainer extends Component {
   handleLogIn(event) {
 
     event.preventDefault();
-    document.querySelector('#loginClose').click();
+    document.querySelector("#loginClose").click();
     this.props.userLogIn(this.state.email, this.state.password)
-    .then(() => {
-      this.props.fetchCart(this.props.user, this.props.cart)
-      window.localStorage.clear()
-    })
-    // .then(() => this.props.history.push("/"));
+    .then(res => {
+      if (!res) {
+        alert("Wrong username or password");
+      } else {
+        this.props.fetchCart(this.props.user, this.props.cart)
+        window.localStorage.clear()
+      }
+    });
   }
 
   handleInput(e) {
@@ -64,7 +68,8 @@ class NavbarContainer extends Component {
     return (
       <div>
         <Navbar
-          location = {location}
+          wrongUser={this.state.wrongUser}
+          location={location}
           user={user}
           handleLogIn={this.handleLogIn}
           handleInput={this.handleInput}
@@ -89,7 +94,4 @@ const mapDispatchToProps = {
   fetchCart
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NavbarContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);
