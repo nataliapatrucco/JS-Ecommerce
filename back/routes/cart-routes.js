@@ -11,11 +11,11 @@ router.post("/", async function(req, res, next) {
 
     const cart = await Cart.findOne( { where:{ CurrentUserCartId: req.user.id } } )
 
-    const onlyWaitProdToAdd = await cart.addProduct(req.body.id)
+    await cart.addProduct(req.body.id)
 
     const product_cart = await Product_cart.findOne({where: {cartId: cart.id, productId: req.body.id}})
 
-    const waitProdToUpdate = await product_cart.update({quantity: product_cart.quantity + 1})
+    await product_cart.update({quantity: product_cart.quantity + 1})
 
     const array = await Product_cart.findAll({where: {cartId: cart.id}})
 
@@ -24,15 +24,39 @@ router.post("/", async function(req, res, next) {
         frontProduct.dataValues.quantity = product.dataValues.quantity
         return frontProduct.dataValues
     })
-    console.log(getFrontCart, "-----------------------------")
+    // console.log(getFrontCart, "-----------------------------")
 
     const frontCart = await Promise.all(getFrontCart)
-        console.log(frontCart, "auiyzdbfhjndaofodanf")
+        // console.log(frontCart, "auiyzdbfhjndaofodanf")
         res.send(frontCart)
     
 
 })
 
+
+router.get("/me", async function(req, res, next) {
+
+    const cart = await Cart.findOne({where: {CurrentUserCartId: req.user.id}})
+    const product_cartUser = await Product_cart.findAll({where: {cartId: cart.id}})
+    const productsToSendPending = await Promise.all(product_cartUser)
+    // console.log(productsToSendPending, "---afdf--------------")
+    let productsToSendResolved = []
+    if (productsToSendPending.length) {
+
+        productsToSendResolved = productsToSendPending.map(async (product) => {
+            let perfectProduct = await Product.findByPk(product.dataValues.productId)
+            perfectProduct.quantity = product.dataValues.quantity
+            return perfectProduct
+    
+        })
+        // console.log(productsToSendResolved)
+    }
+    console.log(productsToSendResolved)
+    let kk = await Promise.all(productsToSendResolved)
+    console.log(kk, "-------------------------")
+    res.send(kk)
+    // res.send(productsToSendPending)
+})
 
 //move current cart to history
 

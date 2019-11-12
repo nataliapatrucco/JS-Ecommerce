@@ -243,6 +243,10 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchUser();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
       this.props.fetchCart(this.props.user);
     }
   }, {
@@ -859,6 +863,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var NavbarContainer =
 /*#__PURE__*/
 function (_Component) {
@@ -895,14 +900,21 @@ function (_Component) {
     value: function handleLogOut(event) {
       event.preventDefault();
       this.props.userLogOut();
-      this.props.userLogOutCart(); //.then(() => this.props.history.push("/"));
+      this.props.userLogOutCart();
+      window.localStorage.clear(); //.then(() => this.props.history.push("/"));
     }
   }, {
     key: "handleLogIn",
     value: function handleLogIn(event) {
+      var _this2 = this;
+
       event.preventDefault();
       document.querySelector('#loginClose').click();
-      this.props.userLogIn(this.state.email, this.state.password); // .then(() => this.props.history.push("/"));
+      this.props.userLogIn(this.state.email, this.state.password).then(function () {
+        _this2.props.fetchCart(_this2.props.user);
+
+        window.localStorage.clear();
+      }); // .then(() => this.props.history.push("/"));
     }
   }, {
     key: "handleInput",
@@ -940,7 +952,8 @@ var mapDispatchToProps = {
   userLogOut: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userLogOut"],
   userLogOutCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_4__["userLogOutCart"],
   userRegUser: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userRegUser"],
-  userLogIn: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userLogIn"]
+  userLogIn: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userLogIn"],
+  fetchCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_4__["fetchCart"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(NavbarContainer));
 
@@ -56360,7 +56373,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64278,7 +64291,7 @@ var userLogIn = function userLogIn(email, password) {
 };
 var fetchUser = function fetchUser() {
   return function (dispatch) {
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/user/me").then(function (res) {
+    return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/user/me").then(function (res) {
       return res.data;
     }).then(function (user) {
       return dispatch(logUser(user));

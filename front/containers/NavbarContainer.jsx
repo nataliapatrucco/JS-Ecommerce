@@ -5,6 +5,8 @@ import { userRegUser } from '../store/actions/user';
 import { userLogOut } from '../store/actions/user';
 import { userLogIn } from '../store/actions/user';
 import { userLogOutCart } from "../store/actions/cart"
+import { fetchCart } from "../store/actions/cart";
+
 
 class NavbarContainer extends Component {
   constructor(props) {
@@ -37,13 +39,18 @@ class NavbarContainer extends Component {
     event.preventDefault();
     this.props.userLogOut();
     this.props.userLogOutCart();
+    window.localStorage.clear()
     //.then(() => this.props.history.push("/"));
   }
   handleLogIn(event) {
+
     event.preventDefault();
     document.querySelector('#loginClose').click();
-    this.props.userLogIn(this.state.email, this.state.password);
-
+    this.props.userLogIn(this.state.email, this.state.password)
+    .then(() => {
+      this.props.fetchCart(this.props.user)
+      window.localStorage.clear()
+    })
     // .then(() => this.props.history.push("/"));
   }
 
@@ -77,7 +84,8 @@ const mapDispatchToProps = {
   userLogOut,
   userLogOutCart,
   userRegUser,
-  userLogIn
+  userLogIn,
+  fetchCart
 };
 
 export default connect(
