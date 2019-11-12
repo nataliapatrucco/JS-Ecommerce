@@ -1,4 +1,4 @@
-const {Product, Category, Review} = require("../models/index")
+const {Product, Category, User} = require("../models/index")
 const S = require("sequelize")
 const Op = S.Op
 
@@ -81,7 +81,7 @@ Product.bulkCreate([
     return Product.findAll();
   })
   .then(products => {
-     //console.log(products); // ... in order to get the array of user objects
+     console.log(products); // ... in order to get the array of user objects
   });
 
 
@@ -106,11 +106,25 @@ Product.bulkCreate([
     },
   ])
     .then(() => {
-     // return Category.findAll();
+      return Category.findAll();
     })
     .then(category => {
-       //console.log(category); // ... in order to get the array of user objects
+       console.log(category); // ... in order to get the array of user objects
     });
+
+    User.bulkCreate([
+      {name: 'jared', email: 'jared@jared.com', password:'abc123'},
+      {name: 'ivan', email: 'ivan@ivan.com', password:'abc123'},
+      {name: 'gonza', email: 'gonza@gonza.com', password:'abc123'},
+      {name: 'milo', email: 'milo@milo.com', password:'abc123'},
+      {name: 'nati', email: 'nati@nati.com', password:'abc123'},
+    ]).then(() => {
+      return User.findAll();
+    })
+    .then(users => {
+       console.log(users); // ... in order to get the array of user objects
+    });
+    
 
 
 

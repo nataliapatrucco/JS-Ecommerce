@@ -9,7 +9,8 @@ export default function Navbar(props) {
     handleLogOut,
     handleSubmitRegister,
     location,
-    user
+    user,
+    wrongUser
   } = props;
 
   return (
@@ -177,7 +178,12 @@ export default function Navbar(props) {
                         />
                       </div>
                       <div className="modal-footer">
-                        <button type="submit" className="btn btn-dark">
+                        <p>{wrongUser}</p>
+                        <button
+                          type="submit"
+                          id="submitLogin"
+                          className="btn btn-dark"
+                        >
                           Login
                         </button>
                       </div>
@@ -190,7 +196,9 @@ export default function Navbar(props) {
         )}
         <div>
           {Object.keys(user).length ? (
-            <span id="helloUser">Hello {user.name}</span>
+            <Link to="/user/id">
+              <span id="helloUser">Hello {user.name}</span>
+            </Link>
           ) : (
             ""
           )}

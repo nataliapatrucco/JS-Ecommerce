@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 import { TiPlus } from "react-icons/ti";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-export default function RandomView({ products }) {
+export default function RandomView({
+  products,
+  handleSelect,
+  handleAdd,
+  selectedProduct
+}) {
   return (
     <div id="randomViewContainer">
       <CardDeck>
@@ -32,7 +37,14 @@ export default function RandomView({ products }) {
                 </button>
               </Link>
               <hr />
-              <button className="btn btn-light" id="cartBtn">
+              <button
+                onClick={id => {
+                  handleSelect(product.id);
+                  handleAdd();
+                }}
+                className="btn btn-light"
+                id="cartBtn"
+              >
                 {" "}
                 <AiOutlineShoppingCart />
               </button>
