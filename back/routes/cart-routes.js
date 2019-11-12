@@ -24,10 +24,8 @@ router.post("/", async function(req, res, next) {
         frontProduct.dataValues.quantity = product.dataValues.quantity
         return frontProduct.dataValues
     })
-    // console.log(getFrontCart, "-----------------------------")
 
     const frontCart = await Promise.all(getFrontCart)
-        // console.log(frontCart, "auiyzdbfhjndaofodanf")
         res.send(frontCart)
     
 
@@ -44,20 +42,15 @@ router.get("/me", async function(req, res, next) {
 
         productsToSendResolved = productsToSendPending.map(async (product) => {
             let perfectProduct = await Product.findByPk(product.dataValues.productId)
-            console.log(product.dataValues, "datavalues de product")
             perfectProduct.dataValues.quantity = product.dataValues.quantity
-            console.log(perfectProduct.dataValues)
             return perfectProduct
     
         })
-        // console.log(productsToSendResolved)
     }
 
     let kk = await Promise.all(productsToSendResolved)
-    console.log("empieza acaaaa", kk, "ESTOOOOOOOOO")
 
     res.send(kk)
-    // res.send(productsToSendPending)
 })
 
 //move current cart to history

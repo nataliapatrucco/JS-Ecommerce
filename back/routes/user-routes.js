@@ -27,7 +27,6 @@ router.post('/login', passportConfig.authenticate('local'), async function(req, 
 
           Product_cart.findOne({where: {productId: productLocal.id, cartId: cart.id}})
           .then(instanceProduct_cart => {
-            console.log(instanceProduct_cart, "-----------algoalgo-----------")
 
             if (instanceProduct_cart !== null) {
               instanceProduct_cart.update({quantity: instanceProduct_cart.dataValues.quantity + productLocal.quantity})
@@ -47,47 +46,6 @@ router.post('/login', passportConfig.authenticate('local'), async function(req, 
     
 
 
-    //   const productsInUserCart = await Product_cart.findAll({where: {cartId: cart.id}})
-
-    //   let isEqual
-    //   let keys = Object.keys(req.body.localStorage)
-    //   let i = keys.length;
-    //   while ( i-- ) {
-        
-    //     isEqual = false;
-    //     let productLocal = JSON.parse(req.body.localStorage[keys[i]])
-        
-    //     productsInUserCart.forEach((product_cartInstance) => {
-
-    //       if (product_cartInstance.productId === productLocal.id) {
-
-    //         (async function() {
-
-    //           const product_cartInstanceUpdated = await product_cartInstance.update(
-    //             { quantity: product_cartInstance.quantity + productLocal.quantity}
-    //             );
-    //             console.log(product_cartInstanceUpdated)
-    //             isEqual = true;
-
-    //         })()
-
-    //       }
-
-    //     })
-
-    //     if (!isEqual) {
-
-    //       const product = await Product.findByPk(productLocal.id)
-    //       const updatedNewProduct = await product.update({quantity: productLocal.quantity})
-
-    //       cart.addProduct(updatedNewProduct)
-
-          
-    //     }
-    //   }
-
-    //   res.send(req.user)
-
     } 
   } else {
 
@@ -102,14 +60,11 @@ router.post('/login', passportConfig.authenticate('local'), async function(req, 
                 let productLocal = JSON.parse(req.body.localStorage[keys[i]])
                 Product.findByPk(productLocal.id)
                 .then(product => {
-                  // product.dataValues.quantity = productLocal.quantity
-                  // console.log(product, "----------afdsadfadffadfadfafadfadfadf-------")
                   cart.addProduct( product )
                   .then(() => {
                     Product_cart.findOne({where: {cartId: cart.id, productId: product.id}})
                     .then((prodCart) => {
                       prodCart.update({quantity: productLocal.quantity}).then(() =>{
-                        console.log(prodCart, "-------------------")
                       })
                     })
                   })
