@@ -198,7 +198,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_actions_user__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../store/actions/user */ "./store/actions/user.js");
 /* harmony import */ var _containers_SingleProductContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../containers/SingleProductContainer */ "./containers/SingleProductContainer.jsx");
 /* harmony import */ var _containers_SearchResultsContainer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../containers/SearchResultsContainer */ "./containers/SearchResultsContainer.jsx");
-/* harmony import */ var _store_actions_cart__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../store/actions/cart */ "./store/actions/cart.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -227,7 +226,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var Main =
 /*#__PURE__*/
 function (_Component) {
@@ -243,7 +241,6 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchUser();
-      this.props.fetchCart(this.props.user);
     }
   }, {
     key: "render",
@@ -254,6 +251,9 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_NavbarContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
         location: location
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/cart",
+        component: CartContainer
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
         path: "/product/:id",
         component: _containers_SingleProductContainer__WEBPACK_IMPORTED_MODULE_7__["default"]
@@ -272,7 +272,7 @@ function (_Component) {
         exact: true,
         path: "/",
         component: _containers_HomeContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
-      })));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -280,8 +280,7 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapDispatchToProps = {
-  fetchUser: _store_actions_user__WEBPACK_IMPORTED_MODULE_6__["fetchUser"],
-  fetchCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_9__["fetchCart"]
+  fetchUser: _store_actions_user__WEBPACK_IMPORTED_MODULE_6__["fetchUser"]
 };
 
 var mapStateToProps = function mapStateToProps(state) {
