@@ -135,8 +135,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_AlterQuantButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AlterQuantButton */ "./components/AlterQuantButton.jsx");
-/* harmony import */ var react_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons */ "./node_modules/react-icons/lib/esm/index.js");
-
 
 
 function Cart(_ref) {
@@ -146,7 +144,7 @@ function Cart(_ref) {
       quantRemove = _ref.quantRemove;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "cartItemContainer"
-  }, cart.map(function (cartItem) {
+  }, cart && cart.map(function (cartItem) {
     var name = cartItem.name,
         price = cartItem.price,
         id = cartItem.id,
@@ -64281,14 +64279,17 @@ var userLogOutCart = function userLogOutCart() {
   return function (dispatch) {
     dispatch(logOutCart());
   };
-};
+}; //TODO:
+
 var fetchAndRemoveFromCart = function fetchAndRemoveFromCart(product, user) {
   return function (dispatch) {
-    if (user.name) axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart/remove", product).then(function (res) {
-      return res.data;
-    }).then(function (cart) {
-      dispatch(setCart(cart));
-    });else {
+    if (user.name) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart/remove", product).then(function (res) {
+        return res.data;
+      }).then(function (cart) {
+        dispatch(setCart(cart));
+      });
+    } else {
       var newCartObj = {};
       var windowCart = window.localStorage;
       Object.keys(windowCart).map(function (key) {
