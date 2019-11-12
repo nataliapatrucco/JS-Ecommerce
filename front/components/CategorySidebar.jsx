@@ -1,6 +1,5 @@
 import React from "react";
-
-export default function CategorySidebar({ selectFilter }) {
+export default function CategorySidebar({ selectFilter, filterCategories }) {
   return (
     <div>
       <div className="wrapper">
@@ -17,16 +16,7 @@ export default function CategorySidebar({ selectFilter }) {
                 CATEGORIES
               </a>
               <ul className="collapse list-unstyled" id="homeSubmenu">
-                {[
-                  "dress",
-                  "pants",
-                  "shirts",
-                  "black",
-                  "red",
-                  "white",
-                  "brown",
-                  "blue"
-                ].map((category, i) => (
+                {filterCategories.map((category, i) => (
                   <li id="singleCat" key={i}>
                     <a onClick={selectFilter} name={`${category}`}>
                       {`${category.toUpperCase()}`}
