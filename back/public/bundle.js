@@ -99,19 +99,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-function AlterQuantButton(props) {
-  console.log("BUTTONPROPS!!!!!!!!!!!!", props);
-  var product = props.product,
-      quantity = props.quantity,
-      quantAddOne = props.quantAddOne,
-      quantSubOne = props.quantSubOne;
+function AlterQuantButton(_ref) {
+  var product = _ref.product,
+      quantity = _ref.quantity,
+      quantAddOne = _ref.quantAddOne,
+      quantSubOne = _ref.quantSubOne,
+      quantRemove = _ref.quantRemove;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "alterQuant"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick() {
       return quantSubOne(product);
     }
-  }, "-"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "-"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "inblockLetter"
+  }, quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick() {
       return quantAddOne(product);
     }
@@ -133,13 +135,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_AlterQuantButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AlterQuantButton */ "./components/AlterQuantButton.jsx");
+/* harmony import */ var react_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons */ "./node_modules/react-icons/lib/esm/index.js");
 
 
-function Cart(props) {
-  console.log("cartpropppppppppps", props);
-  var cart = props.cart,
-      quantAddOne = props.quantAddOne,
-      quantSubOne = props.quantSubOne;
+
+function Cart(_ref) {
+  var cart = _ref.cart,
+      quantAddOne = _ref.quantAddOne,
+      quantSubOne = _ref.quantSubOne,
+      quantRemove = _ref.quantRemove;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "cartItemContainer"
   }, cart.map(function (cartItem) {
@@ -160,7 +164,13 @@ function Cart(props) {
       product: cartItem,
       quantity: quantity,
       quantAddOne: quantAddOne,
-      quantSubOne: quantSubOne
+      quantSubOne: quantSubOne,
+      quantRemove: quantRemove
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "removeItemButton",
+      onClick: function onClick() {
+        return quantRemove(cartItem);
+      }
     })));
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "cosa"
@@ -848,8 +858,8 @@ function (_C) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CartContainer).call(this, props));
     _this.quantAddOne = _this.quantAddOne.bind(_assertThisInitialized(_this));
-    _this.quantSubOne = _this.quantSubOne.bind(_assertThisInitialized(_this)); // this.removeItem = this.removeItem.bind(this)
-
+    _this.quantSubOne = _this.quantSubOne.bind(_assertThisInitialized(_this));
+    _this.quantRemove = _this.quantRemove.bind(_assertThisInitialized(_this));
     return _this;
   } // componentDidMount() {
   //  //refresh cart
@@ -867,13 +877,11 @@ function (_C) {
     value: function quantSubOne(product) {
       this.props.fetchAndSubstractFromCart(product, this.props.user);
     }
-    /*
-    quantRemoveOne(product){
-        this.props.fetchAndSubstractFromCart(product, this.props.user)
+  }, {
+    key: "quantRemove",
+    value: function quantRemove(product) {
+      this.props.fetchAndRemoveFromCart(product, this.props.user);
     }
-     removeItem(){}
-    */
-
   }, {
     key: "render",
     value: function render() {
@@ -881,7 +889,8 @@ function (_C) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Cart__WEBPACK_IMPORTED_MODULE_2__["default"], {
         cart: cart,
         quantAddOne: this.quantAddOne,
-        quantSubOne: this.quantSubOne
+        quantSubOne: this.quantSubOne,
+        quantRemove: this.quantRemove
       }));
     }
   }]);
@@ -899,6 +908,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = {
   fetchCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_3__["fetchCart"],
   fetchAndAddToCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_3__["fetchAndAddToCart"],
+  fetchAndRemoveFromCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_3__["fetchAndRemoveFromCart"],
   fetchAndSubstractFromCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_3__["fetchAndSubstractFromCart"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(CartContainer));
@@ -64238,7 +64248,7 @@ module.exports = function(originalModule) {
 /*!*******************************!*\
   !*** ./store/actions/cart.js ***!
   \*******************************/
-/*! exports provided: setCart, logOutCart, userLogOutCart, fetchAndSubstractFromCart, fetchCart, fetchAndAddToCart */
+/*! exports provided: setCart, logOutCart, userLogOutCart, fetchAndRemoveFromCart, fetchAndSubstractFromCart, fetchCart, fetchAndAddToCart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64246,6 +64256,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCart", function() { return setCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logOutCart", function() { return logOutCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userLogOutCart", function() { return userLogOutCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAndRemoveFromCart", function() { return fetchAndRemoveFromCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAndSubstractFromCart", function() { return fetchAndSubstractFromCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCart", function() { return fetchCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAndAddToCart", function() { return fetchAndAddToCart; });
@@ -64269,6 +64280,26 @@ var logOutCart = function logOutCart() {
 var userLogOutCart = function userLogOutCart() {
   return function (dispatch) {
     dispatch(logOutCart());
+  };
+};
+var fetchAndRemoveFromCart = function fetchAndRemoveFromCart(product, user) {
+  return function (dispatch) {
+    if (user.name) axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart/remove", product).then(function (res) {
+      return res.data;
+    }).then(function (cart) {
+      dispatch(setCart(cart));
+    });else {
+      var newCartObj = {};
+      var windowCart = window.localStorage;
+      Object.keys(windowCart).map(function (key) {
+        if (key !== product.id) newCartObj[key] = JSON.parse(windowCart[key]);
+      });
+      window.localStorage.clear();
+      Object.keys(newCartObj).map(function (key) {
+        window.localStorage.setItem(key, newCartObj[key]);
+      });
+      dispatch(setCart(newCartObj));
+    }
   };
 };
 var fetchAndSubstractFromCart = function fetchAndSubstractFromCart(product, user) {
@@ -64321,6 +64352,8 @@ var fetchCart = function fetchCart(user) {
 };
 var fetchAndAddToCart = function fetchAndAddToCart(product, user) {
   return function (dispatch) {
+    console.log("hwewewewewewewewewew");
+
     if (user.name) {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart", product).then(function (res) {
         return res.data;

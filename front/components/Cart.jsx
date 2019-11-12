@@ -2,9 +2,9 @@ import React from "react";
 
 import AlterQuantButton from "../components/AlterQuantButton";
 
-export default function Cart(props) {
-  console.log("cartpropppppppppps", props);
-  const { cart, quantAddOne, quantSubOne } = props;
+import { MdRemoveShoppingCart } from "react-icons";
+
+export default function Cart({ cart, quantAddOne, quantSubOne, quantRemove }) {
   return (
     <div className="cartItemContainer">
       {cart.map(cartItem => {
@@ -21,7 +21,12 @@ export default function Cart(props) {
                 quantity={quantity}
                 quantAddOne={quantAddOne}
                 quantSubOne={quantSubOne}
+                quantRemove={quantRemove}
               />
+              <button
+                className="removeItemButton"
+                onClick={() => quantRemove(cartItem)}
+              ></button>
             </div>
           </div>
         );

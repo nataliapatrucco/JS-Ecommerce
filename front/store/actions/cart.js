@@ -15,6 +15,31 @@ export const userLogOutCart = () => dispatch => {
   dispatch(logOutCart());
 };
 
+export const fetchAndRemoveFromCart = (product, user) => dispatch => {
+  if (user.name)
+    axios
+      .post("/api/cart/remove", product)
+      .then(res => res.data)
+      .then(cart => {
+        dispatch(setCart(cart));
+      });
+  else {
+    let newCartObj = {};
+    let windowCart = window.localStorage;
+    Object.keys(windowCart).map(key => {
+      if (key !== product.id) newCartObj[key] = JSON.parse(windowCart[key]);
+    });
+
+    window.localStorage.clear();
+
+    Object.keys(newCartObj).map(key => {
+      window.localStorage.setItem(key, newCartObj[key]);
+    });
+
+    dispatch(setCart(newCartObj));
+  }
+};
+
 export const fetchAndSubstractFromCart = (product, user) => dispatch => {
   if (user.name) {
     axios
@@ -67,6 +92,8 @@ export const fetchCart = user => dispatch => {
 };
 
 export const fetchAndAddToCart = (product, user) => dispatch => {
+  console.log("hwewewewewewewewewew");
+
   if (user.name) {
     axios
       .post("/api/cart", product)

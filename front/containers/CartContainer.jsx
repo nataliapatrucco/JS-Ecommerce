@@ -6,6 +6,7 @@ import Cart from "../components/Cart";
 import {
   fetchCart,
   fetchAndAddToCart,
+  fetchAndRemoveFromCart,
   fetchAndSubstractFromCart
 } from "../store/actions/cart";
 
@@ -14,7 +15,7 @@ class CartContainer extends C {
     super(props);
     this.quantAddOne = this.quantAddOne.bind(this);
     this.quantSubOne = this.quantSubOne.bind(this);
-    // this.removeItem = this.removeItem.bind(this)
+    this.quantRemove = this.quantRemove.bind(this);
   }
 
   // componentDidMount() {
@@ -29,13 +30,10 @@ class CartContainer extends C {
   quantSubOne(product) {
     this.props.fetchAndSubstractFromCart(product, this.props.user);
   }
-  /*
-  quantRemoveOne(product){
-      this.props.fetchAndSubstractFromCart(product, this.props.user)
-  }
 
-  removeItem(){}
-*/
+  quantRemove(product) {
+    this.props.fetchAndRemoveFromCart(product, this.props.user);
+  }
 
   render() {
     const { cart } = this.props;
@@ -46,6 +44,7 @@ class CartContainer extends C {
           cart={cart}
           quantAddOne={this.quantAddOne}
           quantSubOne={this.quantSubOne}
+          quantRemove={this.quantRemove}
         />
       </div>
     );
@@ -60,6 +59,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   fetchCart,
   fetchAndAddToCart,
+  fetchAndRemoveFromCart,
   fetchAndSubstractFromCart
 };
 

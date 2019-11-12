@@ -7,6 +7,27 @@ const { Cart, Product, User, Product_cart } = require("../models");
 
 //return current cart
 
+router.post("/remove", async function(req, res, next) {
+  const cart = await Cart.findOne({
+    where: { CurrentUserCartId: req.user.id }
+  });
+
+  const array = await Product_cart.findAll({ where: { cartId: cart.id } });
+
+  console.log(array);
+
+  let currentCart = array.map(async product => {
+    let prods = await Product.findByPk(product.dataValues.productId);
+
+    prods.dataValues.quantity = product.dataValues.quantity;
+
+    return prods.dataValues;
+  });
+
+  const frontCart = await Promise.all(currentCart);
+  res.send(frontCart);
+});
+
 router.post("/substract", async function(req, res, next) {
   const cart = await Cart.findOne({
     where: { CurrentUserCartId: req.user.id }
