@@ -29,14 +29,6 @@ body {
   padding-bottom: 100px;
 }
 
-#singleView {
-  min-height: 100vh;
-  overflow: hidden;
-  display: block;
-  position: relative;
-  padding-bottom: 100px;
-}
-
 .natiFooter {
   display: inline-block;
   size: 33%;
@@ -45,18 +37,58 @@ body {
 
 .natiHolder {
   -webkit-box-sizing: content-box;
-  box-sizing: content-box;
+          box-sizing: content-box;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 33.3% 33.3% 33.3%;
-  grid-template-columns: 33.3% 33.3% 33.3%;
+      grid-template-columns: 33.3% 33.3% 33.3%;
   -ms-grid-rows: 1fr 2fr 2fr 1fr;
-  grid-template-rows: 1fr 2fr 2fr 1fr;
+      grid-template-rows: 1fr 2fr 2fr 1fr;
   row-gap: 5px;
   color: white;
   background-color: black;
   position: absolute;
   bottom: 0;
   width: 100vw;
+}
+
+.cartItemContainer {
+  background-color: rgba(233, 232, 231, 0.65);
+  margin: 7% 0% 10% 17%;
+  max-width: 58vw;
+}
+
+.singleItemInCart {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  padding: 1rem;
+  border: 2px solid #c47464;
+  color: #000;
+  font-size: 16px;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+.singleItemInCart div {
+  display: inline-block;
+}
+
+.singleItemText {
+  margin-left: 2vw;
+}
+
+.singleItemInCart img {
+  width: 80px;
+  height: 120px;
+}
+
+#cosa {
+  background-color: indigo;
+}
+
+#alterQuant button {
+  font-family: Andale Mono, monospace;
+  color: #a86b6b;
+  display: inline-block;
 }
 /*# sourceMappingURL=globalStyle.css.map */

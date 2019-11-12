@@ -1,20 +1,27 @@
 import React, { Component } from "react";
-import { Switch, Route as R, Redirect } from "react-router-dom";
-import Footer from "../components/Footer";
-import NavbarContainer from "../containers/NavbarContainer";
 import { connect } from "react-redux";
-import HomeContainer from "../containers/HomeContainer";
+import { Switch, Route as R, Redirect } from "react-router-dom";
+
 import { fetchUser } from "../store/actions/user";
+import { fetchCart } from "../store/actions/cart";
+
+import Footer from "../components/Footer";
+
+import HomeContainer from "../containers/HomeContainer";
+import NavbarContainer from "../containers/NavbarContainer";
+import CartContainer from "../containers/CartContainer";
 import SingleProductContainer from "../containers/SingleProductContainer";
 import SearchResultsContainer from "../containers/SearchResultsContainer";
 
 class Main extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
   }
 
   componentDidMount() {
     this.props.fetchUser();
+    // this.props.fetchCart();
   }
 
   render() {
@@ -37,7 +44,7 @@ class Main extends Component {
           />
           <R exact path="/" component={HomeContainer} />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }
@@ -45,6 +52,7 @@ class Main extends Component {
 
 const mapDispatchToProps = {
   fetchUser
+  // fetchCart
 };
 
 const mapStateToProps = state => ({
