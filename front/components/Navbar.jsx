@@ -190,7 +190,9 @@ export default function Navbar(props) {
         )}
         <div>
           {Object.keys(user).length ? (
-            <span id="helloUser">Hello {user.name}</span>
+            <Link to="/user/0">
+              <span id="helloUser">Hello {user.name}</span>
+            </Link>
           ) : (
             ""
           )}

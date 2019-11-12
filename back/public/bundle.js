@@ -276,8 +276,28 @@ function (_Component) {
         component: _containers_HomeContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
-        path: "/user/:userId",
-        component: _containers_UserPageContainer__WEBPACK_IMPORTED_MODULE_9__["default"]
+        path: "/user/:pastOrderId",
+        render: function render(_ref2) {
+          var location = _ref2.location,
+              history = _ref2.history,
+              match = _ref2.match;
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_UserPageContainer__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            location: location,
+            history: history,
+            orderId: match.params.pastOrderId
+          });
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        exact: true,
+        path: "/user/address",
+        render: function render(_ref3) {
+          var location = _ref3.location,
+              history = _ref3.history;
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_UserPageContainer__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            location: location,
+            history: history
+          });
+        }
       })));
     }
   }]);
@@ -464,12 +484,32 @@ function Navbar(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "submit",
     className: "btn btn-dark"
-  }, "Login")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object.keys(user).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, "Login")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object.keys(user).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/user/0"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     id: "helloUser"
-  }, "Hello ", user.name) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Hello ", user.name)) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "cartButton"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_1__["AiOutlineShoppingCart"], null)))));
 }
+
+/***/ }),
+
+/***/ "./components/PastOrder.jsx":
+/*!**********************************!*\
+  !*** ./components/PastOrder.jsx ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "hola");
+});
 
 /***/ }),
 
@@ -744,10 +784,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./components/UserPage.jsx":
-/*!*********************************!*\
-  !*** ./components/UserPage.jsx ***!
-  \*********************************/
+/***/ "./components/UserAddress.jsx":
+/*!************************************!*\
+  !*** ./components/UserAddress.jsx ***!
+  \************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -759,11 +799,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var user = _ref.user,
       address = _ref.address,
+      handleAddress = _ref.handleAddress,
+      handleSubmit = _ref.handleSubmit;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-8"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: handleSubmit
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    onChange: handleAddress,
+    type: "text",
+    name: "address"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "submit",
+    className: "btn btn-light"
+  }, "Update Address")));
+});
+
+/***/ }),
+
+/***/ "./components/UserPageSidebar.jsx":
+/*!****************************************!*\
+  !*** ./components/UserPageSidebar.jsx ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var user = _ref.user,
+      address = _ref.address,
       pastOrders = _ref.pastOrders,
       reviews = _ref.reviews;
-  console.log(user);
-  console.log(address, pastOrders, reviews);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Your address: ", address), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/user/address"
+  }, "Update your address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "You Past Orders"), pastOrders.map(function (order) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      key: order.id,
+      to: "/user/".concat(order.id)
+    }, order.name);
+  }));
 });
 
 /***/ }),
@@ -1247,9 +1329,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _components_UserPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/UserPage */ "./components/UserPage.jsx");
+/* harmony import */ var _components_UserPageSidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/UserPageSidebar */ "./components/UserPageSidebar.jsx");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_PastOrder__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/PastOrder */ "./components/PastOrder.jsx");
+/* harmony import */ var _components_UserAddress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/UserAddress */ "./components/UserAddress.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1260,13 +1344,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
 
 
 
@@ -1288,9 +1374,13 @@ function (_Component) {
     _this.state = {
       userReviews: {},
       address: "",
+      newAddress: "",
       pastOrders: [],
-      user: {}
+      user: {},
+      pastOrder: {}
     };
+    _this.handleAddress = _this.handleAddress.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1299,9 +1389,14 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/api/user/allMyInfo').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/user/allMyInfo").then(function (res) {
         return res.data;
       }).then(function (user) {
+        //   pastOrders.map((order)=> {
+        //     if (order.id === orderId) {
+        //         this.setState({pastOrder: order})
+        //     }
+        //   })
         _this2.setState({
           userReviews: user.reviews,
           address: user.address,
@@ -1311,14 +1406,48 @@ function (_Component) {
       });
     }
   }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+
+      if (this.state.address !== "") {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/user/address", {
+          address: this.state.newAddress
+        });
+        this.setState({
+          address: this.state.newAddress
+        });
+        this.props.history.push("/user/0");
+      }
+    }
+  }, {
+    key: "handleAddress",
+    value: function handleAddress(e) {
+      e.preventDefault();
+      console.log(e.target.value);
+      this.setState({
+        newAddress: e.target.value
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UserPage__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      console.log(this.state.address);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UserPageSidebar__WEBPACK_IMPORTED_MODULE_2__["default"], {
         user: this.state.user,
         address: this.state.address,
         pastOrders: this.state.pastOrders,
         reviews: this.state.userReviews
-      }));
+      }), this.props.location.pathname === "/user/address" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UserAddress__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        handleSubmit: this.handleSubmit,
+        handleAddress: this.handleAddress,
+        address: this.state.address,
+        user: this.state.user
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PastOrder__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
     }
   }]);
 

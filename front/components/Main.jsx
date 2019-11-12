@@ -7,11 +7,8 @@ import HomeContainer from "../containers/HomeContainer";
 import { fetchUser } from "../store/actions/user";
 import SingleProductContainer from "../containers/SingleProductContainer";
 import SearchResultsContainer from "../containers/SearchResultsContainer";
-import UserPageContainer from "../containers/UserPageContainer"
+import UserPageContainer from "../containers/UserPageContainer";
 import { fetchCart } from "../store/actions/cart";
-
-
-
 
 class Main extends Component {
   constructor(props) {
@@ -20,14 +17,14 @@ class Main extends Component {
 
   componentDidMount() {
     this.props.fetchUser();
-    this.props.fetchCart(this.props.user)
+    this.props.fetchCart(this.props.user);
   }
 
   render() {
     const { location } = this.props;
     return (
       <div id="main container-fluid">
-        <NavbarContainer location={location}/>
+        <NavbarContainer location={location} />
         <Switch>
           <Route exact path="/product/:id" component={SingleProductContainer} />
           <Route
@@ -41,14 +38,23 @@ class Main extends Component {
             )}
           />
           <Route exact path="/" component={HomeContainer} />
-          <Route exact path="/user/:userId" component={UserPageContainer}/>
+          
+          <Route
+            exact
+            path="/user/:pastOrderId"
+            render={({ location, history, match }) => <UserPageContainer location={location} history={history} orderId = {match.params.pastOrderId}/>}
+          />
+          <Route
+            exact
+            path="/user/address"
+            render={({ location, history }) => <UserPageContainer location={location} history={history} />}
+          />
         </Switch>
         {/* <Footer /> */}
       </div>
     );
   }
 }
-
 
 const mapDispatchToProps = {
   fetchUser,
