@@ -21,7 +21,10 @@ class Main extends Component {
 
   componentDidMount() {
     this.props.fetchUser();
-    // this.props.fetchCart();
+  }
+
+  componentDidUpdate() {
+    this.props.fetchCart(this.props.user);
   }
 
   render() {
@@ -44,7 +47,7 @@ class Main extends Component {
           />
           <R exact path="/" component={HomeContainer} />
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     );
   }

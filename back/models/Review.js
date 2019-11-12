@@ -5,10 +5,13 @@ class Review extends S.Model {}
 
 Review.init(
   {
+    author:{
+      type: S.STRING,
+      defaultValue: 'unknown'
+    },
     rating: {
       type: S.INTEGER,
       defaultValue: null
-      //get() {}
     },
     comment: {
       type: S.TEXT,

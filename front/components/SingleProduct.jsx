@@ -1,7 +1,8 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
+import Review from "../components/Review"
 
-export default ({ selectedProduct, addProduct }) => {
+export default ({ selectedProduct, addProduct, reviews }) => {
   if (selectedProduct.image) {
     let urlImg = selectedProduct.image.slice(1);
     return (
@@ -38,7 +39,9 @@ export default ({ selectedProduct, addProduct }) => {
                 </li>
                 <li className="list-group-item">
                   <strong>Product Reviews:</strong>
-                  {"......................... "}
+                  {reviews.map(review=>{
+                    return (<Review key={review.id} author={review.author} rating ={review.rating} comment ={review.comment}/>)
+                  })}
                 </li>
               </ul>
             </div>
