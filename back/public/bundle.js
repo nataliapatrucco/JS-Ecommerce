@@ -272,7 +272,7 @@ function (_Component) {
         exact: true,
         path: "/",
         component: _containers_HomeContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
-      })));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -322,7 +322,8 @@ function Navbar(props) {
       handleLogOut = props.handleLogOut,
       handleSubmitRegister = props.handleSubmitRegister,
       location = props.location,
-      user = props.user;
+      user = props.user,
+      wrongUser = props.wrongUser;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     className: "navbar navbar-expand-md navbar-dark bg-light"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -455,12 +456,15 @@ function Navbar(props) {
     placeholder: "Enter password"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "modal-footer"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, wrongUser), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "submit",
+    id: "submitLogin",
     className: "btn btn-dark"
-  }, "Login")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object.keys(user).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, "Login")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object.keys(user).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/user/id"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     id: "helloUser"
-  }, "Hello ", user.name) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Hello ", user.name)) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "cartButton"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_1__["AiOutlineShoppingCart"], null)))));
 }
@@ -492,7 +496,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function RandomView(_ref) {
-  var products = _ref.products;
+  var products = _ref.products,
+      handleSelect = _ref.handleSelect,
+      handleAdd = _ref.handleAdd,
+      selectedProduct = _ref.selectedProduct;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "randomViewContainer"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, products.map(function (product) {
@@ -524,6 +531,10 @@ function RandomView(_ref) {
       id: "plusBtn",
       className: "btn btn-light"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ti__WEBPACK_IMPORTED_MODULE_4__["TiPlus"], null), " info")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: function onClick(id) {
+        handleSelect(product.id);
+        handleAdd();
+      },
       className: "btn btn-light",
       id: "cartBtn"
     }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_5__["AiOutlineShoppingCart"], null))));
@@ -754,6 +765,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_actions_product__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/actions/product */ "./store/actions/product.js");
 /* harmony import */ var _components_Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Search */ "./components/Search.jsx");
 /* harmony import */ var _components_RandomView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/RandomView */ "./components/RandomView.jsx");
+/* harmony import */ var _store_actions_cart__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store/actions/cart */ "./store/actions/cart.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -778,6 +790,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var HomeContainers =
 /*#__PURE__*/
 function (_Component) {
@@ -794,6 +808,8 @@ function (_Component) {
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleAdd = _this.handleAdd.bind(_assertThisInitialized(_this));
+    _this.handleSelect = _this.handleSelect.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -817,8 +833,15 @@ function (_Component) {
       this.props.history.push("/".concat(this.state.searchQuery));
     }
   }, {
+    key: "handleSelect",
+    value: function handleSelect(id) {
+      this.props.fetchProduct(id);
+    }
+  }, {
     key: "handleAdd",
-    value: function handleAdd() {}
+    value: function handleAdd() {
+      this.props.fetchAndAddToCart(this.props.selectedProduct, this.props.user);
+    }
   }, {
     key: "render",
     value: function render() {
@@ -826,6 +849,9 @@ function (_Component) {
         handleSubmit: this.handleSubmit,
         handleChange: this.handleChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_RandomView__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        selectedProduct: this.props.selectedProduct,
+        handleSelect: this.handleSelect,
+        handleAdd: this.handleAdd,
         products: this.props.products
       }));
     }
@@ -835,12 +861,16 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 var mapDispatchToProps = {
   fetchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["fetchProducts"],
-  searchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["searchProducts"]
+  fetchProduct: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["fetchProduct"],
+  searchProducts: _store_actions_product__WEBPACK_IMPORTED_MODULE_2__["searchProducts"],
+  fetchAndAddToCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_5__["fetchAndAddToCart"]
 };
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    products: state.products.products
+    products: state.products.products,
+    user: state.user.user,
+    selectedProduct: state.products.selectedProduct
   };
 };
 
@@ -903,9 +933,10 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(NavbarContainer).call(this, props));
     _this.state = {
-      email: '',
-      password: '',
-      name: ''
+      email: "",
+      password: "",
+      name: "",
+      wrongUser: ""
     };
     _this.handleLogIn = _this.handleLogIn.bind(_assertThisInitialized(_this));
     _this.handleLogOut = _this.handleLogOut.bind(_assertThisInitialized(_this));
@@ -919,8 +950,8 @@ function (_Component) {
     value: function handleSubmitRegister(event) {
       event.preventDefault();
       this.props.userRegUser(this.state.name, this.state.email, this.state.password);
-      document.querySelector('#registerForm').reset();
-      document.querySelector('#registerClose').click(); // .then(() => this.props.history.push("/"));
+      document.querySelector("#registerForm").reset();
+      document.querySelector("#registerClose").click(); // .then(() => this.props.history.push("/"));
     }
   }, {
     key: "handleLogOut",
@@ -933,8 +964,12 @@ function (_Component) {
     key: "handleLogIn",
     value: function handleLogIn(event) {
       event.preventDefault();
-      document.querySelector('#loginClose').click();
-      this.props.userLogIn(this.state.email, this.state.password); // .then(() => this.props.history.push("/"));
+      document.querySelector("#loginClose").click();
+      this.props.userLogIn(this.state.email, this.state.password).then(function (res) {
+        if (!res) {
+          alert("Wrong username or password");
+        }
+      });
     }
   }, {
     key: "handleInput",
@@ -949,6 +984,7 @@ function (_Component) {
           user = _this$props.user,
           location = _this$props.location;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        wrongUser: this.state.wrongUser,
         location: location,
         user: user,
         handleLogIn: this.handleLogIn,
@@ -64300,8 +64336,7 @@ var userLogOut = function userLogOut() {
       return console.log(err);
     });
   };
-}; //Ruta en el back a /register que haga un User.create en la db
-
+};
 var userRegUser = function userRegUser(name, email, password) {
   return function (dispatch) {
     return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/user/register", {
@@ -64316,8 +64351,7 @@ var userRegUser = function userRegUser(name, email, password) {
       return console.log(err);
     });
   };
-}; // Para esta funcion necesito una ruta en el back a /login que haga un findByPk para buscar un usuario particular y loguearlo
-
+};
 var userLogIn = function userLogIn(email, password) {
   return function (dispatch) {
     return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/user/login", {
@@ -64335,7 +64369,7 @@ var userLogIn = function userLogIn(email, password) {
 };
 var fetchUser = function fetchUser() {
   return function (dispatch) {
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/user/me").then(function (res) {
+    return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/user/me").then(function (res) {
       return res.data;
     }).then(function (user) {
       return dispatch(logUser(user));
