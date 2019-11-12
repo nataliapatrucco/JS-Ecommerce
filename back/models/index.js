@@ -3,6 +3,7 @@ const Product = require('./Product');
 const Review = require('./Review');
 const User = require('./User');
 const Category = require('./Category')
+const Product_cart = require("./Product_cart")
 
 Category.belongsToMany(Product, { as: "Product",
   through: "Product_Category"
@@ -10,7 +11,7 @@ Category.belongsToMany(Product, { as: "Product",
 Product.belongsToMany(Category, {
   through: "Product_Category"
 });
-const Product_cart = require("./Product_cart")
+
 
 Cart.belongsToMany(Product, {
     through: "product_cart",
@@ -27,7 +28,8 @@ Product.hasMany(Review);
 
 User.hasOne(Cart, { as: "CurrentUserCart" });
 
-User.hasMany(Cart, { as: "history", foreignKey: "history" });
+User.hasMany(Cart, { as: "pastOrder"});
+
 User.hasMany(Review);
 
 module.exports = {Product_cart, Cart, Product, Review, User, Category};

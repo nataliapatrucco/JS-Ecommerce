@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User, Cart, Product } = require('../models');
+const { User, Cart, Product, Review } = require('../models');
 const passportConfig = require('../config/passport');
 
 //login
@@ -49,6 +49,24 @@ router.get('/logout', function(req, res) {
 router.get('/me', function(req, res) {
   res.send(req.user);
 });
+
+router.get("/allMyInfo", (req, res, next) => {
+  User.findOne({
+      where:{name:'nati'},
+      include: [{
+          model: Cart,
+          as: 'pastOrder',
+          where:{
+              state: 'completado'},
+          include:[{ model: Product}]
+          },
+        {model: Review}]} ).then(user=>{
+      res.send(user);
+  })
+
+
+})
+
 
 //return all user
 //TODO

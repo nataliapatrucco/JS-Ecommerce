@@ -1,4 +1,4 @@
-const {Product, Category, User} = require("../models/index")
+const {Product, Category, User, Cart, Product_cart} = require("../models/index")
 const S = require("sequelize")
 const Op = S.Op
 
@@ -107,23 +107,26 @@ createReview: [Function] }
 
 */
 
+//console.log(User.prototype)
+
 /*
 
 User methods
 
-hashPassword: [Function],
+ _isAttribute: [Function],
+  hashPassword: [Function],
   randomSalt: [Function],
   validatePassword: [Function],
-  getCurrentCart: [Function],
-  setCurrentCart: [Function],
-  createCurrentCart: [Function],
-  getHistory: [Function],
-  countHistory: [Function],
-  hasHistory: [Function],
-  setHistory: [Function],
-  addHistory: [Function],
-  removeHistory: [Function],
-  createHistory: [Function],
+  getCurrentUserCart: [Function],
+  setCurrentUserCart: [Function],
+  createCurrentUserCart: [Function],
+  getPastOrder: [Function],
+  countPastOrder: [Function],
+  hasPastOrder: [Function],
+  setPastOrder: [Function],
+  addPastOrder: [Function],
+  removePastOrder: [Function],
+  createPastOrder: [Function],
   getReviews: [Function],
   countReviews: [Function],
   hasReview: [Function],
@@ -133,9 +136,30 @@ hashPassword: [Function],
   addReviews: [Function],
   removeReview: [Function],
   removeReviews: [Function],
-  createReview: [Function] }
+  createReview: [Function] 
 
   */
+
+
+  /*
+  console.log(Cart.prototype);
+
+  //Cart magic methods
+
+  _isAttribute: [Function],
+  getProducts: [Function],
+  countProducts: [Function],
+  hasProduct: [Function],
+  hasProducts: [Function],
+  setProducts: [Function],
+  addProduct: [Function],
+  addProducts: [Function],
+  removeProduct: [Function],
+  removeProducts: [Function],
+  createProduct: [Function] 
+
+  */
+
 
 User.findOne({where:{name: 'jared'}}).then(user=>{
   Product.findOne({where:{name: 'black shirt'}}).then(product=>{
@@ -230,4 +254,42 @@ User.findOne({where:{name: 'nati'}}).then(user=>{
       product.addReview(review)
     })
   }) 
+})
+
+
+//add pastOrder carts
+
+User.findOne({where:{name: 'jared'}}).then(user=>{
+  Product.findAll().then(products=>{
+    user.createPastOrder({name: new Date('December 17, 1995 03:24:00'), state:"completado"}).then(pastOrder=>{
+      pastOrder.addProducts([products[0],products[1],products[2]])
+    });
+    user.createPastOrder({name: new Date('November 10, 2008 03:24:00'), state:"completado"}).then(pastOrder=>{
+      pastOrder.addProducts([products[4],products[5],products[2]])
+    });
+    user.createPastOrder({name: new Date('June 23, 2018 03:24:00'), state:"completado"}).then(pastOrder=>{
+      pastOrder.addProducts([products[5],products[8],products[0]])
+    });
+  })
+})
+
+User.findOne({where:{name: 'nati'}}).then(user=>{
+  Product.findAll().then(products=>{
+
+  user.createPastOrder({name: new Date(), state:"completado"}).then(pastOrder=>{
+    pastOrder.addProducts([products[7],products[3],products[1]]).then(()=>{
+      Product_cart.findAll({where:{cartId: pastOrder.id}}).then(quantities=>{
+        quantities[0].update({quantity: 5})
+        quantities[1].update({quantity: 3})
+        quantities[2].update({quantity: 1})
+      })
+    })
+  });
+  user.createPastOrder({name: new Date('October 1, 1999 03:24:00'), state:"completado"}).then(pastOrder=>{
+    pastOrder.addProducts([products[0],products[5],products[3]])
+  });
+  user.createPastOrder({name: new Date('May 15, 2019 03:24:00'), state:"completado"}).then(pastOrder=>{
+    pastOrder.addProducts([products[3],products[1],products[5]])
+  });
+  })
 })

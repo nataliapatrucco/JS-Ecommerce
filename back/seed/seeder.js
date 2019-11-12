@@ -1,4 +1,4 @@
-const {Product, Category, User} = require("../models/index")
+const {Product, Category, User, Cart} = require("../models/index")
 const S = require("sequelize")
 const Op = S.Op
 
@@ -124,7 +124,3 @@ Product.bulkCreate([
     .then(users => {
        console.log(users); // ... in order to get the array of user objects
     });
-    
-
-
-

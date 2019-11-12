@@ -198,7 +198,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_actions_user__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../store/actions/user */ "./store/actions/user.js");
 /* harmony import */ var _containers_SingleProductContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../containers/SingleProductContainer */ "./containers/SingleProductContainer.jsx");
 /* harmony import */ var _containers_SearchResultsContainer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../containers/SearchResultsContainer */ "./containers/SearchResultsContainer.jsx");
-/* harmony import */ var _store_actions_cart__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../store/actions/cart */ "./store/actions/cart.js");
+/* harmony import */ var _containers_UserPageContainer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../containers/UserPageContainer */ "./containers/UserPageContainer.jsx");
+/* harmony import */ var _store_actions_cart__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../store/actions/cart */ "./store/actions/cart.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -216,6 +217,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -272,6 +274,10 @@ function (_Component) {
         exact: true,
         path: "/",
         component: _containers_HomeContainer__WEBPACK_IMPORTED_MODULE_5__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        exact: true,
+        path: "/user/:userId",
+        component: _containers_UserPageContainer__WEBPACK_IMPORTED_MODULE_9__["default"]
       })));
     }
   }]);
@@ -281,7 +287,7 @@ function (_Component) {
 
 var mapDispatchToProps = {
   fetchUser: _store_actions_user__WEBPACK_IMPORTED_MODULE_6__["fetchUser"],
-  fetchCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_9__["fetchCart"]
+  fetchCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_10__["fetchCart"]
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -738,6 +744,30 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./components/UserPage.jsx":
+/*!*********************************!*\
+  !*** ./components/UserPage.jsx ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var user = _ref.user,
+      address = _ref.address,
+      pastOrders = _ref.pastOrders,
+      reviews = _ref.reviews;
+  console.log(user);
+  console.log(address, pastOrders, reviews);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+});
+
+/***/ }),
+
 /***/ "./containers/HomeContainer.jsx":
 /*!**************************************!*\
   !*** ./containers/HomeContainer.jsx ***!
@@ -1160,14 +1190,15 @@ function (_React$Component) {
     value: function getReviews() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/review/all/".concat(this.props.selectedProduct.id)).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/review/".concat(this.props.selectedProduct.id)).then(function (res) {
         return res.data;
       }).then(function (reviews) {
         _this2.setState({
           reviews: reviews
         });
       });
-    }
+    } //YO
+
   }, {
     key: "addProduct",
     value: function addProduct(product) {
@@ -1201,6 +1232,100 @@ var mapDispatchToProps = {
   fetchAndAddToCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_5__["fetchAndAddToCart"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(SingleProductContainer));
+
+/***/ }),
+
+/***/ "./containers/UserPageContainer.jsx":
+/*!******************************************!*\
+  !*** ./containers/UserPageContainer.jsx ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_UserPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/UserPage */ "./components/UserPage.jsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var UserPageContainer =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(UserPageContainer, _Component);
+
+  function UserPageContainer(props) {
+    var _this;
+
+    _classCallCheck(this, UserPageContainer);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserPageContainer).call(this, props));
+    _this.state = {
+      userReviews: {},
+      address: "",
+      pastOrders: [],
+      user: {}
+    };
+    return _this;
+  }
+
+  _createClass(UserPageContainer, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/api/user/allMyInfo').then(function (res) {
+        return res.data;
+      }).then(function (user) {
+        _this2.setState({
+          userReviews: user.reviews,
+          address: user.address,
+          pastOrders: user.pastOrder,
+          user: user
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_UserPage__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        user: this.state.user,
+        address: this.state.address,
+        pastOrders: this.state.pastOrders,
+        reviews: this.state.userReviews
+      }));
+    }
+  }]);
+
+  return UserPageContainer;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, null)(UserPageContainer));
 
 /***/ }),
 

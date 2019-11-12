@@ -7,6 +7,7 @@ import HomeContainer from "../containers/HomeContainer";
 import { fetchUser } from "../store/actions/user";
 import SingleProductContainer from "../containers/SingleProductContainer";
 import SearchResultsContainer from "../containers/SearchResultsContainer";
+import UserPageContainer from "../containers/UserPageContainer"
 import { fetchCart } from "../store/actions/cart";
 
 
@@ -40,6 +41,7 @@ class Main extends Component {
             )}
           />
           <Route exact path="/" component={HomeContainer} />
+          <Route exact path="/user/:userId" component={UserPageContainer}/>
         </Switch>
         {/* <Footer /> */}
       </div>

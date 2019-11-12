@@ -24,7 +24,7 @@ class SingleProductContainer extends React.Component {
     }
 
     getReviews() {
-        axios.get(`/api/review/all/${this.props.selectedProduct.id}`).then(res => res.data).then(reviews => {
+        axios.get(`/api/review/${this.props.selectedProduct.id}`).then(res => res.data).then(reviews => {
             this.setState({
                 reviews: reviews
               });

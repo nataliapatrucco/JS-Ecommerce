@@ -4,6 +4,19 @@ const router = express.Router();
 const { Cart, Product, User, Product_cart } = require('../models');
 
 //return cart history
+// router.get("/myPastOrder", (req, res, next) => {
+//     User.findOne({
+//         where:{name:'nati'},
+//         include: [{
+//             model: Cart,
+//             as: 'pastOrder',
+//             where:{
+//                 state: 'completado'},
+//             include:[{ model: Product}]
+//             }] }).then(user=>{
+//         res.send(user);
+//     })
+// })
 
 //return current cart
 
