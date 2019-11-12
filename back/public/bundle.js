@@ -101,8 +101,9 @@ __webpack_require__.r(__webpack_exports__);
 
 function CategorySidebar(_ref) {
   var selectFilter = _ref.selectFilter,
-      filterCategories = _ref.filterCategories;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      filterCategories = _ref.filterCategories,
+      products = _ref.products;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, products.length == 0 ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "wrapper"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     id: "sidebar"
@@ -336,7 +337,13 @@ function Navbar(props) {
     className: "navbar-toggler",
     type: "button",
     id: "logoutButton"
-  }, _defineProperty(_React$createElement, "className", "btn btn-light"), _defineProperty(_React$createElement, "onClick", handleLogOut), _React$createElement), "LOG OUT")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, _defineProperty(_React$createElement, "className", "btn btn-light"), _defineProperty(_React$createElement, "onClick", handleLogOut), _React$createElement), "LOG OUT"), location.pathname === "/" ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "brandLogoMiniDiv"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "brandLogoMini"
+  }, "JS"))))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn btn-light",
     "data-toggle": "modal",
@@ -631,14 +638,15 @@ __webpack_require__.r(__webpack_exports__);
 
 function SearchResults(_ref) {
   var catFilter = _ref.catFilter,
-      products = _ref.products;
+      products = _ref.products,
+      searchQuery = _ref.searchQuery;
   var filteredProducts = products;
   catFilter ? filteredProducts = products.filter(function (product) {
     return product.category.includes(catFilter);
   }) : null;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "randomViewContainer"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, filteredProducts.map(function (product) {
+  }, products.length != 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, filteredProducts.map(function (product) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
       className: "card text-center",
       id: "productCard",
@@ -667,7 +675,7 @@ function SearchResults(_ref) {
       id: "plusBtn",
       className: "btn btn-light"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ti__WEBPACK_IMPORTED_MODULE_4__["TiPlus"], null), " info"))));
-  })));
+  })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "UNFORTUNATELY WE DON'T GET RESULTS FOR YOUR SEARCH: ", searchQuery, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Please try again!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Tips for your search: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Check your spelling in case you had typing errors, for example \"Palangana\" instead of \"Pants.\""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Try again, looking for only one word."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Try again, looking for more generic terms - you can filter the results later."))));
 }
 
 /***/ }),
@@ -1109,9 +1117,11 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CategorySidebar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        products: this.props.products,
         selectFilter: this.selectFilter,
         filterCategories: this.filteredCategories()
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchResults__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        searchQuery: this.props.searchQuery,
         catFilter: this.state.catFilter,
         products: this.props.products
       }));
