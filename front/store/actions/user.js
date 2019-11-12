@@ -35,10 +35,10 @@ export const userLogIn = (email, password) => dispatch =>
     .then(user => dispatch(logUser(user)))
     .catch(err => console.log(err));
 
-export const fetchUser = () => dispatch => {
-  return axios
+export const fetchUser = () => dispatch => 
+  axios
     .get("/api/user/me")
     .then(res => res.data)
     .then(user => dispatch(logUser(user)))
     .catch(err => console.log(err));
-};
+

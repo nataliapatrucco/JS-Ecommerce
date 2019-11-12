@@ -1,10 +1,12 @@
-import React, { Component } from "react";
-import Navbar from "../components/Navbar";
-import { connect } from "react-redux";
-import { userRegUser } from "../store/actions/user";
-import { userLogOut } from "../store/actions/user";
-import { userLogIn } from "../store/actions/user";
-import { userLogOutCart } from "../store/actions/cart";
+import React, { Component } from 'react';
+import Navbar from '../components/Navbar';
+import { connect } from 'react-redux';
+import { userRegUser } from '../store/actions/user';
+import { userLogOut } from '../store/actions/user';
+import { userLogIn } from '../store/actions/user';
+import { userLogOutCart } from "../store/actions/cart"
+import { fetchCart } from "../store/actions/cart";
+
 
 class NavbarContainer extends Component {
   constructor(props) {
@@ -38,14 +40,20 @@ class NavbarContainer extends Component {
     event.preventDefault();
     this.props.userLogOut();
     this.props.userLogOutCart();
+    window.localStorage.clear()
     //.then(() => this.props.history.push("/"));
   }
   handleLogIn(event) {
+
     event.preventDefault();
     document.querySelector("#loginClose").click();
-    this.props.userLogIn(this.state.email, this.state.password).then(res => {
+    this.props.userLogIn(this.state.email, this.state.password)
+    .then(res => {
       if (!res) {
         alert("Wrong username or password");
+      } else {
+        this.props.fetchCart(this.props.user, this.props.cart)
+        window.localStorage.clear()
       }
     });
   }
@@ -74,14 +82,16 @@ class NavbarContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user.user
+  user: state.user.user,
+  cart: state.cart.cart
 });
 
 const mapDispatchToProps = {
   userLogOut,
   userLogOutCart,
   userRegUser,
-  userLogIn
+  userLogIn,
+  fetchCart
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavbarContainer);

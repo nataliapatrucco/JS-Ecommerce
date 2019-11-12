@@ -243,6 +243,10 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchUser();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
       this.props.fetchCart(this.props.user);
     }
   }, {
@@ -921,6 +925,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var NavbarContainer =
 /*#__PURE__*/
 function (_Component) {
@@ -958,16 +963,23 @@ function (_Component) {
     value: function handleLogOut(event) {
       event.preventDefault();
       this.props.userLogOut();
-      this.props.userLogOutCart(); //.then(() => this.props.history.push("/"));
+      this.props.userLogOutCart();
+      window.localStorage.clear(); //.then(() => this.props.history.push("/"));
     }
   }, {
     key: "handleLogIn",
     value: function handleLogIn(event) {
+      var _this2 = this;
+
       event.preventDefault();
       document.querySelector("#loginClose").click();
       this.props.userLogIn(this.state.email, this.state.password).then(function (res) {
         if (!res) {
           alert("Wrong username or password");
+        } else {
+          _this2.props.fetchCart(_this2.props.user, _this2.props.cart);
+
+          window.localStorage.clear();
         }
       });
     }
@@ -1000,7 +1012,8 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    user: state.user.user
+    user: state.user.user,
+    cart: state.cart.cart
   };
 };
 
@@ -1008,7 +1021,8 @@ var mapDispatchToProps = {
   userLogOut: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userLogOut"],
   userLogOutCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_4__["userLogOutCart"],
   userRegUser: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userRegUser"],
-  userLogIn: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userLogIn"]
+  userLogIn: _store_actions_user__WEBPACK_IMPORTED_MODULE_3__["userLogIn"],
+  fetchCart: _store_actions_cart__WEBPACK_IMPORTED_MODULE_4__["fetchCart"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(NavbarContainer));
 
@@ -64168,7 +64182,7 @@ var userLogOutCart = function userLogOutCart() {
     dispatch(logOutCart());
   };
 };
-var fetchCart = function fetchCart(user) {
+var fetchCart = function fetchCart(user, cart) {
   return function (dispatch) {
     if (user.name) {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/cart/me").then(function (res) {
@@ -64177,6 +64191,7 @@ var fetchCart = function fetchCart(user) {
         return dispatch(setCart(cart));
       });
     } else {
+      console.log("aodifnasiopgpiafsg");
       var values = [];
       var keys = Object.keys(window.localStorage);
       var i = keys.length;

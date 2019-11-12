@@ -14,9 +14,14 @@ class Main extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.fetchUser();
-    this.props.fetchCart(this.props.user);
+   componentDidMount() {
+       
+      this.props.fetchUser();
+
+  }
+
+  componentDidUpdate() {
+    this.props.fetchCart(this.props.user)
   }
 
   render() {
