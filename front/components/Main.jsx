@@ -9,9 +9,6 @@ import SingleProductContainer from "../containers/SingleProductContainer";
 import SearchResultsContainer from "../containers/SearchResultsContainer";
 import { fetchCart } from "../store/actions/cart";
 
-
-
-
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -19,14 +16,14 @@ class Main extends Component {
 
   componentDidMount() {
     this.props.fetchUser();
-    this.props.fetchCart(this.props.user)
+    this.props.fetchCart(this.props.user);
   }
 
   render() {
     const { location } = this.props;
     return (
       <div id="main container-fluid">
-        <NavbarContainer location={location}/>
+        <NavbarContainer location={location} />
         <Switch>
           <Route exact path="/product/:id" component={SingleProductContainer} />
           <Route
@@ -41,12 +38,11 @@ class Main extends Component {
           />
           <Route exact path="/" component={HomeContainer} />
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     );
   }
 }
-
 
 const mapDispatchToProps = {
   fetchUser,
@@ -58,7 +54,4 @@ const mapStateToProps = state => ({
   isUrlHome: state.navbar.home
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
