@@ -911,7 +911,7 @@ function (_Component) {
       event.preventDefault();
       document.querySelector('#loginClose').click();
       this.props.userLogIn(this.state.email, this.state.password).then(function () {
-        _this2.props.fetchCart(_this2.props.user);
+        _this2.props.fetchCart(_this2.props.user, _this2.props.cart);
 
         window.localStorage.clear();
       }); // .then(() => this.props.history.push("/"));
@@ -944,7 +944,8 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    user: state.user.user
+    user: state.user.user,
+    cart: state.cart.cart
   };
 };
 
@@ -64087,7 +64088,7 @@ var userLogOutCart = function userLogOutCart() {
     dispatch(logOutCart());
   };
 };
-var fetchCart = function fetchCart(user) {
+var fetchCart = function fetchCart(user, cart) {
   return function (dispatch) {
     if (user.name) {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/cart/me").then(function (res) {
@@ -64096,6 +64097,7 @@ var fetchCart = function fetchCart(user) {
         return dispatch(setCart(cart));
       });
     } else {
+      console.log("aodifnasiopgpiafsg");
       var values = [];
       var keys = Object.keys(window.localStorage);
       var i = keys.length;

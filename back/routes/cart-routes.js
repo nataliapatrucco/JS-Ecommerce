@@ -39,21 +39,23 @@ router.get("/me", async function(req, res, next) {
     const cart = await Cart.findOne({where: {CurrentUserCartId: req.user.id}})
     const product_cartUser = await Product_cart.findAll({where: {cartId: cart.id}})
     const productsToSendPending = await Promise.all(product_cartUser)
-    // console.log(productsToSendPending, "---afdf--------------")
     let productsToSendResolved = []
     if (productsToSendPending.length) {
 
         productsToSendResolved = productsToSendPending.map(async (product) => {
             let perfectProduct = await Product.findByPk(product.dataValues.productId)
-            perfectProduct.quantity = product.dataValues.quantity
+            console.log(product.dataValues, "datavalues de product")
+            perfectProduct.dataValues.quantity = product.dataValues.quantity
+            console.log(perfectProduct.dataValues)
             return perfectProduct
     
         })
         // console.log(productsToSendResolved)
     }
-    console.log(productsToSendResolved)
+
     let kk = await Promise.all(productsToSendResolved)
-    console.log(kk, "-------------------------")
+    console.log("empieza acaaaa", kk, "ESTOOOOOOOOO")
+
     res.send(kk)
     // res.send(productsToSendPending)
 })

@@ -16,12 +16,13 @@ export const userLogOutCart = () => dispatch => {
 }
 
 
-export const fetchCart = (user) => dispatch => {
-    if (user.name) {
+export const fetchCart = (user, cart) => dispatch => {
+    if (user.name ) {
         axios.get("/api/cart/me")
         .then(res => res.data)
         .then(cart => dispatch(setCart(cart)))
     } else {
+        console.log("aodifnasiopgpiafsg")
         let values = [];
         let keys = Object.keys(window.localStorage);
         let i = keys.length;

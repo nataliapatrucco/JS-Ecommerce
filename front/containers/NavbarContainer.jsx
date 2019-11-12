@@ -48,7 +48,7 @@ class NavbarContainer extends Component {
     document.querySelector('#loginClose').click();
     this.props.userLogIn(this.state.email, this.state.password)
     .then(() => {
-      this.props.fetchCart(this.props.user)
+      this.props.fetchCart(this.props.user, this.props.cart)
       window.localStorage.clear()
     })
     // .then(() => this.props.history.push("/"));
@@ -77,7 +77,8 @@ class NavbarContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user.user
+  user: state.user.user,
+  cart: state.cart.cart
 });
 
 const mapDispatchToProps = {

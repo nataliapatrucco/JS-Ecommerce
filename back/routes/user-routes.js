@@ -27,7 +27,7 @@ router.post('/login', passportConfig.authenticate('local'), async function(req, 
 
           Product_cart.findOne({where: {productId: productLocal.id, cartId: cart.id}})
           .then(instanceProduct_cart => {
-            console.log(instanceProduct_cart, "----------------------")
+            console.log(instanceProduct_cart, "-----------algoalgo-----------")
 
             if (instanceProduct_cart !== null) {
               instanceProduct_cart.update({quantity: instanceProduct_cart.dataValues.quantity + productLocal.quantity})
@@ -99,12 +99,22 @@ router.post('/login', passportConfig.authenticate('local'), async function(req, 
       .then(cart => {
               user.setCurrentUserCart(cart)
               while ( i-- ) {
-              let productLocal = JSON.parse(req.body.localStorage[keys[i]])
-              Product.findByPk(productLocal.id)
-              .then(product => {
-                  product.quantity = productLocal.quantity
+                let productLocal = JSON.parse(req.body.localStorage[keys[i]])
+                Product.findByPk(productLocal.id)
+                .then(product => {
+                  // product.dataValues.quantity = productLocal.quantity
+                  // console.log(product, "----------afdsadfadffadfadfafadfadfadf-------")
                   cart.addProduct( product )
-              })
+                  .then(() => {
+                    Product_cart.findOne({where: {cartId: cart.id, productId: product.id}})
+                    .then((prodCart) => {
+                      prodCart.update({quantity: productLocal.quantity}).then(() =>{
+                        console.log(prodCart, "-------------------")
+                      })
+                    })
+                  })
+
+                })
               }
           })
     } else {
