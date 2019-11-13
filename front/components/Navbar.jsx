@@ -213,20 +213,18 @@ export default function Navbar(props) {
           ) : (
             ""
           )}
-
-          {/* code for adding searchbar to navbar */}
-
-          {/* {props.location.pathname !== "/" && 
-          <input
-              onChange={props.handleChange}
-              className=" active-purple-3 active-purple-4 form-control navSearch"
-              type="text"
-              placeholder="search"
-              aria-label="Search"
-              style={{ textAlign: "center" }}
-            />
-          } */}
-
+          {user.userType == "admin" ? (
+            <div>
+              <Link to="/admin/create">
+                <button>CREATE</button>
+              </Link>
+              <Link to="/admin/users">
+                <button>USERS</button>
+              </Link>
+            </div>
+          ) : (
+            " "
+          )}
           <button id="cartButton">
             <AiOutlineShoppingCart />
           </button>

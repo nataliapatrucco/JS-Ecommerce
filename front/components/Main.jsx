@@ -8,20 +8,19 @@ import { fetchUser } from "../store/actions/user";
 import SingleProductContainer from "../containers/SingleProductContainer";
 import SearchResultsContainer from "../containers/SearchResultsContainer";
 import { fetchCart } from "../store/actions/cart";
+import AdminUsersListContainer from "../containers/AdminUsersListContainer";
 
 class Main extends Component {
   constructor(props) {
     super(props);
   }
 
-   componentDidMount() {
-       
-      this.props.fetchUser();
-
+  componentDidMount() {
+    this.props.fetchUser();
   }
 
   componentDidUpdate() {
-    this.props.fetchCart(this.props.user)
+    this.props.fetchCart(this.props.user);
   }
 
   render() {
@@ -30,6 +29,11 @@ class Main extends Component {
       <div id="main container-fluid">
         <NavbarContainer location={location} />
         <Switch>
+          <Route
+            exact
+            path="/admin/users"
+            component={AdminUsersListContainer}
+          />
           <Route exact path="/product/:id" component={SingleProductContainer} />
           <Route
             exact
@@ -43,7 +47,7 @@ class Main extends Component {
           />
           <Route exact path="/" component={HomeContainer} />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

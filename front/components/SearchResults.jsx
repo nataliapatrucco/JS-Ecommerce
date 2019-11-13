@@ -3,6 +3,7 @@ import StarRatings from "react-star-ratings";
 import { CardDeck, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { TiPlus } from "react-icons/ti";
+// import { Grid, Row, Col } from "../node_modules/react-flexbox-grid";
 
 export default function SearchResults({ catFilter, products, searchQuery }) {
   let filteredProducts = products;
@@ -15,6 +16,8 @@ export default function SearchResults({ catFilter, products, searchQuery }) {
   return (
     <div id="randomViewContainer">
       {products.length != 0 ? (
+        // <Row>
+        //   <Col sm={4}>
         <CardDeck>
           {filteredProducts.map(product => (
             <Card
@@ -47,6 +50,8 @@ export default function SearchResults({ catFilter, products, searchQuery }) {
           ))}
         </CardDeck>
       ) : (
+        //   </Col>
+        // </Row>
         <div>
           <h1>
             UNFORTUNATELY WE DON'T GET RESULTS FOR YOUR SEARCH: {searchQuery}{" "}
