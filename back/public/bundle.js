@@ -508,9 +508,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function RandomView(_ref) {
   var products = _ref.products,
-      handleSelect = _ref.handleSelect,
-      handleAdd = _ref.handleAdd,
-      selectedProduct = _ref.selectedProduct;
+      handleAdd = _ref.handleAdd;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "randomViewContainer"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, products.map(function (product) {
@@ -542,13 +540,12 @@ function RandomView(_ref) {
       id: "plusBtn",
       className: "btn btn-light"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ti__WEBPACK_IMPORTED_MODULE_4__["TiPlus"], null), " info")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: function onClick(id) {
-        handleSelect(product.id);
-        handleAdd();
+      onClick: function onClick() {
+        return handleAdd(product);
       },
       className: "btn btn-light",
       id: "cartBtn"
-    }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_5__["AiOutlineShoppingCart"], null))));
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_5__["AiOutlineShoppingCart"], null))));
   })));
 }
 
@@ -816,12 +813,11 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HomeContainers).call(this, props));
     _this.state = {
-      searchQuery: ""
+      searchQuery: ''
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleAdd = _this.handleAdd.bind(_assertThisInitialized(_this));
-    _this.handleSelect = _this.handleSelect.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -840,19 +836,13 @@ function (_Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault(); // this.props.searchProducts(this.state.searchQuery);
-
+      e.preventDefault();
       this.props.history.push("/".concat(this.state.searchQuery));
     }
   }, {
-    key: "handleSelect",
-    value: function handleSelect(id) {
-      this.props.fetchProduct(id);
-    }
-  }, {
     key: "handleAdd",
-    value: function handleAdd() {
-      this.props.fetchAndAddToCart(this.props.selectedProduct, this.props.user);
+    value: function handleAdd(product) {
+      this.props.fetchAndAddToCart(product, this.props.user);
     }
   }, {
     key: "render",
@@ -861,8 +851,6 @@ function (_Component) {
         handleSubmit: this.handleSubmit,
         handleChange: this.handleChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_RandomView__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        selectedProduct: this.props.selectedProduct,
-        handleSelect: this.handleSelect,
         handleAdd: this.handleAdd,
         products: this.props.products
       }));
@@ -56478,7 +56466,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64195,13 +64183,12 @@ var userLogOutCart = function userLogOutCart() {
 var fetchCart = function fetchCart(user, cart) {
   return function (dispatch) {
     if (user.name) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/cart/me").then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/cart/me').then(function (res) {
         return res.data;
       }).then(function (cart) {
         return dispatch(setCart(cart));
       });
     } else {
-      console.log("aodifnasiopgpiafsg");
       var values = [];
       var keys = Object.keys(window.localStorage);
       var i = keys.length;
@@ -64217,32 +64204,25 @@ var fetchCart = function fetchCart(user, cart) {
 var fetchAndAddToCart = function fetchAndAddToCart(product, user) {
   return function (dispatch) {
     if (user.name) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart", product).then(function (res) {
+      return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/cart', product).then(function (res) {
         return res.data;
       }).then(function (cart) {
         console.log(cart);
         dispatch(setCart(cart));
       });
-    } else {
-      if (window.localStorage.getItem(product.id)) {
-        var addedProduct = JSON.parse(window.localStorage.getItem(product.id));
-        addedProduct.quantity = addedProduct.quantity + 1;
-        window.localStorage.setItem(addedProduct.id, JSON.stringify(addedProduct));
-      } else {
-        product.quantity = 1;
-        window.localStorage.setItem(product.id, JSON.stringify(product));
-      }
-
-      var values = [];
-      var keys = Object.keys(window.localStorage);
-      var i = keys.length;
-
-      while (i--) {
-        values.push(JSON.parse(window.localStorage.getItem(keys[i])));
-      }
-
-      dispatch(setCart(values));
     }
+
+    if (!window.localStorage.getItem(product.id)) {
+      product.quantity = 0;
+      window.localStorage.setItem(product.id, JSON.stringify(product));
+    }
+
+    var addToThis = JSON.parse(window.localStorage.getItem(product.id));
+    addToThis.quantity = addToThis.quantity + 1;
+    window.localStorage.setItem(addToThis.id, JSON.stringify(addToThis));
+    dispatch(setCart(Object.values(window.localStorage).map(function (item) {
+      return JSON.parse(item);
+    })));
   };
 };
 
