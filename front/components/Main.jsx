@@ -21,15 +21,15 @@ class Main extends Component {
   }
 
   render() {
-    const { location } = this.props;
+    const { location, history } = this.props;
     return (
       <div id="main container-fluid">
-        <NavbarContainer location={location} />
+        <NavbarContainer location={location} history={history} />
         <Switch>
           <Route exact path="/product/:id" component={SingleProductContainer} />
           <Route
             exact
-            path="/:query"
+            path="/search/:query"
             render={({ match, history }) => (
               <SearchResultsContainer
                 searchQuery={match.params.query}
@@ -38,17 +38,44 @@ class Main extends Component {
             )}
           />
           <Route exact path="/" component={HomeContainer} />
-          
+
+          {Object.keys(this.props.user).length ?  (
+            <div>
+            <Route
+            exact
+            path="/user"
+            render={({ location, history, match }) => {
+              
+              return <UserPageContainer location={location} history={history}/>
+              }}
+          />
+
           <Route
             exact
-            path="/user/:pastOrderId"
-            render={({ location, history, match }) => <UserPageContainer location={location} history={history} orderId = {match.params.pastOrderId}/>}
+            path="/user/order/:pastOrderId"
+            render={({ location, history, match }) => {
+              
+              return <UserPageContainer location={location} history={history} orderId = {match.params.pastOrderId}/>}}
           />
+
           <Route
             exact
             path="/user/address"
-            render={({ location, history }) => <UserPageContainer location={location} history={history} />}
-          />
+            render={({ location, history, match }) => {
+              
+              return <UserPageContainer location={location} history={history}/>}}
+          /> 
+            </div>
+
+          ) : 
+          
+          (<Route
+            exact
+            path="/user"
+            component={HomeContainer}
+          />)
+          
+          }
         </Switch>
         {/* <Footer /> */}
       </div>

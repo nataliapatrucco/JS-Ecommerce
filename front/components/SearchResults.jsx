@@ -18,7 +18,9 @@ export default function SearchResults({ catFilter, products }) {
         {filteredProducts.map(product => (
           <Card className="card text-center" id="productCard" key={product.id}>
             <Link to={`/product/${product.id}`}>
-              <Card.Img variant="top" src={product.image} />
+              <Card.Img variant="top" src={
+                product.image.slice(1)
+                } />
             </Link>
             <Card.Body id="prodBody">
               <Card.Title id="productName">{product.name}</Card.Title>

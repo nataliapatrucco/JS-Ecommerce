@@ -37,10 +37,8 @@ router.post("/", async function(req, res, next) {
         frontProduct.dataValues.quantity = product.dataValues.quantity
         return frontProduct.dataValues
     })
-    console.log(getFrontCart, "-----------------------------")
 
     const frontCart = await Promise.all(getFrontCart)
-        console.log(frontCart, "auiyzdbfhjndaofodanf")
         res.send(frontCart)
     
 
