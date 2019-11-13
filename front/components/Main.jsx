@@ -54,8 +54,8 @@ class Main extends Component {
 }
 
 const mapDispatchToProps = {
-  fetchUser
-  // fetchCart
+  fetchUser,
+  fetchCart
 };
 
 const mapStateToProps = state => ({
