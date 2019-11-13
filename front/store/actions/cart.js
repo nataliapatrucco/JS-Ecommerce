@@ -15,22 +15,16 @@ export const userLogOutCart = () => dispatch => {
   dispatch(logOutCart());
 };
 
-export const fetchCart = (user, cart) => dispatch => {
-  if (user.name) {
-    axios
+export const fetchCart = user => dispatch => {
+  if (user.name)
+    return axios
       .get('/api/cart/me')
       .then(res => res.data)
       .then(cart => dispatch(setCart(cart)));
-  } else {
-    let values = [];
-    let keys = Object.keys(window.localStorage);
-    let i = keys.length;
-    while (i--) {
-      values.push(JSON.parse(window.localStorage.getItem(keys[i])));
-    }
 
-    dispatch(setCart(values));
-  }
+  return dispatch(
+    setCart(Object.values(window.localStorage).map(item => JSON.parse(item)))
+  );
 };
 
 export const fetchAndAddToCart = (product, user) => dispatch => {
@@ -38,10 +32,7 @@ export const fetchAndAddToCart = (product, user) => dispatch => {
     return axios
       .post('/api/cart', product)
       .then(res => res.data)
-      .then(cart => {
-        console.log(cart);
-        dispatch(setCart(cart));
-      });
+      .then(cart => dispatch(setCart(cart)));
   }
 
   if (!window.localStorage.getItem(product.id)) {

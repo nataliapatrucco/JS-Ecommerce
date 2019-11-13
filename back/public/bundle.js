@@ -64180,25 +64180,16 @@ var userLogOutCart = function userLogOutCart() {
     dispatch(logOutCart());
   };
 };
-var fetchCart = function fetchCart(user, cart) {
+var fetchCart = function fetchCart(user) {
   return function (dispatch) {
-    if (user.name) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/cart/me').then(function (res) {
-        return res.data;
-      }).then(function (cart) {
-        return dispatch(setCart(cart));
-      });
-    } else {
-      var values = [];
-      var keys = Object.keys(window.localStorage);
-      var i = keys.length;
-
-      while (i--) {
-        values.push(JSON.parse(window.localStorage.getItem(keys[i])));
-      }
-
-      dispatch(setCart(values));
-    }
+    if (user.name) return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/cart/me').then(function (res) {
+      return res.data;
+    }).then(function (cart) {
+      return dispatch(setCart(cart));
+    });
+    return dispatch(setCart(Object.values(window.localStorage).map(function (item) {
+      return JSON.parse(item);
+    })));
   };
 };
 var fetchAndAddToCart = function fetchAndAddToCart(product, user) {
@@ -64207,8 +64198,7 @@ var fetchAndAddToCart = function fetchAndAddToCart(product, user) {
       return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/cart', product).then(function (res) {
         return res.data;
       }).then(function (cart) {
-        console.log(cart);
-        dispatch(setCart(cart));
+        return dispatch(setCart(cart));
       });
     }
 
