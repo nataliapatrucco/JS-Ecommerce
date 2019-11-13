@@ -4,15 +4,18 @@ import { fetchProducts } from '../store/actions/product';
 import Search from '../components/Search';
 import RandomView from '../components/RandomView';
 import { searchProducts } from '../store/actions/product';
+import { fetchAndAddToCart } from '../store/actions/cart';
+import { fetchProduct } from '../store/actions/product';
 
 export class HomeContainers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchQuery: ""
+      searchQuery: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +32,9 @@ export class HomeContainers extends Component {
     this.props.history.push(`/search/${this.state.searchQuery}`);
   }
 
-  handleAdd() {}
+  handleAdd(product) {
+    this.props.fetchAndAddToCart(product, this.props.user);
+  }
 
   render() {
     return (
@@ -38,7 +43,7 @@ export class HomeContainers extends Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
-        <RandomView products={this.props.products} />
+        <RandomView handleAdd={this.handleAdd} products={this.props.products} />
       </div>
     );
   }
@@ -46,11 +51,15 @@ export class HomeContainers extends Component {
 
 const mapDispatchToProps = {
   fetchProducts,
-  searchProducts
+  fetchProduct,
+  searchProducts,
+  fetchAndAddToCart
 };
 
 const mapStateToProps = state => ({
-  products: state.products.products
+  products: state.products.products,
+  user: state.user.user,
+  selectedProduct: state.products.selectedProduct
 });
 
 export default connect(

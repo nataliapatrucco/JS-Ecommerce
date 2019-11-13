@@ -11,7 +11,8 @@ export default ({ user, address, pastOrders, reviews }) => {
 
       <hr />
       <h5>You Past Orders</h5>
-      {pastOrders.map(order => {
+      {console.log("TyPEOF PASTORDERS", typeof pastOrders)}
+      {pastOrders.length && pastOrders.map(order => {
         return (
           <Link key={order.id} to={`/user/order/${order.id}`}>
             {order.name}

@@ -34,10 +34,12 @@ export class SearchResultsContainer extends Component {
     return (
       <div>
         <CategorySideBar
+          products={this.props.products}
           selectFilter={this.selectFilter}
           filterCategories={this.filteredCategories()}
         />
         <SearchResults
+          searchQuery={this.props.searchQuery}
           catFilter={this.state.catFilter}
           products={this.props.products}
         />

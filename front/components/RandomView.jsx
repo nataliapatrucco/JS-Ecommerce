@@ -1,11 +1,11 @@
-import React from "react";
-import StarRatings from "react-star-ratings";
-import { CardDeck, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { TiPlus } from "react-icons/ti";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import React from 'react';
+import StarRatings from 'react-star-ratings';
+import { CardDeck, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { TiPlus } from 'react-icons/ti';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
-export default function RandomView({ products }) {
+export default function RandomView({ products, handleAdd }) {
   return (
     <div id="randomViewContainer">
       <CardDeck>
@@ -32,8 +32,11 @@ export default function RandomView({ products }) {
                 </button>
               </Link>
               <hr />
-              <button className="btn btn-light" id="cartBtn">
-                {" "}
+              <button
+                onClick={() => handleAdd(product)}
+                className="btn btn-light"
+                id="cartBtn"
+              >
                 <AiOutlineShoppingCart />
               </button>
             </Card.Body>

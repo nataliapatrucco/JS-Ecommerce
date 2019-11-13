@@ -39,8 +39,11 @@ export default ({ selectedProduct, addProduct, reviews }) => {
                 </li>
                 <li className="list-group-item">
                   <strong>Product Reviews:</strong>
-                  {!reviews && reviews.map(review=>{
-                    return (<Review key={review.id} author={review.author} rating ={review.rating} comment ={review.comment}/>)
+                  {reviews.length && reviews.map(review=>{
+                    return ( <div key={review.id} >
+                      <Review  author={review.author} rating ={review.rating} comment ={review.comment}/>
+                    </div>
+                      )
                   })}
                 </li>
               </ul>
@@ -48,7 +51,11 @@ export default ({ selectedProduct, addProduct, reviews }) => {
           </div>
           <div className="row">
             <div className="card card-body bg-dark my-5 text-light">
-              <button onClick={() => addProduct(selectedProduct)} type="button" className="btn btn-default text-light">
+              <button
+                onClick={() => addProduct(selectedProduct)}
+                type="button"
+                className="btn btn-default text-light"
+              >
                 Add to Cart
               </button>
             </div>

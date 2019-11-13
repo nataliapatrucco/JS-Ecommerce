@@ -1,6 +1,7 @@
 import React from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
+
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export default function Navbar(props) {
   const {
@@ -9,7 +10,8 @@ export default function Navbar(props) {
     handleLogOut,
     handleSubmitRegister,
     location,
-    user
+    user,
+    wrongUser
   } = props;
 
   return (
@@ -26,6 +28,17 @@ export default function Navbar(props) {
             >
               LOG OUT
             </button>
+            {location.pathname === "/" ? (
+              ""
+            ) : (
+              <Link to={`/`}>
+                <label>
+                  <div className="brandLogoMiniDiv">
+                    <p className="brandLogoMini">JS</p>
+                  </div>
+                </label>
+              </Link>
+            )}
           </div>
         ) : (
           <div>
@@ -117,9 +130,7 @@ export default function Navbar(props) {
               LOGIN
             </button>
 
-            {location.pathname === "/" ? (
-              ""
-            ) : (
+            {location.pathname === "/" ? null : (
               <Link to={`/`}>
                 <label>
                   <div className="brandLogoMiniDiv">
@@ -177,7 +188,12 @@ export default function Navbar(props) {
                         />
                       </div>
                       <div className="modal-footer">
-                        <button type="submit" className="btn btn-dark">
+                        <p>{wrongUser}</p>
+                        <button
+                          type="submit"
+                          id="submitLogin"
+                          className="btn btn-dark"
+                        >
                           Login
                         </button>
                       </div>
@@ -209,10 +225,11 @@ export default function Navbar(props) {
               style={{ textAlign: "center" }}
             />
           } */}
-
-          <button id="cartButton">
-            <AiOutlineShoppingCart />
-          </button>
+          <Link to="/cart">
+            <button id="cartButton">
+              <AiOutlineShoppingCart />
+            </button>
+          </Link>
         </div>
       </div>
     </nav>

@@ -47,11 +47,11 @@ class UserPageContainer extends Component {
       .get("/api/user/allMyInfo")
       .then(res => res.data)
       .then(user => {
-        console.log("ComponentDidMountUSER!!", user)
+
         this.setState({
-          userReviews: user.reviews,
-          address: user.address,
-          pastOrders: user.pastOrder,
+          userReviews: user.reviews || [],
+          address: user.address || "",
+          pastOrders: user.pastOrders || [],
           user: user
         });
       });
@@ -59,14 +59,11 @@ class UserPageContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.address !== "") {
       axios.post("/api/user/address", {
         address: this.state.newAddress
       })
-      console.log("ADDRESS STATE", this.state.newAddress)
       this.setState({ address: this.state.newAddress });
       this.props.history.push("/user/");
-    }
   }
 
   handleAddress(e) {
@@ -115,10 +112,6 @@ class UserPageContainer extends Component {
     );
   }
 }
-
-// const mapStateToProps = state => ({
-//   user: state.user.user
-// });
 
 export default connect(
   null,

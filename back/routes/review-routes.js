@@ -7,8 +7,8 @@ const {Review, Product} = require('../models');
 
 
 //get all product reviews
-router.get("/product/:id", function(req, res) {
-    Product.findOne({where:{id: req.params.id}}).then(product => { 
+router.get("/all/:productId", function(req, res) {
+    Product.findOne({where:{id: req.params.productId}}).then(product => { 
         product.getReviews().then(reviews=>{    
             res.status(200).send(reviews);
         })})
