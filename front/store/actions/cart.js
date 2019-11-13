@@ -49,3 +49,39 @@ export const fetchAndAddToCart = (product, user) => dispatch => {
     setCart(Object.values(window.localStorage).map(item => JSON.parse(item)))
   );
 };
+
+export const fetchAndSubstractFromCart = (product, user) => dispatch => {
+  if (user.name) {
+    return axios
+      .post("/api/cart", product)
+      .then(res => res.data)
+      .then(cart => dispatch(setCart(cart)));
+  }
+
+  let subOneFromThis = JSON.parse(window.localStorage.getItem(product.id));
+  subOneFromThis.quantity = subOneFromThis.quantity - 1;
+
+  window.localStorage.setItem(
+    subOneFromThis.id,
+    JSON.stringify(subOneFromThis)
+  );
+
+  dispatch(
+    setCart(Object.values(window.localStorage).map(item => JSON.parse(item)))
+  );
+};
+
+export const fetchAndRemoveFromCart = (product, user) => dispatch => {
+  if (user.name) {
+    return axios
+      .post("/api/cart", product)
+      .then(res => res.data)
+      .then(cart => dispatch(setCart(cart)));
+  }
+
+  window.localStorage.removeItem(product.id);
+
+  dispatch(
+    setCart(Object.values(window.localStorage).map(item => JSON.parse(item)))
+  );
+};
