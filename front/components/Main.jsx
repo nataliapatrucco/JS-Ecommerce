@@ -12,11 +12,11 @@ import NavbarContainer from "../containers/NavbarContainer";
 import CartContainer from "../containers/CartContainer";
 import SingleProductContainer from "../containers/SingleProductContainer";
 import SearchResultsContainer from "../containers/SearchResultsContainer";
+import Checkout from "../containers/CheckoutContainer";
 
 class Main extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
   }
 
   componentDidMount() {
@@ -28,12 +28,13 @@ class Main extends Component {
   }
 
   render() {
-    const { location } = this.props;
+    const { location, history, user } = this.props;
     return (
       <div id="main container-fluid">
         <NavbarContainer location={location} />
         <Switch>
-          <R path="/cart" component={CartContainer} />
+          <R path="/cart/checkout" component={Checkout} user={user} />
+          <R path="/cart" component={CartContainer} history={history} />
           <R exact path="/product/:id" component={SingleProductContainer} />
           <R
             exact

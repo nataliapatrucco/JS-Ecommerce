@@ -36,12 +36,14 @@ class CartContainer extends C {
   }
 
   render() {
-    const { cart } = this.props;
+    const { cart, user, history } = this.props;
 
     return (
       <div className='container' >
         <Cart
           cart={cart}
+          user={user}
+          history={history}
           quantAddOne={this.quantAddOne}
           quantSubOne={this.quantSubOne}
           quantRemove={this.quantRemove}

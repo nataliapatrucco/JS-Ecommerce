@@ -1,15 +1,16 @@
 import React from "react";
 
 import AlterQuantButton from "../components/AlterQuantButton";
+import Checkout from '../containers/CheckoutContainer'
 
-export default function Cart({ cart, quantAddOne, quantSubOne, quantRemove }) {
+export default function Cart({
+  cart, user, quantAddOne, quantSubOne, quantRemove, history }) {
   return (
     <div className='row'>
       <div className="col-8">
         {cart &&
           cart.map(cartItem => {
             const { name, price, id, image, quantity } = cartItem;
-            console.log('PRICEEEEEEEEEEEE', price)
 
             return (
               <div className="singleItemInCart" key={`${cartItem}_${id}`}>
@@ -49,9 +50,15 @@ export default function Cart({ cart, quantAddOne, quantSubOne, quantRemove }) {
           <button
             type='button'
             className='btn btn-light'
+
             onClick={() => {
-              alert('Please Log in')
-              document.querySelector("#loginButton").click()
+              if (!Object.keys(user).length) {
+                alert('Please Log in')
+                document.querySelector("#loginButton").click()
+
+              }
+              else
+                history.push('/cart/checkout')
             }
             }>checkout</button>
         </div>)
