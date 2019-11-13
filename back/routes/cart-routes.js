@@ -3,51 +3,49 @@ const Product_Cart = require("sequelize");
 const router = express.Router();
 const { Cart, Product, User, Product_cart } = require("../models");
 
-//return cart history
 
-//return current cart
-
-router.post("/remove", async function(req, res, next) {
+router.post("/remove", async function (req, res, next) {
   const cart = await Cart.findOne({
     where: { CurrentUserCartId: req.user.id }
-  });
+  })
 
-  const array = await Product_cart.findAll({ where: { cartId: cart.id } });
+  await Product_cart.destroy({ where: { cartId: cart.id, productId: req.body.id } })
 
-  console.log(array);
+  const prodIdsIncart = await Product_cart.findAll({ where: { cartId: cart.id } })
 
-  let currentCart = array.map(async product => {
-    let prods = await Product.findByPk(product.dataValues.productId);
+  const frontCart = prodIdsIncart.map(async productCartId => {
+    let product = await Product.findByPk(productCartId.productId)
+    product.dataValues.quantity = productCartId.dataValues.quantity
 
-    prods.dataValues.quantity = product.dataValues.quantity;
+    return product.dataValues
+  })
+  let culo = await Promise.all(frontCart)
 
-    return prods.dataValues;
-  });
-
-  const frontCart = await Promise.all(currentCart);
-  res.send(frontCart);
+  res.send(culo)
 });
 
-router.post("/substract", async function(req, res, next) {
+router.post("/substract", async function (req, res, next) {
   const cart = await Cart.findOne({
     where: { CurrentUserCartId: req.user.id }
-  });
+  })
 
-  const array = await Product_cart.findAll({ where: { cartId: cart.id } });
+  const prodInCart = await Product_cart.findOne({ where: { productId: req.body.id, cartId: cart.id } })
+  await prodInCart.update({ quantity: prodInCart.quantity - 1 })
 
-  let currentCart = array.map(async product => {
-    let prods = await Product.findByPk(product.dataValues.productId);
+  const prodsInCartIds = await Product_cart.findAll({ where: { cartId: cart.id } })
+  const frontCart = prodsInCartIds.map(async prodId => {
+    let product = await Product.findByPk(prodId.productId)
 
-    prods.dataValues.quantity = product.dataValues.quantity;
+    product.dataValues.quantity = prodId.dataValues.quantity
 
-    return prods.dataValues;
-  });
+    return product.dataValues;
+  })
 
-  const frontCart = await Promise.all(currentCart);
-  res.send(frontCart);
+  const a = await Promise.all(frontCart);
+  res.send(a);
 });
 
-router.post("/", async function(req, res, next) {
+router.post("/", async function (req, res, next) {
   const cart = await Cart.findOne({
     where: { CurrentUserCartId: req.user.id }
   });
@@ -72,7 +70,7 @@ router.post("/", async function(req, res, next) {
   res.send(frontCart);
 });
 
-router.get("/me", async function(req, res, next) {
+router.get("/me", async function (req, res, next) {
   const cart = await Cart.findOne({
     where: { CurrentUserCartId: req.user.id }
   });

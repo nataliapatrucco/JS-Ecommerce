@@ -64427,7 +64427,7 @@ var fetchAndAddToCart = function fetchAndAddToCart(product, user) {
 var fetchAndSubstractFromCart = function fetchAndSubstractFromCart(product, user) {
   return function (dispatch) {
     if (user.name) {
-      return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart", product).then(function (res) {
+      return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart/substract", product).then(function (res) {
         return res.data;
       }).then(function (cart) {
         return dispatch(setCart(cart));
@@ -64445,7 +64445,7 @@ var fetchAndSubstractFromCart = function fetchAndSubstractFromCart(product, user
 var fetchAndRemoveFromCart = function fetchAndRemoveFromCart(product, user) {
   return function (dispatch) {
     if (user.name) {
-      return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart", product).then(function (res) {
+      return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart/remove", product).then(function (res) {
         return res.data;
       }).then(function (cart) {
         return dispatch(setCart(cart));

@@ -53,7 +53,7 @@ export const fetchAndAddToCart = (product, user) => dispatch => {
 export const fetchAndSubstractFromCart = (product, user) => dispatch => {
   if (user.name) {
     return axios
-      .post("/api/cart", product)
+      .post("/api/cart/substract", product)
       .then(res => res.data)
       .then(cart => dispatch(setCart(cart)));
   }
@@ -74,7 +74,7 @@ export const fetchAndSubstractFromCart = (product, user) => dispatch => {
 export const fetchAndRemoveFromCart = (product, user) => dispatch => {
   if (user.name) {
     return axios
-      .post("/api/cart", product)
+      .post("/api/cart/remove", product)
       .then(res => res.data)
       .then(cart => dispatch(setCart(cart)));
   }
