@@ -70,6 +70,11 @@ button {
   color: #a86b6b;
 }
 
+#imgOrder{
+  height: 20%;
+  width: 20%;
+}
+
 .modal-title {
   color: #a86b6b;
 }

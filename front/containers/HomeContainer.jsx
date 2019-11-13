@@ -28,7 +28,8 @@ export class HomeContainers extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.history.push(`/${this.state.searchQuery}`);
+    // this.props.searchProducts(this.state.searchQuery);
+    this.props.history.push(`/search/${this.state.searchQuery}`);
   }
 
   handleAdd(product) {

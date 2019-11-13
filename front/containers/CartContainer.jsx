@@ -28,7 +28,6 @@ class CartContainer extends C {
   }
 
   quantSubOne(product) {
-    console.log("!!!!!!!!!!!!!!!!", product);
     this.props.fetchAndSubstractFromCart(product, this.props.user);
   }
 

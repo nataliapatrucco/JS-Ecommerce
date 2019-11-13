@@ -9,7 +9,7 @@ class SingleProductContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: []
+      reviews: ['no reviews loaded']
     };
     this.getReviews = this.getReviews.bind(this);
     this.addProduct = this.addProduct.bind(this);
@@ -19,7 +19,7 @@ class SingleProductContainer extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.selectedProduct && this.state.reviews.length === 0)
+    if (this.props.selectedProduct && this.state.reviews[0] === 'no reviews loaded')
       this.getReviews();
   }
 
@@ -33,8 +33,6 @@ class SingleProductContainer extends React.Component {
         });
       });
   }
-
-  //YO
 
   addProduct(product) {
     this.props.fetchAndAddToCart(product, this.props.user);

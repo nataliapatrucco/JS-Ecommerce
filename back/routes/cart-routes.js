@@ -3,7 +3,6 @@ const Product_Cart = require("sequelize");
 const router = express.Router();
 const { Cart, Product, User, Product_cart } = require("../models");
 
-
 router.post("/remove", async function (req, res, next) {
   const cart = await Cart.findOne({
     where: { CurrentUserCartId: req.user.id }
@@ -24,33 +23,35 @@ router.post("/remove", async function (req, res, next) {
   res.send(culo)
 });
 
-router.post("/substract", async function (req, res, next) {
-  const cart = await Cart.findOne({
-    where: { CurrentUserCartId: req.user.id }
-  })
+// router.post("/substract", async function (req, res, next) {
+//   const cart = await Cart.findOne({
+//     where: { CurrentUserCartId: req.user.id }
+//   })
 
-  const prodInCart = await Product_cart.findOne({ where: { productId: req.body.id, cartId: cart.id } })
-  await prodInCart.update({ quantity: prodInCart.quantity - 1 })
+//   const prodInCart = await Product_cart.findOne({ where: { productId: req.body.id, cartId: cart.id } })
+//   await prodInCart.update({ quantity: prodInCart.quantity - 1 })
 
-  const prodsInCartIds = await Product_cart.findAll({ where: { cartId: cart.id } })
-  const frontCart = prodsInCartIds.map(async prodId => {
-    let product = await Product.findByPk(prodId.productId)
+//   const prodsInCartIds = await Product_cart.findAll({ where: { cartId: cart.id } })
+//   const frontCart = prodsInCartIds.map(async prodId => {
+//     let product = await Product.findByPk(prodId.productId)
 
-    product.dataValues.quantity = prodId.dataValues.quantity
+//     product.dataValues.quantity = prodId.dataValues.quantity
 
-    return product.dataValues;
-  })
+//     return product.dataValues;
+//   })
 
-  const a = await Promise.all(frontCart);
-  res.send(a);
-});
+//   const a = await Promise.all(frontCart);
+//   res.send(a);
+// });
 
 router.post("/", async function (req, res, next) {
   const cart = await Cart.findOne({
     where: { CurrentUserCartId: req.user.id }
   });
 
-  const onlyWaitProdToAdd = await cart.addProduct(req.body.id);
+  console.log("CART",cart)
+
+   await cart.addProduct(req.body.id);
 
   const product_cart = await Product_cart.findOne({
     where: { cartId: cart.id, productId: req.body.id }
@@ -70,27 +71,88 @@ router.post("/", async function (req, res, next) {
   res.send(frontCart);
 });
 
-router.get("/me", async function (req, res, next) {
-  const cart = await Cart.findOne({
-    where: { CurrentUserCartId: req.user.id }
+router.post("/addQuantity/", function(req, res) {
+  Cart.findOne({
+    where: { CurrentUserCartId: req.user.id },
+    include: [{ model: Product }]
+  }).then(cart => {
+    let foundProduct = cart.products.find((product)=>{
+      return product.dataValues.id === req.body.id
+    })
+    foundProduct.product_cart.update({ quantity: foundProduct.product_cart.quantity + 1 }).then(()=>{
+      Cart.findOne({
+        where: { CurrentUserCartId: req.user.id },
+        include: [{ model: Product }]
+      }).then(cart=>{
+        cart.products.forEach((product)=>{
+          product.dataValues.quantity = product.product_cart.quantity;
+        })
+        console.log("CartProducts", cart.products)
+        res.send(cart.products)
+      })
+    })
   });
-  const product_cartUser = await Product_cart.findAll({
-    where: { cartId: cart.id }
+})
+
+router.post("/subtractQuantity/", function(req, res) {
+  console.log("YO")
+  Cart.findOne({
+    where: { CurrentUserCartId: req.user.id },
+    include: [{ model: Product }]
+  }).then(cart => {
+    let foundProduct = cart.products.find((product)=>{
+      return product.dataValues.id === req.body.id
+    })
+    foundProduct.product_cart.update({ quantity: foundProduct.product_cart.quantity - 1 }).then(()=>{
+      Cart.findOne({
+        where: { CurrentUserCartId: req.user.id },
+        include: [{ model: Product }]
+      }).then(cart=>{
+        cart.products.forEach((product)=>{
+          product.dataValues.quantity = product.product_cart.quantity;
+        })
+        console.log("CartProductsSUBS-----", cart.products)
+        res.send(cart.products)
+      })
+    })
   });
-  const productsToSendPending = await Promise.all(product_cartUser);
-  let productsToSendResolved = [];
-  if (productsToSendPending.length) {
-    productsToSendResolved = productsToSendPending.map(async product => {
-      let perfectProduct = await Product.findByPk(product.dataValues.productId);
-      perfectProduct.dataValues.quantity = product.dataValues.quantity;
-      return perfectProduct;
-    });
-  }
+})
 
-  let kk = await Promise.all(productsToSendResolved);
+// router.get("/me", async function (req, res, next) {
+//   const cart = await Cart.findOne({
+//     where: { CurrentUserCartId: req.user.id }
+//   });
+//   const product_cartUser = await Product_cart.findAll({
+//     where: { cartId: cart.id }
+//   });
+//   const productsToSendPending = await Promise.all(product_cartUser);
+//   let productsToSendResolved = [];
+//   if (productsToSendPending.length) {
+//     productsToSendResolved = productsToSendPending.map(async product => {
+//       let perfectProduct = await Product.findByPk(product.dataValues.productId);
+//       perfectProduct.dataValues.quantity = product.dataValues.quantity;
+//       return perfectProduct;
+//     });
+//   }
 
-  res.send(kk);
-});
+//   let kk = await Promise.all(productsToSendResolved);
+
+//   res.send(kk);
+// });
+
+
+router.get("/me", function(req,res,next) {
+  Cart.findOne({
+    where: { CurrentUserCartId: req.user.id },
+    include: [{ model: Product }]
+  }).then(cart=>{
+    cart.products.forEach((product)=>{
+      product.dataValues.quantity = product.product_cart.quantity;
+    })
+    //console.log("CartProductsSUBS-----", cart.products)
+    res.send(cart.products)
+  })
+})
 
 //move current cart to history
 
