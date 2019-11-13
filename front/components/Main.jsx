@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Switch, Route as R, Redirect } from "react-router-dom";
+import { Switch, Route as R } from "react-router-dom";
 
 import { fetchUser } from "../store/actions/user";
 import { fetchCart } from "../store/actions/cart";

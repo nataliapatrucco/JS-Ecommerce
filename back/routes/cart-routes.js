@@ -58,9 +58,7 @@ router.post("/", async function(req, res, next) {
     where: { cartId: cart.id, productId: req.body.id }
   });
 
-  const waitProdToUpdate = await product_cart.update({
-    quantity: product_cart.quantity + 1
-  });
+  await product_cart.update({ quantity: product_cart.quantity + 1 });
 
   const array = await Product_cart.findAll({ where: { cartId: cart.id } });
 

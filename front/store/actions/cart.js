@@ -14,108 +14,38 @@ export const logOutCart = () => ({
 export const userLogOutCart = () => dispatch => {
   dispatch(logOutCart());
 };
-//TODO:
-export const fetchAndRemoveFromCart = (product, user) => dispatch => {
-  if (user.name) {
-    axios
-      .post("/api/cart/remove", product)
-      .then(res => res.data)
-      .then(cart => {
-        dispatch(setCart(cart));
-      });
-  } else {
-    let newCartObj = {};
-    let windowCart = window.localStorage;
 
-    Object.keys(windowCart).map(key => {
-      if (key !== product.id) newCartObj[key] = JSON.parse(windowCart[key]);
-    });
-  }
-};
-
-export const fetchCart = (user, cart) => dispatch => {
-  if (user.name) {
-    axios
+export const fetchCart = user => dispatch => {
+  if (user.name)
+    return axios
       .get("/api/cart/me")
       .then(res => res.data)
       .then(cart => dispatch(setCart(cart)));
-  } else {
-    console.log("aodifnasiopgpiafsg");
-    let values = [];
-    let keys = Object.keys(window.localStorage);
-    let i = keys.length;
-    while (i--) {
-      values.push(JSON.parse(window.localStorage.getItem(keys[i])));
-    }
 
-    dispatch(setCart(values));
-  }
-};
-
-export const fetchAndSubstractFromCart = (product, user) => dispatch => {
-  if (user.name) {
-    axios
-      .post("/api/cart/substract", product)
-      .then(res => res.data)
-      .then(cart => {
-        dispatch(setCart(cart));
-      });
-  } else {
-    if (window.localStorage.getItem(product.id)) {
-      let productToSubFrom = JSON.parse(
-        window.localStorage.getItem(product.id)
-      );
-
-      productToSubFrom.quantity = productToSubFrom.quantity - 1;
-
-      window.localStorage.setItem(
-        productToSubFrom.id,
-        JSON.stringify(productToSubFrom)
-      );
-    }
-
-    let values = [];
-    let keys = Object.keys(window.localStorage);
-    let i = keys.length;
-    while (i--) {
-      values.push(JSON.parse(window.localStorage.getItem(keys[i])));
-    }
-
-    dispatch(setCart(values));
-  }
+  return dispatch(
+    setCart(Object.values(window.localStorage).map(item => JSON.parse(item)))
+  );
 };
 
 export const fetchAndAddToCart = (product, user) => dispatch => {
-  console.log("hwewewewewewewewewew");
-
   if (user.name) {
-    axios
+    return axios
       .post("/api/cart", product)
       .then(res => res.data)
-      .then(cart => {
-        console.log(cart);
-        dispatch(setCart(cart));
-      });
-  } else {
-    if (window.localStorage.getItem(product.id)) {
-      let addedProduct = JSON.parse(window.localStorage.getItem(product.id));
-      addedProduct.quantity = addedProduct.quantity + 1;
-      window.localStorage.setItem(
-        addedProduct.id,
-        JSON.stringify(addedProduct)
-      );
-    } else {
-      product.quantity = 1;
-      window.localStorage.setItem(product.id, JSON.stringify(product));
-    }
-
-    let values = [];
-    let keys = Object.keys(window.localStorage);
-    let i = keys.length;
-    while (i--) {
-      values.push(JSON.parse(window.localStorage.getItem(keys[i])));
-    }
-
-    dispatch(setCart(values));
+      .then(cart => dispatch(setCart(cart)));
   }
+
+  if (!window.localStorage.getItem(product.id)) {
+    product.quantity = 0;
+    window.localStorage.setItem(product.id, JSON.stringify(product));
+  }
+
+  let addToThis = JSON.parse(window.localStorage.getItem(product.id));
+  addToThis.quantity = addToThis.quantity + 1;
+
+  window.localStorage.setItem(addToThis.id, JSON.stringify(addToThis));
+
+  dispatch(
+    setCart(Object.values(window.localStorage).map(item => JSON.parse(item)))
+  );
 };

@@ -192,8 +192,9 @@ __webpack_require__.r(__webpack_exports__);
 
 function CategorySidebar(_ref) {
   var selectFilter = _ref.selectFilter,
-      filterCategories = _ref.filterCategories;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      filterCategories = _ref.filterCategories,
+      products = _ref.products;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, products.length == 0 ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "wrapper"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     id: "sidebar"
@@ -436,7 +437,13 @@ function Navbar(props) {
     className: "navbar-toggler",
     type: "button",
     id: "logoutButton"
-  }, _defineProperty(_React$createElement, "className", "btn btn-light"), _defineProperty(_React$createElement, "onClick", handleLogOut), _React$createElement), "LOG OUT")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, _defineProperty(_React$createElement, "className", "btn btn-light"), _defineProperty(_React$createElement, "onClick", handleLogOut), _React$createElement), "LOG OUT"), location.pathname === "/" ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    to: "/"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "brandLogoMiniDiv"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "brandLogoMini"
+  }, "JS"))))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn btn-light",
     "data-toggle": "modal",
@@ -603,9 +610,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function RandomView(_ref) {
   var products = _ref.products,
-      handleSelect = _ref.handleSelect,
-      handleAdd = _ref.handleAdd,
-      selectedProduct = _ref.selectedProduct;
+      handleAdd = _ref.handleAdd;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "randomViewContainer"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, products.map(function (product) {
@@ -637,13 +642,12 @@ function RandomView(_ref) {
       id: "plusBtn",
       className: "btn btn-light"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ti__WEBPACK_IMPORTED_MODULE_4__["TiPlus"], null), " info")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: function onClick(id) {
-        handleSelect(product.id);
-        handleAdd();
+      onClick: function onClick() {
+        return handleAdd(product);
       },
       className: "btn btn-light",
       id: "cartBtn"
-    }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_5__["AiOutlineShoppingCart"], null))));
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_5__["AiOutlineShoppingCart"], null))));
   })));
 }
 
@@ -733,14 +737,15 @@ __webpack_require__.r(__webpack_exports__);
 
 function SearchResults(_ref) {
   var catFilter = _ref.catFilter,
-      products = _ref.products;
+      products = _ref.products,
+      searchQuery = _ref.searchQuery;
   var filteredProducts = products;
   catFilter ? filteredProducts = products.filter(function (product) {
     return product.category.includes(catFilter);
   }) : null;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "randomViewContainer"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, filteredProducts.map(function (product) {
+  }, products.length != 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, filteredProducts.map(function (product) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
       className: "card text-center",
       id: "productCard",
@@ -769,7 +774,7 @@ function SearchResults(_ref) {
       id: "plusBtn",
       className: "btn btn-light"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ti__WEBPACK_IMPORTED_MODULE_4__["TiPlus"], null), " info"))));
-  })));
+  })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "UNFORTUNATELY WE DON'T GET RESULTS FOR YOUR SEARCH: ", searchQuery, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Please try again!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Tips for your search: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Check your spelling in case you had typing errors, for example \"Palangana\" instead of \"Pants.\""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Try again, looking for only one word."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Try again, looking for more generic terms - you can filter the results later."))));
 }
 
 /***/ }),
@@ -1017,12 +1022,11 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HomeContainers).call(this, props));
     _this.state = {
-      searchQuery: ""
+      searchQuery: ''
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleAdd = _this.handleAdd.bind(_assertThisInitialized(_this));
-    _this.handleSelect = _this.handleSelect.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1041,19 +1045,13 @@ function (_Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault(); // this.props.searchProducts(this.state.searchQuery);
-
+      e.preventDefault();
       this.props.history.push("/".concat(this.state.searchQuery));
     }
   }, {
-    key: "handleSelect",
-    value: function handleSelect(id) {
-      this.props.fetchProduct(id);
-    }
-  }, {
     key: "handleAdd",
-    value: function handleAdd() {
-      this.props.fetchAndAddToCart(this.props.selectedProduct, this.props.user);
+    value: function handleAdd(product) {
+      this.props.fetchAndAddToCart(product, this.props.user);
     }
   }, {
     key: "render",
@@ -1062,8 +1060,6 @@ function (_Component) {
         handleSubmit: this.handleSubmit,
         handleChange: this.handleChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_RandomView__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        selectedProduct: this.props.selectedProduct,
-        handleSelect: this.handleSelect,
         handleAdd: this.handleAdd,
         products: this.props.products
       }));
@@ -1316,9 +1312,11 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CategorySidebar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        products: this.props.products,
         selectFilter: this.selectFilter,
         filterCategories: this.filteredCategories()
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchResults__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        searchQuery: this.props.searchQuery,
         catFilter: this.state.catFilter,
         products: this.props.products
       }));
@@ -56675,7 +56673,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64409,26 +64407,16 @@ var fetchAndRemoveFromCart = function fetchAndRemoveFromCart(product, user) {
     }
   };
 };
-var fetchCart = function fetchCart(user, cart) {
+var fetchCart = function fetchCart(user) {
   return function (dispatch) {
-    if (user.name) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/cart/me").then(function (res) {
-        return res.data;
-      }).then(function (cart) {
-        return dispatch(setCart(cart));
-      });
-    } else {
-      console.log("aodifnasiopgpiafsg");
-      var values = [];
-      var keys = Object.keys(window.localStorage);
-      var i = keys.length;
-
-      while (i--) {
-        values.push(JSON.parse(window.localStorage.getItem(keys[i])));
-      }
-
-      dispatch(setCart(values));
-    }
+    if (user.name) return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/cart/me').then(function (res) {
+      return res.data;
+    }).then(function (cart) {
+      return dispatch(setCart(cart));
+    });
+    return dispatch(setCart(Object.values(window.localStorage).map(function (item) {
+      return JSON.parse(item);
+    })));
   };
 };
 var fetchAndSubstractFromCart = function fetchAndSubstractFromCart(product, user) {
@@ -64463,32 +64451,24 @@ var fetchAndAddToCart = function fetchAndAddToCart(product, user) {
     console.log("hwewewewewewewewewew");
 
     if (user.name) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart", product).then(function (res) {
+      return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/cart', product).then(function (res) {
         return res.data;
       }).then(function (cart) {
-        console.log(cart);
-        dispatch(setCart(cart));
+        return dispatch(setCart(cart));
       });
-    } else {
-      if (window.localStorage.getItem(product.id)) {
-        var addedProduct = JSON.parse(window.localStorage.getItem(product.id));
-        addedProduct.quantity = addedProduct.quantity + 1;
-        window.localStorage.setItem(addedProduct.id, JSON.stringify(addedProduct));
-      } else {
-        product.quantity = 1;
-        window.localStorage.setItem(product.id, JSON.stringify(product));
-      }
-
-      var values = [];
-      var keys = Object.keys(window.localStorage);
-      var i = keys.length;
-
-      while (i--) {
-        values.push(JSON.parse(window.localStorage.getItem(keys[i])));
-      }
-
-      dispatch(setCart(values));
     }
+
+    if (!window.localStorage.getItem(product.id)) {
+      product.quantity = 0;
+      window.localStorage.setItem(product.id, JSON.stringify(product));
+    }
+
+    var addToThis = JSON.parse(window.localStorage.getItem(product.id));
+    addToThis.quantity = addToThis.quantity + 1;
+    window.localStorage.setItem(addToThis.id, JSON.stringify(addToThis));
+    dispatch(setCart(Object.values(window.localStorage).map(function (item) {
+      return JSON.parse(item);
+    })));
   };
 };
 
