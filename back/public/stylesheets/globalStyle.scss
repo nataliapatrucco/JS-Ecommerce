@@ -53,8 +53,19 @@ body {
 
 .cartItemContainer {
   background-color: rgba(233, 232, 231, 0.65);
-  margin: 7% 0% 10% 17%;
-  max-width: 58vw;
+  // margin: 7% 0% 10% 17%;
+  max-width: 40vw;
+
+  border: black 100px solid;
+}
+
+#totalContainer {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  background-color: black;
+  width: 100px;
+  height: 300px;
 }
 
 .singleItemInCart {
@@ -90,6 +101,7 @@ body {
 #alterQuant {
   padding: 6px;
   border: 2px solid #a35963;
+  background-color: #fff;
 }
 
 #alterQuant button {
@@ -111,4 +123,8 @@ body {
   background-color: red;
   width: 30px;
   height: 30px;
+}
+
+.checkoutDiv {
+  border: black 5px solid !important;
 }

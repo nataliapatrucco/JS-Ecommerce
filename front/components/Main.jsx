@@ -47,7 +47,7 @@ class Main extends Component {
           />
           <R exact path="/" component={HomeContainer} />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

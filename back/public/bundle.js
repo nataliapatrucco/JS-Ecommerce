@@ -109,7 +109,7 @@ function AlterQuantButton(_ref) {
     id: "alterQuant"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick() {
-      return quantSubOne(product);
+      return quantity > 1 ? quantSubOne(product) : quantRemove(product);
     }
   }, "-"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "inblockLetter"
@@ -143,13 +143,16 @@ function Cart(_ref) {
       quantSubOne = _ref.quantSubOne,
       quantRemove = _ref.quantRemove;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "cartItemContainer"
+    className: "row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-8"
   }, cart && cart.map(function (cartItem) {
     var name = cartItem.name,
         price = cartItem.price,
         id = cartItem.id,
         image = cartItem.image,
         quantity = cartItem.quantity;
+    console.log('PRICEEEEEEEEEEEE', price);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "singleItemInCart",
       key: "".concat(cartItem, "_").concat(id)
@@ -169,10 +172,21 @@ function Cart(_ref) {
       onClick: function onClick() {
         return quantRemove(cartItem);
       }
-    })));
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "cosa"
-  }));
+    }), price ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "subtotal: $ ", typeof price === 'string' ? parseInt(price.slice(1)) * quantity : price * quantity) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading...")));
+  })), Object.keys(cart).length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "checkoutDiv col-4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "TOTAL $", cart.map(function (cartItem) {
+    return typeof cartItem.price === 'string' ? parseInt(cartItem.price.slice(1)) * cartItem.quantity : cartItem.price * cartItem.quantity;
+  }).reduce(function (total, nextItem) {
+    return total + nextItem;
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-light",
+    onClick: function onClick() {
+      alert('Please Log in');
+      document.querySelector("#loginButton").click();
+    }
+  }, "checkout")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading..."));
 }
 
 /***/ }),
@@ -377,7 +391,7 @@ function (_Component) {
         exact: true,
         path: "/",
         component: _containers_HomeContainer__WEBPACK_IMPORTED_MODULE_6__["default"]
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Footer__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+      })));
     }
   }]);
 
@@ -908,15 +922,12 @@ function (_C) {
     _classCallCheck(this, CartContainer);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CartContainer).call(this, props));
+    _this.state = {};
     _this.quantAddOne = _this.quantAddOne.bind(_assertThisInitialized(_this));
     _this.quantSubOne = _this.quantSubOne.bind(_assertThisInitialized(_this));
     _this.quantRemove = _this.quantRemove.bind(_assertThisInitialized(_this));
     return _this;
-  } // componentDidMount() {
-  //  //refresh cart
-  //  this.props.fetchCart();
-  // }
-
+  }
 
   _createClass(CartContainer, [{
     key: "quantAddOne",
@@ -926,7 +937,6 @@ function (_C) {
   }, {
     key: "quantSubOne",
     value: function quantSubOne(product) {
-      console.log("!!!!!!!!!!!!!!!!", product);
       this.props.fetchAndSubstractFromCart(product, this.props.user);
     }
   }, {
@@ -938,7 +948,9 @@ function (_C) {
     key: "render",
     value: function render() {
       var cart = this.props.cart;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Cart__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Cart__WEBPACK_IMPORTED_MODULE_2__["default"], {
         cart: cart,
         quantAddOne: this.quantAddOne,
         quantSubOne: this.quantSubOne,
