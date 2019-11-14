@@ -206,10 +206,12 @@ export default function Navbar(props) {
         )}
         <div>
           {Object.keys(user).length ? (
-            <Link to="/user/id">
+            <Link to="/user/">
               <span id="helloUser">Hello {user.name}</span>
             </Link>
-          ) : null}
+          ) : (
+            ""
+          )}
 
           {/* code for adding searchbar to navbar */}
 

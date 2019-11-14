@@ -3,12 +3,12 @@ const Product = require("./Product");
 const Review = require("./Review");
 const User = require("./User");
 const Category = require("./Category");
+const Product_cart = require("./Product_cart");
 
 Category.belongsToMany(Product, { as: "Product", through: "Product_Category" });
 Product.belongsToMany(Category, {
   through: "Product_Category"
 });
-const Product_cart = require("./Product_cart");
 
 Cart.belongsToMany(Product, {
   through: "product_cart"

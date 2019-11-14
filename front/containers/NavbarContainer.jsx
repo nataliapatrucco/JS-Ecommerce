@@ -41,7 +41,7 @@ class NavbarContainer extends Component {
     this.props.userLogOut();
     this.props.userLogOutCart();
     window.localStorage.clear();
-    //.then(() => this.props.history.push("/"));
+    this.props.history.push("/");
   }
   handleLogIn(event) {
     event.preventDefault();

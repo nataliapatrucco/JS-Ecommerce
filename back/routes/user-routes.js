@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { User, Review, Cart, Product, Product_cart } = require("../models");
+const { User, Cart, Product, Product_cart, Review } = require("../models");
 const passportConfig = require("../config/passport");
 
 //login
@@ -118,6 +118,7 @@ router.put("/allMyInfo", (req, res, next) => {
 });
 
 router.get("/allMyInfo", (req, res, next) => {
+ 
   User.findOne({
     where: { name: req.user.name },
     include: [
@@ -139,6 +140,7 @@ router.get("/allMyInfo", (req, res, next) => {
       }
     ]
   }).then(user => {
+    
     res.send(user);
   });
 });
