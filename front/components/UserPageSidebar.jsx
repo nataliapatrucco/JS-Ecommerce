@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default ({ user, address, pastOrders, reviews }) => {
+  console.log("PastOrders", pastOrders)
   return (
     <div className="col-4">
       <hr />

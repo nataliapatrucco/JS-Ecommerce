@@ -84,8 +84,7 @@ router.get("/me", function(req, res) {
 });
 
 router.get("/allMyInfo", (req, res, next) => {
-  console.log("HOLA")
-  console.log(req.user)
+ 
   User.findOne({
     where: { name: req.user.name },
     include: [
@@ -107,7 +106,7 @@ router.get("/allMyInfo", (req, res, next) => {
       }
     ]
   }).then(user => {
-    console.log("BACKUSER", user)
+    
     res.send(user);
   });
 });

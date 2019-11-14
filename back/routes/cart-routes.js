@@ -49,8 +49,6 @@ router.post("/", async function (req, res, next) {
     where: { CurrentUserCartId: req.user.id }
   });
 
-  console.log("CART",cart)
-
    await cart.addProduct(req.body.id);
 
   const product_cart = await Product_cart.findOne({
@@ -87,7 +85,6 @@ router.post("/addQuantity/", function(req, res) {
         cart.products.forEach((product)=>{
           product.dataValues.quantity = product.product_cart.quantity;
         })
-        console.log("CartProducts", cart.products)
         res.send(cart.products)
       })
     })
@@ -95,7 +92,6 @@ router.post("/addQuantity/", function(req, res) {
 })
 
 router.post("/subtractQuantity/", function(req, res) {
-  console.log("YO")
   Cart.findOne({
     where: { CurrentUserCartId: req.user.id },
     include: [{ model: Product }]
@@ -111,7 +107,7 @@ router.post("/subtractQuantity/", function(req, res) {
         cart.products.forEach((product)=>{
           product.dataValues.quantity = product.product_cart.quantity;
         })
-        console.log("CartProductsSUBS-----", cart.products)
+        
         res.send(cart.products)
       })
     })
@@ -149,7 +145,7 @@ router.get("/me", function(req,res,next) {
     cart.products.forEach((product)=>{
       product.dataValues.quantity = product.product_cart.quantity;
     })
-    //console.log("CartProductsSUBS-----", cart.products)
+    
     res.send(cart.products)
   })
 })

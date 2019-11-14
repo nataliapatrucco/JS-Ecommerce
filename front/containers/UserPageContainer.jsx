@@ -12,7 +12,7 @@ class UserPageContainer extends Component {
     super(props);
 
     this.state = {
-      userReviews: {},
+      userReviews: [],
       address: "",
       newAddress: "",
       pastOrders: [],
@@ -23,6 +23,8 @@ class UserPageContainer extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.userRender = this.userRender.bind(this);
     this.fetchPastOrder = this.fetchPastOrder.bind(this);
+    this.handleReviewSubmit = this.handleReviewSubmit.bind(this);
+    
   }
 
   fetchPastOrder() {
@@ -34,24 +36,29 @@ class UserPageContainer extends Component {
         order.total = order.products.reduce((accum, product)=>{
             return accum + (parseInt(product.price.slice(1)) * product.product_cart.quantity)
         }, 0)
-
         this.setState({ pastOrder: order });
-
       }
     });
   }
 
+  handleReviewSubmit(e) {
+    e.preventDefault();
+      axios.post("/api/review/",{rating: e.target[0].value, comment: e.target[1].value, productId: e.target[2].value}).then(res=>res.data).then(()=> {
+       axios.get("/api/review/user").then(res=>res.data).then(reviews=>{
+        this.setState({userReviews: reviews})
+       })
+      })
+  }
+
   componentDidMount() {
-    console.log("componentDidMount");
     axios
       .get("/api/user/allMyInfo")
       .then(res => res.data)
       .then(user => {
-
         this.setState({
           userReviews: user.reviews || [],
           address: user.address || "",
-          pastOrders: user.pastOrders || [],
+          pastOrders: user.pastOrder || [],
           user: user
         });
       });
@@ -90,13 +97,18 @@ class UserPageContainer extends Component {
           this.state.pastOrder.id !== parseInt(this.props.orderId)
         )
           this.fetchPastOrder();          ///give warning that the state is changing within render
-        return <PastOrder pastOrder={this.state.pastOrder} />;
+        return <PastOrder 
+        userReviews = {this.state.userReviews}
+        handleReviewSubmit = {this.handleReviewSubmit}
+        pastOrder={this.state.pastOrder} 
+        />;
       default:
         return <UserHomePage />;
     }
   }
 
   render() {
+    console.log("USERCONTAINER STATE", this.state)
     return (
       <div className="container">
         <div className="row">
