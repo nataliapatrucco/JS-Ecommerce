@@ -62,7 +62,7 @@ router.post("/create", function(req, res, next) {
     })
     .catch(err => res.sendStatus(500));
 });
-
+// hola!!
 router.delete("/:user", async function(req, res, next) {
   User.destroy({ where: { id: req.params.user } })
     .then(() => {
