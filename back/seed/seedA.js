@@ -3,46 +3,57 @@ const S = require("sequelize")
 const Op = S.Op
 
 // Adding relations
-    Category.findOne({where: {categoryName: "pants"}}).then((category => {
-      Product.findAll({where: {category: {[Op.contains]: ['pants'] }}}).then(products =>{
-        category.setProduct(products);
-      })
-    }))
+Category.findOne({ where: { categoryName: "pants" } }).then(category => {
+  Product.findAll({ where: { category: { [Op.contains]: ["pants"] } } }).then(
+    products => {
+      category.setProduct(products);
+    }
+  );
+});
 
-    Category.findOne({where: {categoryName: "shirts"}}).then((category => {
-      Product.findAll({where: {category: {[Op.contains]: ['shirts'] }}}).then(products =>{
-        category.setProduct(products);
-      })
-    }))
+Category.findOne({ where: { categoryName: "shirts" } }).then(category => {
+  Product.findAll({ where: { category: { [Op.contains]: ["shirts"] } } }).then(
+    products => {
+      category.setProduct(products);
+    }
+  );
+});
 
-    Category.findOne({where: {categoryName: "dresses"}}).then((category => {
-      Product.findAll({where: {category: {[Op.contains]: ['dresses'] }}}).then(products =>{
-        category.setProduct(products);
-      })
-    }))
+Category.findOne({ where: { categoryName: "dresses" } }).then(category => {
+  Product.findAll({ where: { category: { [Op.contains]: ["dresses"] } } }).then(
+    products => {
+      category.setProduct(products);
+    }
+  );
+});
 
-    Category.findOne({where: {categoryName: "black"}}).then((category => {
-      Product.findAll({where: {category: {[Op.contains]: ['black'] }}}).then(products =>{
-        category.setProduct(products);
-      })
-    }))
+Category.findOne({ where: { categoryName: "black" } }).then(category => {
+  Product.findAll({ where: { category: { [Op.contains]: ["black"] } } }).then(
+    products => {
+      category.setProduct(products);
+    }
+  );
+});
 
-    Category.findOne({where: {categoryName: "red"}}).then((category => {
-      Product.findAll({where: {category: {[Op.contains]: ['red'] }}}).then(products =>{
-        category.setProduct(products);
-      })
-    }))
+Category.findOne({ where: { categoryName: "red" } }).then(category => {
+  Product.findAll({ where: { category: { [Op.contains]: ["red"] } } }).then(
+    products => {
+      category.setProduct(products);
+    }
+  );
+});
 
-    Category.findOne({where: {categoryName: "blue"}}).then((category => {
-      Product.findAll({where: {category: {[Op.contains]: ['blue'] }}}).then(products =>{
-        category.setProduct(products);
-      })
-    }))
+Category.findOne({ where: { categoryName: "blue" } }).then(category => {
+  Product.findAll({ where: { category: { [Op.contains]: ["blue"] } } }).then(
+    products => {
+      category.setProduct(products);
+    }
+  );
+});
 
-    /* 
+/* 
     
     magic methods of category:
-
     getProduct: [Function]
     countProduct: [Function]
     hasProduct: [Function]
@@ -50,30 +61,27 @@ const Op = S.Op
     addProduct: [Function]
     removeProduct: [Function]
     createProduct: [Function] 
-
     */
 
+//  Product.findOne({where:{name: 'black shirt'}}).then(product=>{
+//   product.createReview({rating: 5, comment: "Very Nice"});
+//   product.createReview({rating: 8, comment: "Amazing!!"});
+// })
+// Product.findOne({where:{name: 'blue shirt'}}).then(product=>{
+//   product.createReview({rating: 3, comment: "Very Nice"});
+//   product.createReview({rating: 8, comment: "Amazing!!"});
+// })
+// Product.findOne({where:{name: 'red pants'}}).then(product=>{
+//   product.createReview({rating: 5, comment: "Very Nice"});
+//   product.createReview({rating: 8, comment: "Amazing!!"});
+// })
+// Product.findOne({where:{name: 'black dress'}}).then(product=>{
+//   product.createReview({rating: 5, comment: "Very Nice"});
+//   product.createReview({rating: 8, comment: "Amazing!!"});
+// })
 
-  //  Product.findOne({where:{name: 'black shirt'}}).then(product=>{
-  //   product.createReview({rating: 5, comment: "Very Nice"});
-  //   product.createReview({rating: 8, comment: "Amazing!!"});
-  // })
-  // Product.findOne({where:{name: 'blue shirt'}}).then(product=>{
-  //   product.createReview({rating: 3, comment: "Very Nice"});
-  //   product.createReview({rating: 8, comment: "Amazing!!"});
-  // })
-  // Product.findOne({where:{name: 'red pants'}}).then(product=>{
-  //   product.createReview({rating: 5, comment: "Very Nice"});
-  //   product.createReview({rating: 8, comment: "Amazing!!"});
-  // })
-  // Product.findOne({where:{name: 'black dress'}}).then(product=>{
-  //   product.createReview({rating: 5, comment: "Very Nice"});
-  //   product.createReview({rating: 8, comment: "Amazing!!"});
-  // })
-     
 /*
 magic methods of Product
-
 getCategories: [Function],
 countCategories: [Function],
 hasCategory: [Function],
@@ -104,15 +112,14 @@ addReviews: [Function],
 removeReview: [Function],
 removeReviews: [Function],
 createReview: [Function] }
-
 */
 
 //console.log(User.prototype)
 
 /*
 
+/*
 User methods
-
  _isAttribute: [Function],
   hashPassword: [Function],
   randomSalt: [Function],
@@ -138,6 +145,20 @@ User methods
   removeReviews: [Function],
   createReview: [Function] 
 
+/*
+  console.log(Cart.prototype);
+  //Cart magic methods
+  _isAttribute: [Function],
+  getProducts: [Function],
+  countProducts: [Function],
+  hasProduct: [Function],
+  hasProducts: [Function],
+  setProducts: [Function],
+  addProduct: [Function],
+  addProducts: [Function],
+  removeProduct: [Function],
+  removeProducts: [Function],
+  createProduct: [Function] 
   */
 
 

@@ -81,9 +81,35 @@ Product.bulkCreate([
     return Product.findAll();
   })
   .then(products => {
-     console.log(products); // ... in order to get the array of user objects
+    console.log(products); // ... in order to get the array of user objects
   });
 
+Category.bulkCreate([
+  {
+    categoryName: "shirts"
+  },
+  {
+    categoryName: "pants"
+  },
+  {
+    categoryName: "dresses"
+  },
+  {
+    categoryName: "black"
+  },
+  {
+    categoryName: "red"
+  },
+  {
+    categoryName: "blue"
+  }
+])
+  .then(() => {
+    return Category.findAll();
+  })
+  .then(category => {
+    console.log(category); // ... in order to get the array of user objects
+  });
 
   Category.bulkCreate([
     {

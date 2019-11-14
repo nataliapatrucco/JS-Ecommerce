@@ -9,7 +9,10 @@ export default function AlterQuantButton({
 }) {
   return (
     <div id="alterQuant">
-      <button onClick={() => quantSubOne(product)}>-</button>
+      <button onClick={() => quantity > 1
+        ? quantSubOne(product)
+        : quantRemove(product)}>-</button>
+
       <span className="inblockLetter">{quantity}</span>
       <button onClick={() => quantAddOne(product)}>+</button>
     </div>

@@ -83,6 +83,40 @@ router.get("/me", function(req, res) {
   res.send(req.user);
 });
 
+router.put("/allMyInfo", (req, res, next) => {
+  User.findOne({
+    where: { name: req.user.name },
+    include: [
+      {
+        model: Cart,
+        required: false,
+        as: "CurrentUserCart",
+        include: [{ model: Product }]
+      },
+      { model: Review },
+      {
+        model: Cart,
+        required: false,
+        as: "pastOrder",
+        where: {
+          state: "completado"
+        },
+        include: [{ model: Product }]
+      }
+    ]
+  }).then(user => {
+    user.CurrentUserCart.update({ state: "completado" }).then(() =>
+      user
+        .addPastOrder(user.CurrentUserCart)
+        .then(() => {
+            Cart.create({name: new Date()}).then(cart=>{
+              user.setCurrentUserCart(cart)
+            })
+        })
+    );
+  });
+});
+
 router.get("/allMyInfo", (req, res, next) => {
  
   User.findOne({

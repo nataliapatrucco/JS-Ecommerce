@@ -13,15 +13,13 @@ import {
 class CartContainer extends C {
   constructor(props) {
     super(props);
+
+    this.state = {};
+
     this.quantAddOne = this.quantAddOne.bind(this);
     this.quantSubOne = this.quantSubOne.bind(this);
     this.quantRemove = this.quantRemove.bind(this);
   }
-
-  // componentDidMount() {
-  //  //refresh cart
-  //  this.props.fetchCart();
-  // }
 
   quantAddOne(product) {
     this.props.fetchAndAddToCart(product, this.props.user);
@@ -36,12 +34,14 @@ class CartContainer extends C {
   }
 
   render() {
-    const { cart } = this.props;
+    const { cart, user, history } = this.props;
 
     return (
-      <div>
+      <div className="container">
         <Cart
           cart={cart}
+          user={user}
+          history={history}
           quantAddOne={this.quantAddOne}
           quantSubOne={this.quantSubOne}
           quantRemove={this.quantRemove}
