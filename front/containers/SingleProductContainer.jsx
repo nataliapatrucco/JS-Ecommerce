@@ -54,8 +54,9 @@ class SingleProductContainer extends React.Component {
     updatedProduct.stock = this.state.stock || this.props.selectedProduct.stock;
 
     this.props.adminEditProduct(updatedProduct);
-    this.props.history.push(`/`);
     document.querySelector("#editCruz").click();
+
+    this.props.history.push(`/`);
   }
 
   handleChangeName(event) {

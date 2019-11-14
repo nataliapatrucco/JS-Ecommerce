@@ -1,26 +1,23 @@
-import React, { Component } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-export default ({ users, handleUpgrade, handleDowngrade }) => {
-  console.log("que rarrrroooooooooooo", users);
+export default ({ users, handleDownUp, handleDelete }) => {
   return (
     <div>
-      aofnadmofinadfoiadf
       {users.map(user => {
-        {
-          console.log(user);
-        }
         return (
           <div>
             <p>{user.name}</p>;
-            {user.userType === "admin" ? (
-              <button onClick={() => handleUpgrade(user)}>
-                Downgrade to User
+            <button id="auto_btn" onClick={() => handleDownUp(user)}>
+              {user.userType == "admin"
+                ? "Downgrade to User"
+                : "Upgrade to Admin"}
+            </button>
+            <Link to={`/admin/users/${user.id}`}>
+              <button id="auto_btn" onClick={() => handleDelete(user)}>
+                DELETE
               </button>
-            ) : (
-              <button onClick={() => handleDowngrade(user)}>
-                Upgrade to Admin
-              </button>
-            )}
+            </Link>
           </div>
         );
       })}

@@ -10,3 +10,4 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const CHECK_IS_HOME = "CHECK_IS_HOME";
 export const SET_CART = "SET_CART";
 export const LOG_OUT_CART = "LOG_OUT_CART";
+export const USERS = "USERS";

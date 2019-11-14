@@ -51,7 +51,7 @@ export default ({
                     </small>
                   </li>
                   <li className="list-group-item">
-                    <strong>Product SOY ADMIN Reviews:</strong>
+                    <strong>Product Reviews:</strong>
                     {reviews.map(review => {
                       return (
                         <Review
@@ -83,13 +83,13 @@ export default ({
               className="btn btn-light"
               data-toggle="modal"
               id="registerButton"
-              data-target="#register"
+              data-target="#edit"
             >
               Edit
             </button>
             <div
               className="modal fade"
-              id="register"
+              id="edit"
               tabIndex="-1"
               role="dialog"
               aria-labelledby="exampleModalLabel"

@@ -9,6 +9,7 @@ import SingleProductContainer from "../containers/SingleProductContainer";
 import SearchResultsContainer from "../containers/SearchResultsContainer";
 import { fetchCart } from "../store/actions/cart";
 import AdminUsersListContainer from "../containers/AdminUsersListContainer";
+import adminCreate from "../components/adminCreate";
 
 class Main extends Component {
   constructor(props) {
@@ -33,7 +34,8 @@ class Main extends Component {
             exact
             path="/admin/users"
             component={AdminUsersListContainer}
-          />
+          />{" "}
+          <Route exact path="/admin/create" component={adminCreate} />
           <Route exact path="/product/:id" component={SingleProductContainer} />
           <Route
             exact

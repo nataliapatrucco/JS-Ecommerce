@@ -48,6 +48,7 @@ export class HomeContainers extends Component {
           handleChange={this.handleChange}
         />
         <RandomView
+          user={this.props.user}
           selectedProduct={this.props.selectedProduct}
           handleSelect={this.handleSelect}
           handleAdd={this.handleAdd}

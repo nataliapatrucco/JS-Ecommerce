@@ -9,7 +9,7 @@ export default function RandomView({
   products,
   handleSelect,
   handleAdd,
-  selectedProduct
+  user
 }) {
   return (
     <div id="randomViewContainer">

@@ -8,17 +8,19 @@ export default class AdminUsersListContainer extends Component {
     this.state = {
       users: []
     };
-    this.handleUpgrade = this.handleUpgrade.bind(this);
-    this.handleDowngrade = this.handleDowngrade.bind(this);
+    this.handleDownUp = this.handleDownUp.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
-  handleUpgrade(user) {
-    axios.put("/api/admin/user", user).then(() => {
-      this.setState({ hola: "holaaa" });
-    });
+  handleDownUp(user) {
+    axios.put(`/api/admin/user`, user).then(() => {});
+    window.location.reload();
   }
 
-  handleDowngrade() {}
+  handleDelete(user) {
+    axios.delete(`/api/admin/${user.id}`, user).then(() => {});
+    window.location.reload();
+  }
 
   componentWillMount() {
     axios
@@ -30,11 +32,11 @@ export default class AdminUsersListContainer extends Component {
   render() {
     return (
       <div>
-        {console.log("entroooooo", this.state)}
+        {console.log(this.state.users)}
         <AdminUsersList
           users={this.state.users}
-          handleUpgrade={this.handleUpgrade}
-          handleDowngrade={this.handleDowngrade}
+          handleDownUp={this.handleDownUp}
+          handleDelete={this.handleDelete}
         />
       </div>
     );
