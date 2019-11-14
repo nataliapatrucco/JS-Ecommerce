@@ -57,15 +57,14 @@ router.post("/addQuantity/", function(req, res) {
     where: { CurrentUserCartId: req.user.id },
     include: [{ model: Product }]
   }).then(cart => {
-    console.log(cart, ".-----------cart");
     let foundProduct = cart.products.find(product => {
-      console.log(product, "---------");
       return product.dataValues.id === req.body.id;
     });
-    
-    Product.findOne({where: {id : req.body.id}, include: [{all: true}]
-    }).then(product=>{
-      console.log("---------111111",product)
+
+    Product.findOne({
+      where: { id: req.body.id },
+      include: [{ all: true }]
+    }).then(product => {
       cart.hasProduct(product).then(productExists => {
         if (productExists) {
           foundProduct.product_cart
@@ -82,20 +81,17 @@ router.post("/addQuantity/", function(req, res) {
               });
             });
         } else {
-          console.log("----------entro___---------------")
           cart.addProduct(product).then(cart2 => {
-            console.log("CART!!!!", cart2)
             Cart.findOne({
               where: { CurrentUserCartId: req.user.id },
               include: [{ model: Product }]
             }).then(cart => {
-              console.log(cart, "----------------");
               res.send(cart.products);
             });
           });
         }
       });
-    })
+    });
   });
 });
 
