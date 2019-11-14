@@ -3,16 +3,13 @@ import LeaveReview from "../components/LeaveReview"
 import Review from "../components/Review"
 
 export default ({ pastOrder, handleReviewSubmit, userReviews }) => {
-  {
-    console.log("PastOrder", pastOrder);
-  }
 
   let productIds = [];
 
   userReviews.map(review =>{
     productIds.push(review.productId);
   })
-  console.log("productIds", productIds)
+  
 
   return (
     <div className="col-8">
@@ -36,8 +33,6 @@ export default ({ pastOrder, handleReviewSubmit, userReviews }) => {
               <div>
                 <hr/>
               <span>Thanks for your review!</span>
-              {console.log("userReviews", userReviews)}
-              {console.log(productIds.indexOf(product.id))}
               <Review  author={userReviews[productIds.indexOf(product.id)].name} rating ={userReviews[productIds.indexOf(product.id)].rating / 2} comment ={userReviews[productIds.indexOf(product.id)].comment}/>
               </div>
               }

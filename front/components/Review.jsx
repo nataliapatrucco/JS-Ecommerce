@@ -2,6 +2,8 @@ import React from "react";
 import StarRatings from "react-star-ratings";
 
 export default function Review({author, rating, comment}) {
+  console.log("RATING",rating)
+  if(rating) rating = rating/2
   return (
     <div>
         <span>{author} </span> <br/>

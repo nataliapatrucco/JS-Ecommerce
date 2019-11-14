@@ -287,7 +287,6 @@ __webpack_require__.r(__webpack_exports__);
 function LeaveReview(_ref) {
   var product = _ref.product,
       handleReviewSubmit = _ref.handleReviewSubmit;
-  console.log("PRODUCT", product);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: handleReviewSubmit
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -373,13 +372,9 @@ function (_Component) {
   _inherits(Main, _Component);
 
   function Main(props) {
-    var _this;
-
     _classCallCheck(this, Main);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Main).call(this, props));
-    console.log(props);
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Main).call(this, props));
   }
 
   _createClass(Main, [{
@@ -693,14 +688,10 @@ __webpack_require__.r(__webpack_exports__);
   var pastOrder = _ref.pastOrder,
       handleReviewSubmit = _ref.handleReviewSubmit,
       userReviews = _ref.userReviews;
-  {
-    console.log("PastOrder", pastOrder);
-  }
   var productIds = [];
   userReviews.map(function (review) {
     productIds.push(review.productId);
   });
-  console.log("productIds", productIds);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-8"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Order Name: ", pastOrder.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(pastOrder).length && pastOrder.products.map(function (product) {
@@ -712,7 +703,7 @@ __webpack_require__.r(__webpack_exports__);
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Product : ", product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Quantity: ", product.product_cart.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Unit Price: ", product.price), !productIds.includes(product.id) ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LeaveReview__WEBPACK_IMPORTED_MODULE_1__["default"], {
       handleReviewSubmit: handleReviewSubmit,
       product: product
-    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Thanks for your review!"), console.log("userReviews", userReviews), console.log(productIds.indexOf(product.id)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Review__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Thanks for your review!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Review__WEBPACK_IMPORTED_MODULE_2__["default"], {
       author: userReviews[productIds.indexOf(product.id)].name,
       rating: userReviews[productIds.indexOf(product.id)].rating / 2,
       comment: userReviews[productIds.indexOf(product.id)].comment
@@ -811,6 +802,8 @@ function Review(_ref) {
   var author = _ref.author,
       rating = _ref.rating,
       comment = _ref.comment;
+  console.log("RATING", rating);
+  if (rating) rating = rating / 2;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, author, " "), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default.a, {
     rating: rating,
     starDimension: "11px",
@@ -1070,8 +1063,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
@@ -1079,12 +1070,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       address = _ref.address,
       pastOrders = _ref.pastOrders,
       reviews = _ref.reviews;
-  console.log("PastOrders", pastOrders);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), console.log("ADDRESS-----", address), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Your address: ", address), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Your address: ", address), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/user/address"
-  }, "Update your address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "You Past Orders"), console.log("TyPEOF PASTORDERS", _typeof(pastOrders)), pastOrders.length && pastOrders.map(function (order) {
+  }, "Update your address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "You Past Orders"), pastOrders.length && pastOrders.map(function (order) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       key: order.id,
       to: "/user/order/".concat(order.id)
@@ -1869,7 +1859,6 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log("USERCONTAINER STATE", this.state);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -64822,7 +64811,6 @@ var userLogOutCart = function userLogOutCart() {
 var fetchCart = function fetchCart(user) {
   return function (dispatch) {
     if (user.name) return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/cart/me").then(function (res) {
-      console.log("FETCHCART", res.data);
       return res.data;
     }).then(function (cart) {
       return dispatch(setCart(cart));
@@ -64836,7 +64824,6 @@ var fetchAndAddToCart = function fetchAndAddToCart(product, user) {
   return function (dispatch) {
     if (user.name) {
       return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart/addQuantity/", product).then(function (res) {
-        console.log("FETCHANDADDTOCART", res.data);
         return res.data;
       }).then(function (cart) {
         return dispatch(setCart(cart));

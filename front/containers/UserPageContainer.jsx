@@ -108,7 +108,7 @@ class UserPageContainer extends Component {
   }
 
   render() {
-    console.log("USERCONTAINER STATE", this.state)
+   
     return (
       <div className="container">
         <div className="row">

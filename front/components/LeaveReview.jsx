@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function LeaveReview({product, handleReviewSubmit}) {
-    console.log("PRODUCT",product);
   return (
     <form onSubmit={handleReviewSubmit}>
       <hr />
