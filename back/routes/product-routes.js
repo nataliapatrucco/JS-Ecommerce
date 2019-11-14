@@ -106,7 +106,6 @@ router.put("/:productId", function(req, res, next) {
   );
 });
 
-delete product;
 router.delete("/:productId", function(req, res, next) {
   Product.destroy({ where: { id: req.params.productId } })
     .then(() => {

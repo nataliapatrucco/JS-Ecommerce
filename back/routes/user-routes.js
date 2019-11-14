@@ -9,11 +9,9 @@ router.post("/login", passportConfig.authenticate("local"), async function(
   res
 ) {
   const user = await User.findByPk(req.user.id);
-  console.log("111", user);
 
   //buscar el carrito
   const cart = await Cart.findOne({ where: { CurrentUserCartId: user.id } });
-  console.log("222", cart);
 
   if (cart) {
     if (Object.keys(req.body.localStorage).length) {
@@ -22,12 +20,10 @@ router.post("/login", passportConfig.authenticate("local"), async function(
 
       while (i--) {
         let productLocal = JSON.parse(req.body.localStorage[keys[i]]);
-        console.log("3333", productLocal);
 
         Product_cart.findOne({
           where: { productId: productLocal.id, cartId: cart.id }
         }).then(instanceProduct_cart => {
-          console.log(instanceProduct_cart, "4444");
           if (instanceProduct_cart !== null) {
             instanceProduct_cart.update({
               quantity:
