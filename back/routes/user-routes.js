@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { User, Cart, Product, Product_cart } = require("../models");
+const { User, Review, Cart, Product, Product_cart } = require("../models");
 const passportConfig = require("../config/passport");
 
 //login
@@ -81,6 +81,71 @@ router.get("/logout", function(req, res) {
 
 router.get("/me", function(req, res) {
   res.send(req.user);
+});
+
+router.put("/allMyInfo", (req, res, next) => {
+  User.findOne({
+    where: { name: req.user.name },
+    include: [
+      {
+        model: Cart,
+        required: false,
+        as: "CurrentUserCart",
+        include: [{ model: Product }]
+      },
+      { model: Review },
+      {
+        model: Cart,
+        required: false,
+        as: "pastOrder",
+        where: {
+          state: "completado"
+        },
+        include: [{ model: Product }]
+      }
+    ]
+  }).then(user => {
+    user.CurrentUserCart.update({ state: "completado" }).then(() =>
+      user
+        .addPastOrder(user.CurrentUserCart)
+        .then(() => {
+            Cart.create({name: new Date()}).then(cart=>{
+              user.setCurrentUserCart(cart)
+            })
+        })
+    );
+  });
+});
+
+router.get("/allMyInfo", (req, res, next) => {
+  User.findOne({
+    where: { name: req.user.name },
+    include: [
+      {
+        model: Cart,
+        required: false,
+        as: "CurrentUserCart",
+        include: [{ model: Product }]
+      },
+      { model: Review },
+      {
+        model: Cart,
+        required: false,
+        as: "pastOrder",
+        where: {
+          state: "completado"
+        },
+        include: [{ model: Product }]
+      }
+    ]
+  }).then(user => {
+    res.send(user);
+  });
+});
+
+router.post("/address", (req, res) => {
+  req.user.update({ address: req.body.address });
+  res.send(req.body.address);
 });
 
 //return all user

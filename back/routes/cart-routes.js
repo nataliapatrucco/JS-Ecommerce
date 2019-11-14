@@ -3,49 +3,56 @@ const Product_Cart = require("sequelize");
 const router = express.Router();
 const { Cart, Product, User, Product_cart } = require("../models");
 
-
-router.post("/remove", async function (req, res, next) {
+router.post("/remove", async function(req, res, next) {
   const cart = await Cart.findOne({
     where: { CurrentUserCartId: req.user.id }
-  })
+  });
 
-  await Product_cart.destroy({ where: { cartId: cart.id, productId: req.body.id } })
+  await Product_cart.destroy({
+    where: { cartId: cart.id, productId: req.body.id }
+  });
 
-  const prodIdsIncart = await Product_cart.findAll({ where: { cartId: cart.id } })
+  const prodIdsIncart = await Product_cart.findAll({
+    where: { cartId: cart.id }
+  });
 
   const frontCart = prodIdsIncart.map(async productCartId => {
-    let product = await Product.findByPk(productCartId.productId)
-    product.dataValues.quantity = productCartId.dataValues.quantity
-
-    return product.dataValues
-  })
-  let culo = await Promise.all(frontCart)
-
-  res.send(culo)
-});
-
-router.post("/substract", async function (req, res, next) {
-  const cart = await Cart.findOne({
-    where: { CurrentUserCartId: req.user.id }
-  })
-
-  const prodInCart = await Product_cart.findOne({ where: { productId: req.body.id, cartId: cart.id } })
-  await prodInCart.update({ quantity: prodInCart.quantity - 1 })
-
-  const prodsInCartIds = await Product_cart.findAll({ where: { cartId: cart.id } })
-  const frontCart = prodsInCartIds.map(async prodId => {
-    let product = await Product.findByPk(prodId.productId)
-
-    product.dataValues.quantity = prodId.dataValues.quantity
+    let product = await Product.findByPk(productCartId.productId);
+    product.dataValues.quantity = productCartId.dataValues.quantity;
 
     return product.dataValues;
-  })
+  });
+  let culo = await Promise.all(frontCart);
+
+  res.send(culo);
+});
+
+router.post("/substract", async function(req, res, next) {
+  const cart = await Cart.findOne({
+    where: { CurrentUserCartId: req.user.id }
+  });
+
+  const prodInCart = await Product_cart.findOne({
+    where: { productId: req.body.id, cartId: cart.id }
+  });
+  await prodInCart.update({ quantity: prodInCart.quantity - 1 });
+
+  const prodsInCartIds = await Product_cart.findAll({
+    where: { cartId: cart.id }
+  });
+  const frontCart = prodsInCartIds.map(async prodId => {
+    let product = await Product.findByPk(prodId.productId);
+
+    product.dataValues.quantity = prodId.dataValues.quantity;
+
+    return product.dataValues;
+  });
 
   const a = await Promise.all(frontCart);
   res.send(a);
 });
 
-router.post("/", async function (req, res, next) {
+router.post("/", async function(req, res, next) {
   const cart = await Cart.findOne({
     where: { CurrentUserCartId: req.user.id }
   });
@@ -70,7 +77,7 @@ router.post("/", async function (req, res, next) {
   res.send(frontCart);
 });
 
-router.get("/me", async function (req, res, next) {
+router.get("/me", async function(req, res, next) {
   const cart = await Cart.findOne({
     where: { CurrentUserCartId: req.user.id }
   });

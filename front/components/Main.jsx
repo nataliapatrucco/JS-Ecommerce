@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Switch, Route as R } from "react-router-dom";
-
 import { fetchUser } from "../store/actions/user";
 import { fetchCart } from "../store/actions/cart";
-
 import Footer from "../components/Footer";
-
 import HomeContainer from "../containers/HomeContainer";
 import NavbarContainer from "../containers/NavbarContainer";
 import CartContainer from "../containers/CartContainer";
 import SingleProductContainer from "../containers/SingleProductContainer";
 import SearchResultsContainer from "../containers/SearchResultsContainer";
-import Checkout from "../containers/CheckoutContainer";
+import CheckoutContainer from "../containers/CheckoutContainer";
 
 class Main extends Component {
   constructor(props) {
@@ -33,7 +30,12 @@ class Main extends Component {
       <div id="main container-fluid">
         <NavbarContainer location={location} />
         <Switch>
-          <R path="/cart/checkout" component={Checkout} user={user} />
+          <R
+            path="/cart/checkout"
+            component={CheckoutContainer}
+            history={history}
+            user={user}
+          />
           <R path="/cart" component={CartContainer} history={history} />
           <R exact path="/product/:id" component={SingleProductContainer} />
           <R
