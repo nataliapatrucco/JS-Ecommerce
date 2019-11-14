@@ -1,9 +1,16 @@
 import React from "react";
+import LeaveReview from "../components/LeaveReview"
+import Review from "../components/Review"
 
-export default ({ pastOrder }) => {
-  {
-    console.log("PastOrder", pastOrder);
-  }
+export default ({ pastOrder, handleReviewSubmit, userReviews }) => {
+
+  let productIds = [];
+
+  userReviews.map(review =>{
+    productIds.push(review.productId);
+  })
+  
+
   return (
     <div className="col-8">
       <hr />
@@ -16,6 +23,19 @@ export default ({ pastOrder }) => {
               <li>Product : {product.name}</li>
               <li>Quantity: {product.product_cart.quantity}</li>
               <li>Unit Price: {product.price}</li>
+
+
+              {!productIds.includes(product.id) ? 
+                <LeaveReview 
+              handleReviewSubmit = {handleReviewSubmit}
+              product = {product}
+              /> :
+              <div>
+                <hr/>
+              <span>Thanks for your review!</span>
+              <Review  author={userReviews[productIds.indexOf(product.id)].name} rating ={userReviews[productIds.indexOf(product.id)].rating / 2} comment ={userReviews[productIds.indexOf(product.id)].comment}/>
+              </div>
+              }
             </div>
           ))}
         <hr />

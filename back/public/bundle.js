@@ -271,6 +271,48 @@ function Footer() {
 
 /***/ }),
 
+/***/ "./components/LeaveReview.jsx":
+/*!************************************!*\
+  !*** ./components/LeaveReview.jsx ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LeaveReview; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function LeaveReview(_ref) {
+  var product = _ref.product,
+      handleReviewSubmit = _ref.handleReviewSubmit;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: handleReviewSubmit
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Leave a Review: ", product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Rating"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    className: "form-control form-control-sm col-md-4",
+    name: "rating"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "\u2B50"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "\u2B50\u2B50"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "\u2B50\u2B50\u2B50"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "\u2B50\u2B50\u2B50\u2B50"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "\u2B50\u2B50\u2B50\u2B50\u2B50"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Comment"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    name: "comment",
+    placeholder: "What'd you think?"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "hidden",
+    name: "productId",
+    value: product.id
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "submit",
+    className: "btn btn-primary"
+  }, "Submit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+}
+
+/***/ }),
+
 /***/ "./components/Main.jsx":
 /*!*****************************!*\
   !*** ./components/Main.jsx ***!
@@ -330,13 +372,9 @@ function (_Component) {
   _inherits(Main, _Component);
 
   function Main(props) {
-    var _this;
-
     _classCallCheck(this, Main);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Main).call(this, props));
-    console.log(props);
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Main).call(this, props));
   }
 
   _createClass(Main, [{
@@ -641,12 +679,19 @@ function Navbar(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_LeaveReview__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/LeaveReview */ "./components/LeaveReview.jsx");
+/* harmony import */ var _components_Review__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Review */ "./components/Review.jsx");
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
-  var pastOrder = _ref.pastOrder;
-  {
-    console.log("PastOrder", pastOrder);
-  }
+  var pastOrder = _ref.pastOrder,
+      handleReviewSubmit = _ref.handleReviewSubmit,
+      userReviews = _ref.userReviews;
+  var productIds = [];
+  userReviews.map(function (review) {
+    productIds.push(review.productId);
+  });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-8"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Order Name: ", pastOrder.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(pastOrder).length && pastOrder.products.map(function (product) {
@@ -655,7 +700,14 @@ __webpack_require__.r(__webpack_exports__);
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       id: "imgOrder",
       src: product.image.slice(1)
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Product : ", product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Quantity: ", product.product_cart.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Unit Price: ", product.price));
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Product : ", product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Quantity: ", product.product_cart.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Unit Price: ", product.price), !productIds.includes(product.id) ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LeaveReview__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      handleReviewSubmit: handleReviewSubmit,
+      product: product
+    }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Thanks for your review!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Review__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      author: userReviews[productIds.indexOf(product.id)].name,
+      rating: userReviews[productIds.indexOf(product.id)].rating / 2,
+      comment: userReviews[productIds.indexOf(product.id)].comment
+    })));
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Total: $ ", pastOrder.total)));
 });
 
@@ -742,12 +794,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Review; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-star-ratings */ "./node_modules/react-star-ratings/build/index.js");
+/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_star_ratings__WEBPACK_IMPORTED_MODULE_1__);
+
 
 function Review(_ref) {
   var author = _ref.author,
       rating = _ref.rating,
       comment = _ref.comment;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, author, " "), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Rating: ", rating), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Comment: ", comment), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+  console.log("RATING", rating);
+  if (rating) rating = rating / 2;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, author, " "), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    rating: rating,
+    starDimension: "11px",
+    starSpacing: "4px",
+    starRatedColor: "rgb(188, 100, 100)"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Comment: ", comment), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
 }
 
 /***/ }),
@@ -1001,8 +1063,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
@@ -1012,9 +1072,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       reviews = _ref.reviews;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), console.log("ADDRESS-----", address), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Your address: ", address), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Your address: ", address), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/user/address"
-  }, "Update your address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "You Past Orders"), console.log("TyPEOF PASTORDERS", _typeof(pastOrders)), pastOrders.length && pastOrders.map(function (order) {
+  }, "Update your address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "You Past Orders"), pastOrders.length && pastOrders.map(function (order) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       key: order.id,
       to: "/user/order/".concat(order.id)
@@ -1681,7 +1741,7 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(UserPageContainer).call(this, props));
     _this.state = {
-      userReviews: {},
+      userReviews: [],
       address: "",
       newAddress: "",
       pastOrders: [],
@@ -1692,6 +1752,7 @@ function (_Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.userRender = _this.userRender.bind(_assertThisInitialized(_this));
     _this.fetchPastOrder = _this.fetchPastOrder.bind(_assertThisInitialized(_this));
+    _this.handleReviewSubmit = _this.handleReviewSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1713,18 +1774,39 @@ function (_Component) {
       });
     }
   }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
+    key: "handleReviewSubmit",
+    value: function handleReviewSubmit(e) {
       var _this3 = this;
 
-      console.log("componentDidMount");
+      e.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/review/", {
+        rating: e.target[0].value,
+        comment: e.target[1].value,
+        productId: e.target[2].value
+      }).then(function (res) {
+        return res.data;
+      }).then(function () {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/review/user").then(function (res) {
+          return res.data;
+        }).then(function (reviews) {
+          _this3.setState({
+            userReviews: reviews
+          });
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this4 = this;
+
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/user/allMyInfo").then(function (res) {
         return res.data;
       }).then(function (user) {
-        _this3.setState({
+        _this4.setState({
           userReviews: user.reviews || [],
           address: user.address || "",
-          pastOrders: user.pastOrders || [],
+          pastOrders: user.pastOrder || [],
           user: user
         });
       });
@@ -1765,6 +1847,8 @@ function (_Component) {
           if (!this.state.pastOrder || this.state.pastOrder.id !== parseInt(this.props.orderId)) this.fetchPastOrder(); ///give warning that the state is changing within render
 
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PastOrder__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            userReviews: this.state.userReviews,
+            handleReviewSubmit: this.handleReviewSubmit,
             pastOrder: this.state.pastOrder
           });
 
@@ -64727,7 +64811,6 @@ var userLogOutCart = function userLogOutCart() {
 var fetchCart = function fetchCart(user) {
   return function (dispatch) {
     if (user.name) return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/cart/me").then(function (res) {
-      console.log("FETCHCART", res.data);
       return res.data;
     }).then(function (cart) {
       return dispatch(setCart(cart));
@@ -64741,7 +64824,6 @@ var fetchAndAddToCart = function fetchAndAddToCart(product, user) {
   return function (dispatch) {
     if (user.name) {
       return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/cart/addQuantity/", product).then(function (res) {
-        console.log("FETCHANDADDTOCART", res.data);
         return res.data;
       }).then(function (cart) {
         return dispatch(setCart(cart));
