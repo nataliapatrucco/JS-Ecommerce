@@ -1,4 +1,4 @@
-import { LOG_USER, REG_USER, LOG_OUT } from "../constants/index";
+import { LOG_USER, REG_USER, LOG_OUT, USERS } from "../constants/index";
 import axios from "axios";
 
 export const logUser = user => ({
@@ -35,10 +35,9 @@ export const userLogIn = (email, password) => dispatch =>
     .then(user => dispatch(logUser(user)))
     .catch(err => console.log(err));
 
-export const fetchUser = () => dispatch => 
+export const fetchUser = () => dispatch =>
   axios
     .get("/api/user/me")
     .then(res => res.data)
     .then(user => dispatch(logUser(user)))
     .catch(err => console.log(err));
-

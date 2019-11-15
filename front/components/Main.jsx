@@ -6,7 +6,8 @@ import SingleProductContainer from "../containers/SingleProductContainer";
 import SearchResultsContainer from "../containers/SearchResultsContainer";
 import UserPageContainer from "../containers/UserPageContainer";
 import { fetchCart } from "../store/actions/cart";
-import Footer from "../components/Footer";
+import AdminUsersListContainer from "../containers/AdminUsersListContainer";
+import adminCreate from "../components/adminCreate";
 import HomeContainer from "../containers/HomeContainer";
 import NavbarContainer from "../containers/NavbarContainer";
 import CartContainer from "../containers/CartContainer";
@@ -32,6 +33,12 @@ class Main extends Component {
         <NavbarContainer location={location} history={history} />
         <Switch>
           <Route
+            exact
+            path="/admin/users"
+            component={AdminUsersListContainer}
+          />{" "}
+          <Route exact path="/admin/create" component={adminCreate} />
+          <Route
             path="/cart/checkout"
             component={CheckoutContainer}
             history={history}
@@ -50,7 +57,6 @@ class Main extends Component {
             )}
           />
           <Route exact path="/" component={HomeContainer} />
-
           {Object.keys(this.props.user).length ? (
             <div>
               <Route

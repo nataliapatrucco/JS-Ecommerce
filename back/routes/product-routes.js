@@ -90,9 +90,30 @@ router.get("/:productId", function(req, res, next) {
 });
 
 //create new product
+router.post("/", function(req, res, next) {
+  Product.create(req.body)
+    .then(product => {
+      res.status(201).send(product);
+    })
+    .catch(err => res.sendStatus(500));
+});
 
 //edit product
+router.put("/:productId", function(req, res, next) {
+  console.log(req.body);
+  Product.update(req.body, { where: { id: req.params.productId } }).then(
+    product => {
+      res.send(product);
+    }
+  );
+});
 
-//delete product
+router.delete("/:productId", function(req, res, next) {
+  Product.destroy({ where: { id: req.params.productId } })
+    .then(() => {
+      res.status(201);
+    })
+    .catch(err => res.sendStatus(500));
+});
 
 module.exports = router;

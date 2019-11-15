@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-
 import Navbar from "../components/Navbar";
-
+import { connect } from "react-redux";
+import { userRegUser } from "../store/actions/user";
+import { userLogOut } from "../store/actions/user";
+import { userLogIn } from "../store/actions/user";
 import { userLogOutCart } from "../store/actions/cart";
-import { userRegUser, userLogOut, userLogIn } from "../store/actions/user";
-
 import { fetchCart } from "../store/actions/cart";
+import Axios from "axios";
 
 class NavbarContainer extends Component {
   constructor(props) {
@@ -20,6 +20,60 @@ class NavbarContainer extends Component {
     this.handleLogOut = this.handleLogOut.bind(this);
     this.handleSubmitRegister = this.handleSubmitRegister.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleSubmitCreate = this.handleSubmitCreate.bind(this);
+    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangePrice = this.handleChangePrice.bind(this);
+    this.handleChangeDescription = this.handleChangeDescription.bind(this);
+    this.handleChangeImage = this.handleChangeImage.bind(this);
+    this.handleChangeRaiting = this.handleChangeRaiting.bind(this);
+    this.handleChangeStock = this.handleChangeStock.bind(this);
+    this.handleChangeActive = this.handleChangeActive.bind(this);
+    this.handleChangeCategory = this.handleChangeCategory.bind(this);
+  }
+
+  handleSubmitCreate(e) {
+    e.preventDefault();
+    let updatedProduct = {};
+    updatedProduct.active = this.state.active;
+    updatedProduct.category = this.state.category.split(" ");
+    updatedProduct.description = this.state.description;
+    updatedProduct.image = this.state.image;
+    updatedProduct.name = this.state.name;
+    updatedProduct.price = this.state.price;
+    updatedProduct.rating = this.state.rating;
+    updatedProduct.stock = this.state.stock;
+
+    Axios.post("/api/admin/create", updatedProduct).then(() => {});
+    document.querySelector("#editCruz").click();
+  }
+  handleChangeName(event) {
+    this.setState({ name: event.target.value });
+  }
+
+  handleChangePrice(event) {
+    this.setState({ price: event.target.value });
+  }
+
+  handleChangeDescription(event) {
+    this.setState({ description: event.target.value });
+  }
+
+  handleChangeImage(event) {
+    this.setState({ image: event.target.value });
+  }
+  handleChangeStock(event) {
+    this.setState({ stock: event.target.value });
+  }
+  handleChangeRaiting(event) {
+    this.setState({ raiting: event.target.value });
+  }
+
+  handleChangeCategory(event) {
+    this.setState({ category: event.target.value });
+  }
+
+  handleChangeActive(event) {
+    this.setState({ active: event.target.value });
   }
 
   handleSubmitRegister(event) {
@@ -65,6 +119,15 @@ class NavbarContainer extends Component {
     return (
       <div>
         <Navbar
+          handleSubmitCreate={this.handleSubmitCreate}
+          handleChangeName={this.handleChangeName}
+          handleChangeImage={this.handleChangeImage}
+          handleChangePrice={this.handleChangePrice}
+          handleChangeDescription={this.handleChangeDescription}
+          handleChangeRaiting={this.handleChangeRaiting}
+          handleChangeStock={this.handleChangeStock}
+          handleChangeActive={this.handleChangeActive}
+          handleChangeCategory={this.handleChangeCategory}
           wrongUser={this.state.wrongUser}
           location={location}
           user={user}
