@@ -14,14 +14,8 @@ Cart.init(
       type: S.ENUM("proceso", "cancelado", "completado"),
       defaultValue: "proceso"
     },
-    guestID: {
+    total: {   //added in route before res.send
       type: S.INTEGER
-    },
-    total: {
-      type: S.VIRTUAL
-      //TODO:   get(){
-      //      return
-      // }
     },
 
   },

@@ -37,10 +37,6 @@ User.init(
   { sequelize: db, modelName: "user" }
 );
 
-User.beforeUpdate(user => {
-  if (user.userType === "guest") user.userType = "user"; // setDataValue() could be good practice
-});
-
 User.prototype.hashPassword = function(password) {
   return crypto
     .createHmac("sha1", this.salt)

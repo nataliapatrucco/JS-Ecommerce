@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import Footer from "../components/Footer";
-import NavbarContainer from "../containers/NavbarContainer";
 import { connect } from "react-redux";
-import HomeContainer from "../containers/HomeContainer";
+import { Switch, Route } from "react-router-dom";
 import { fetchUser } from "../store/actions/user";
 import SingleProductContainer from "../containers/SingleProductContainer";
 import SearchResultsContainer from "../containers/SearchResultsContainer";
+import UserPageContainer from "../containers/UserPageContainer";
 import { fetchCart } from "../store/actions/cart";
 import AdminUsersListContainer from "../containers/AdminUsersListContainer";
 import adminCreate from "../components/adminCreate";
+import HomeContainer from "../containers/HomeContainer";
+import NavbarContainer from "../containers/NavbarContainer";
+import CartContainer from "../containers/CartContainer";
+import CheckoutContainer from "../containers/CheckoutContainer";
 
 class Main extends Component {
   constructor(props) {
@@ -25,10 +27,10 @@ class Main extends Component {
   }
 
   render() {
-    const { location } = this.props;
+    const { location, history, user } = this.props;
     return (
       <div id="main container-fluid">
-        <NavbarContainer location={location} />
+        <NavbarContainer location={location} history={history} />
         <Switch>
           <Route
             exact
@@ -36,10 +38,17 @@ class Main extends Component {
             component={AdminUsersListContainer}
           />{" "}
           <Route exact path="/admin/create" component={adminCreate} />
+          <Route
+            path="/cart/checkout"
+            component={CheckoutContainer}
+            history={history}
+            user={user}
+          />
+          <Route path="/cart" component={CartContainer} history={history} />
           <Route exact path="/product/:id" component={SingleProductContainer} />
           <Route
             exact
-            path="/:query"
+            path="/search/:query"
             render={({ match, history }) => (
               <SearchResultsContainer
                 searchQuery={match.params.query}
@@ -48,6 +57,45 @@ class Main extends Component {
             )}
           />
           <Route exact path="/" component={HomeContainer} />
+          {Object.keys(this.props.user).length ? (
+            <div>
+              <Route
+                exact
+                path="/user"
+                render={({ location, history, match }) => {
+                  return (
+                    <UserPageContainer location={location} history={history} />
+                  );
+                }}
+              />
+
+              <Route
+                exact
+                path="/user/order/:pastOrderId"
+                render={({ location, history, match }) => {
+                  return (
+                    <UserPageContainer
+                      location={location}
+                      history={history}
+                      orderId={match.params.pastOrderId}
+                    />
+                  );
+                }}
+              />
+
+              <Route
+                exact
+                path="/user/address"
+                render={({ location, history, match }) => {
+                  return (
+                    <UserPageContainer location={location} history={history} />
+                  );
+                }}
+              />
+            </div>
+          ) : (
+            <Route exact path="/user" component={HomeContainer} />
+          )}
         </Switch>
         {/* <Footer /> */}
       </div>

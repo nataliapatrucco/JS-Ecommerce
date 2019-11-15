@@ -1,6 +1,7 @@
 import React from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
+
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export default function Navbar(props) {
   const {
@@ -138,9 +139,7 @@ export default function Navbar(props) {
               LOGIN
             </button>
 
-            {location.pathname === "/" ? (
-              ""
-            ) : (
+            {location.pathname === "/" ? null : (
               <Link to={`/`}>
                 <label>
                   <div className="brandLogoMiniDiv">
@@ -216,7 +215,7 @@ export default function Navbar(props) {
         )}
         <div>
           {Object.keys(user).length ? (
-            <Link to="/user/id">
+            <Link to="/user/">
               <span id="helloUser">Hello {user.name}</span>
             </Link>
           ) : (
@@ -371,9 +370,11 @@ export default function Navbar(props) {
           ) : (
             " "
           )}
-          <button id="cartButton">
-            <AiOutlineShoppingCart />
-          </button>
+          <Link to="/cart">
+            <button id="cartButton">
+              <AiOutlineShoppingCart />
+            </button>
+          </Link>
         </div>
       </div>
     </nav>

@@ -38,14 +38,10 @@ export default function RandomView({
               </Link>
               <hr />
               <button
-                onClick={id => {
-                  handleSelect(product.id);
-                  handleAdd();
-                }}
+                onClick={() => handleAdd(product)}
                 className="btn btn-light"
                 id="cartBtn"
               >
-                {" "}
                 <AiOutlineShoppingCart />
               </button>
             </Card.Body>

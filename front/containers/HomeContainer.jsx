@@ -16,7 +16,6 @@ export class HomeContainers extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
   }
 
   componentDidMount() {
@@ -30,14 +29,11 @@ export class HomeContainers extends Component {
   handleSubmit(e) {
     e.preventDefault();
     // this.props.searchProducts(this.state.searchQuery);
-    this.props.history.push(`/${this.state.searchQuery}`);
-  }
-  handleSelect(id) {
-    this.props.fetchProduct(id);
+    this.props.history.push(`/search/${this.state.searchQuery}`);
   }
 
-  handleAdd() {
-    this.props.fetchAndAddToCart(this.props.selectedProduct, this.props.user);
+  handleAdd(product) {
+    this.props.fetchAndAddToCart(product, this.props.user);
   }
 
   render() {

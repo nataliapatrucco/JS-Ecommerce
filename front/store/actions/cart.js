@@ -16,53 +16,76 @@ export const userLogOutCart = () => dispatch => {
 };
 
 export const fetchCart = user => dispatch => {
-  if (user.name) {
-    axios
+  if (user.name)
+    return axios
       .get("/api/cart/me")
-      .then(res => res.data)
+      .then(res => {
+        return res.data;
+      })
       .then(cart => dispatch(setCart(cart)));
-  } else {
-    console.log("aodifnasiopgpiafsg");
-    let values = [];
-    let keys = Object.keys(window.localStorage);
-    let i = keys.length;
-    while (i--) {
-      values.push(JSON.parse(window.localStorage.getItem(keys[i])));
-    }
 
-    dispatch(setCart(values));
-  }
+  return dispatch(
+    setCart(Object.values(window.localStorage).map(item => JSON.parse(item)))
+  );
 };
 
 export const fetchAndAddToCart = (product, user) => dispatch => {
   if (user.name) {
-    axios
-      .post("/api/cart", product)
-      .then(res => res.data)
-      .then(cart => {
-        console.log(cart);
-        dispatch(setCart(cart));
-      });
-  } else {
-    if (window.localStorage.getItem(product.id)) {
-      let addedProduct = JSON.parse(window.localStorage.getItem(product.id));
-      addedProduct.quantity = addedProduct.quantity + 1;
-      window.localStorage.setItem(
-        addedProduct.id,
-        JSON.stringify(addedProduct)
-      );
-    } else {
-      product.quantity = 1;
-      window.localStorage.setItem(product.id, JSON.stringify(product));
-    }
-
-    let values = [];
-    let keys = Object.keys(window.localStorage);
-    let i = keys.length;
-    while (i--) {
-      values.push(JSON.parse(window.localStorage.getItem(keys[i])));
-    }
-
-    dispatch(setCart(values));
+    return axios
+      .post("/api/cart/addQuantity/", product)
+      .then(res => {
+        return res.data;
+      })
+      .then(cart => dispatch(setCart(cart)));
   }
+
+  if (!window.localStorage.getItem(product.id)) {
+    product.quantity = 0;
+    window.localStorage.setItem(product.id, JSON.stringify(product));
+  }
+
+  let addToThis = JSON.parse(window.localStorage.getItem(product.id));
+  addToThis.quantity = addToThis.quantity + 1;
+
+  window.localStorage.setItem(addToThis.id, JSON.stringify(addToThis));
+
+  dispatch(
+    setCart(Object.values(window.localStorage).map(item => JSON.parse(item)))
+  );
+};
+
+export const fetchAndSubstractFromCart = (product, user) => dispatch => {
+  if (user.name) {
+    return axios
+      .post("/api/cart/subtractQuantity", product)
+      .then(res => res.data)
+      .then(cart => dispatch(setCart(cart)));
+  }
+
+  let subOneFromThis = JSON.parse(window.localStorage.getItem(product.id));
+  subOneFromThis.quantity = subOneFromThis.quantity - 1;
+
+  window.localStorage.setItem(
+    subOneFromThis.id,
+    JSON.stringify(subOneFromThis)
+  );
+
+  dispatch(
+    setCart(Object.values(window.localStorage).map(item => JSON.parse(item)))
+  );
+};
+
+export const fetchAndRemoveFromCart = (product, user) => dispatch => {
+  if (user.name) {
+    return axios
+      .post("/api/cart/remove", product)
+      .then(res => res.data)
+      .then(cart => dispatch(setCart(cart)));
+  }
+
+  window.localStorage.removeItem(product.id);
+
+  dispatch(
+    setCart(Object.values(window.localStorage).map(item => JSON.parse(item)))
+  );
 };

@@ -50,3 +50,81 @@ body {
   bottom: 0;
   width: 100vw;
 }
+
+.cartItemContainer {
+  background-color: rgba(233, 232, 231, 0.65);
+  // margin: 7% 0% 10% 17%;
+  max-width: 40vw;
+
+  border: black 100px solid;
+}
+
+#totalContainer {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  background-color: black;
+  width: 100px;
+  height: 300px;
+}
+
+.singleItemInCart {
+  box-sizing: content-box;
+  padding: 1rem;
+
+  border: 2px solid #c47464;
+
+  color: #000;
+
+  font-size: 16px;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+.singleItemInCart div {
+  display: inline-block;
+}
+
+.singleItemText {
+  margin-left: 2vw;
+}
+
+.singleItemInCart img {
+  width: 115px;
+  height: 180px;
+}
+
+#cosa {
+  background-color: indigo;
+}
+
+#alterQuant {
+  padding: 6px;
+  border: 2px solid #a35963;
+  background-color: #fff;
+}
+
+#alterQuant button {
+  font-family: Andale Mono, monospace;
+  color: #a86b6b;
+  display: inline-block;
+  border: none;
+  margin: 6px;
+  border: 1px solid #c7737e;
+}
+
+.inblockLetter {
+  display: inline-block;
+  margin: 0 6px;
+}
+
+.removeItemButton {
+  border: 2px solid black;
+  background-color: red;
+  width: 30px;
+  height: 30px;
+}
+
+.checkoutDiv {
+  border: black 5px solid !important;
+}

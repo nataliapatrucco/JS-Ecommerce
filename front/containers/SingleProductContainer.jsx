@@ -13,7 +13,7 @@ class SingleProductContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: []
+      reviews: ["no reviews loaded"]
     };
     this.getReviews = this.getReviews.bind(this);
     this.addProduct = this.addProduct.bind(this);
@@ -27,9 +27,14 @@ class SingleProductContainer extends React.Component {
   }
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id);
-    if (this.props.selectedProduct && this.state.reviews.length === 0) {
+  }
+
+  componentDidUpdate() {
+    if (
+      this.props.selectedProduct &&
+      this.state.reviews[0] === "no reviews loaded"
+    )
       this.getReviews();
-    }
   }
   handleDelete(product) {
     this.props.adminDeleteProduct(product);

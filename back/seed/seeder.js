@@ -1,4 +1,4 @@
-const { Product, Category, User } = require("../models/index");
+const { Product, Category, User, Cart } = require("../models/index");
 const S = require("sequelize");
 const Op = S.Op;
 
@@ -181,21 +181,58 @@ Category.bulkCreate([
     console.log(category); // ... in order to get the array of user objects
   });
 
-User.bulkCreate([
-  { name: "jared", email: "jared@jared.com", password: "abc123" },
-  { name: "ivan", email: "ivan@ivan.com", password: "abc123" },
+Category.bulkCreate([
   {
-    name: "gonza",
-    email: "gonza@gonza.com",
-    password: "abc123",
-    userType: "admin"
+    categoryName: "shirts"
   },
-  { name: "milo", email: "milo@milo.com", password: "abc123" },
-  { name: "nati", email: "nati@nati.com", password: "abc123" }
+  {
+    categoryName: "pants"
+  },
+  {
+    categoryName: "dresses"
+  },
+  {
+    categoryName: "black"
+  },
+  {
+    categoryName: "red"
+  },
+  {
+    categoryName: "blue"
+  }
 ])
   .then(() => {
-    return User.findAll();
+    return Category.findAll();
   })
-  .then(users => {
-    console.log(users); // ... in order to get the array of user objects
+  .then(category => {
+    console.log(category); // ... in order to get the array of user objects
   });
+
+//     User.bulkCreate([
+//       {name: 'jared', email: 'jared@jared.com', password:'abc123'},
+//       {name: 'ivan', email: 'ivan@ivan.com', password:'abc123'},
+//       {name: 'gonza', email: 'gonza@gonza.com', password:'abc123'},
+//       {name: 'milo', email: 'milo@milo.com', password:'abc123'},
+//       {name: 'nati', email: 'nati@nati.com', password:'abc123'},
+//     ]).then(() => {
+//       return User.findAll();
+//     })
+//     .then(users => {
+//        console.log(users); // ... in order to get the array of user objects
+//     });
+
+User.create({ name: "jared", email: "j@j.com", password: "abc123" }).then(a =>
+  console.log(JSON.stringify(a))
+);
+User.create({ name: "ivan", email: "i@ji.com", password: "abc123" }).then(a =>
+  console.log(JSON.stringify(a))
+);
+User.create({ name: "gonza", email: "g@g.com", password: "abc123" }).then(a =>
+  console.log(JSON.stringify(a))
+);
+User.create({ name: "milo", email: "m@m.com", password: "abc123" }).then(a =>
+  console.log(JSON.stringify(a))
+);
+User.create({ name: "nati", email: "n@n.com", password: "abc123" }).then(a =>
+  console.log(JSON.stringify(a))
+);

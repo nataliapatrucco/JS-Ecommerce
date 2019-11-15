@@ -13,9 +13,11 @@ const addRatingAndSend = async function(product, res) {
   if (numReviews) {
     let sum = 0;
     reviews.map(review => {
+      console.log("REVIEW RATING", review.rating)
       sum += review.rating;
     });
     product.rating = Math.round(sum / numReviews) / 2;
+    console.log("PRODUCT RATING", product.rating)
   }
   res.status(200).send(product);
 };
