@@ -42,10 +42,10 @@ export default function Checkout({
                     <strong>{name}</strong>
                   </p>
                   <p>Unit Price: {price}</p>
-                  <img id="checkoutImg" src={
-                    image[0] === '.' ?
-                    image.slice(1) : image
-                    } />
+                  <img
+                    id="checkoutImg"
+                    src={image[0] === "." ? image.slice(1) : image}
+                  />
                   <p>Quantity: {quantity}</p>
                   <p>
                     Subtotal ${" "}
@@ -73,7 +73,7 @@ export default function Checkout({
               <button
                 type="submit"
                 className="btn btn-light"
-                onClick={handlePurchase}
+                onClick={(handlePurchase)}
               >
                 Confirm your order
               </button>

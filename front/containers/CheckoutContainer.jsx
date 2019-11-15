@@ -36,6 +36,7 @@ class CheckoutContainer extends Component {
     });
     // this.props.fetchCart();
     this.props.userLogOutCart();
+    window.alert("Thanks for your purchase!");
     this.props.history.push("/");
     window.localStorage.clear();
   }
