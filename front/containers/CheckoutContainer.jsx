@@ -30,6 +30,10 @@ class CheckoutContainer extends Component {
 
   handlePurchase() {
     axios.put("/api/user/allMyInfo");
+    axios.post("/api/cart/checkout", {
+      user: this.props.user,
+      cart: this.props.cart
+    });
     // this.props.fetchCart();
     this.props.userLogOutCart();
     this.props.history.push("/");

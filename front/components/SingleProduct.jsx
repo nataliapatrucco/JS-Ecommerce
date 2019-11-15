@@ -16,7 +16,10 @@ export default ({
   handleChangeCategory
 }) => {
   if (selectedProduct.image) {
-    let urlImg = selectedProduct.image.slice(1);
+    let urlImg = 
+    selectedProduct.image[0] === '.' ?
+    selectedProduct.image.slice(1) : selectedProduct.image
+      
     return (
       <div id="singleView" className="container">
         {user.userType == "admin" ? (
@@ -24,7 +27,11 @@ export default ({
             <div className="row">
               <div id="singleProdImg" className="col-8 card card-body">
                 <img
-                  src={`${window.location.origin}${urlImg}`}
+                  src={
+                    urlImg[0]=== '/' ? 
+                    `${window.location.origin}${urlImg}` :
+                    urlImg
+                    }
                   className="thumbnail"
                   alt="Image"
                 />
@@ -195,7 +202,11 @@ export default ({
             <div className="row">
               <div id="singleProdImg" className="col-8 card card-body">
                 <img
-                  src={`${window.location.origin}${urlImg}`}
+                src={
+                    urlImg[0]=== '/' ? 
+                    `${window.location.origin}${urlImg}` :
+                    urlImg
+                    }
                   className="thumbnail"
                   alt="Image"
                 />

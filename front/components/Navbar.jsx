@@ -15,11 +15,8 @@ export default function Navbar(props) {
     handleSubmitCreate,
     handleChangePrice,
     handleChangeName,
-    handleChangeStock,
     handleChangeCategory,
     handleChangeImage,
-    handleChangeActive,
-    handleChangeRaiting,
     handleChangeDescription
   } = props;
 
@@ -289,17 +286,6 @@ export default function Navbar(props) {
                               required
                             />
                           </div>
-                          <div className="form-group">
-                            <label>Stock</label>
-                            <input
-                              onChange={handleChangeStock}
-                              name="stock"
-                              type="number"
-                              min="0"
-                              className="form-control"
-                              required
-                            />
-                          </div>
 
                           <div className="form-group">
                             <label>Image</label>
@@ -311,37 +297,7 @@ export default function Navbar(props) {
                               required
                             />
                           </div>
-                          <div className="form-group">
-                            <label>Raiting</label>
-                            <input
-                              onChange={handleChangeRaiting}
-                              name="raiting"
-                              type="number"
-                              min="0"
-                              max="10"
-                              className="form-control"
-                            />
-                          </div>
-                          <div className="form-group">
-                            <label>Active:</label>
-                            <br></br>
-                            <label>
-                              <input
-                                type="checkbox"
-                                id="cbox1"
-                                value="true"
-                                onChange={handleChangeActive}
-                              />{" "}
-                              True
-                            </label>
-                            <input
-                              type="checkbox"
-                              id="cbox2"
-                              value="false"
-                              onChange={handleChangeActive}
-                            />{" "}
-                            <label for="cbox2">False</label>
-                          </div>
+                 
                           <div className="form-group">
                             <label>Category</label>
                             <input

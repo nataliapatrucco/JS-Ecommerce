@@ -2,6 +2,31 @@ const express = require("express");
 const Product_Cart = require("sequelize");
 const router = express.Router();
 const { Cart, Product, User, Product_cart } = require("../models");
+const nodemailer = require("nodemailer");
+
+router.post("/checkout", (req, res) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "jsclothingp5@gmail.com",
+      pass: "ecommercep5"
+    }
+  });
+
+  const mailOptions = {
+    from: "jsclothingp5@gmail.com",
+    to: req.body.user.email,
+    subject: "Your purchase at JS",
+    text: `${JSON.stringify(req.body.cart)}`
+  };
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+});
 
 router.post("/remove", async function(req, res, next) {
   const cart = await Cart.findOne({

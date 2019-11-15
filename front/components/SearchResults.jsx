@@ -24,7 +24,11 @@ export default function SearchResults({ catFilter, products, searchQuery }) {
                 key={product.id}
               >
                 <Link to={`/product/${product.id}`}>
-                  <Card.Img variant="top" src={product.image.slice(1)} />
+                  <Card.Img variant="top" src={
+                    product.image[0] === '.' ?
+                    product.image.slice(1) : product.image
+                    } />
+
                 </Link>
                 <Card.Body id="prodBody">
                   <Card.Title id="productName">{product.name}</Card.Title>

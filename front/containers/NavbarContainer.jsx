@@ -14,8 +14,7 @@ class NavbarContainer extends Component {
     this.state = {
       email: "",
       password: "",
-      name: "",
-      wrongUser: ""
+      name: ""
     };
     this.handleLogIn = this.handleLogIn.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
@@ -26,23 +25,17 @@ class NavbarContainer extends Component {
     this.handleChangePrice = this.handleChangePrice.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
-    this.handleChangeRaiting = this.handleChangeRaiting.bind(this);
-    this.handleChangeStock = this.handleChangeStock.bind(this);
-    this.handleChangeActive = this.handleChangeActive.bind(this);
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
   }
 
   handleSubmitCreate(e) {
     e.preventDefault();
     let updatedProduct = {};
-    updatedProduct.active = this.state.active;
     updatedProduct.category = this.state.category.split(" ");
     updatedProduct.description = this.state.description;
     updatedProduct.image = this.state.image;
     updatedProduct.name = this.state.name;
     updatedProduct.price = this.state.price;
-    updatedProduct.rating = this.state.rating;
-    updatedProduct.stock = this.state.stock;
 
     Axios.post("/api/admin/create", updatedProduct).then(() => {});
     document.querySelector("#editCruz").click();
@@ -62,20 +55,13 @@ class NavbarContainer extends Component {
   handleChangeImage(event) {
     this.setState({ image: event.target.value });
   }
-  handleChangeStock(event) {
-    this.setState({ stock: event.target.value });
-  }
-  handleChangeRaiting(event) {
-    this.setState({ raiting: event.target.value });
-  }
+
 
   handleChangeCategory(event) {
     this.setState({ category: event.target.value });
   }
 
-  handleChangeActive(event) {
-    this.setState({ active: event.target.value });
-  }
+
 
   handleSubmitRegister(event) {
     event.preventDefault();
@@ -125,9 +111,6 @@ class NavbarContainer extends Component {
           handleChangeImage={this.handleChangeImage}
           handleChangePrice={this.handleChangePrice}
           handleChangeDescription={this.handleChangeDescription}
-          handleChangeRaiting={this.handleChangeRaiting}
-          handleChangeStock={this.handleChangeStock}
-          handleChangeActive={this.handleChangeActive}
           handleChangeCategory={this.handleChangeCategory}
           wrongUser={this.state.wrongUser}
           location={location}

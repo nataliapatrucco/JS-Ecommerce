@@ -75,8 +75,12 @@ router.post("/register", function(req, res) {
 });
 
 router.get("/logout", function(req, res) {
-  req.logout();
+  res.clearCookie("connect.sid");
+  // req.session.destroy(function() {
+  //   // req.logOut();
+  //   console.log("req.user logout/////////////////", req.user);
   res.sendStatus(200);
+  // });
 });
 
 router.get("/me", function(req, res) {
@@ -85,7 +89,7 @@ router.get("/me", function(req, res) {
 
 router.put("/allMyInfo", (req, res, next) => {
   User.findOne({
-    where: { name: req.user.name },
+    where: { id: req.user.id },
     include: [
       {
         model: Cart,
@@ -106,21 +110,18 @@ router.put("/allMyInfo", (req, res, next) => {
     ]
   }).then(user => {
     user.CurrentUserCart.update({ state: "completado" }).then(() =>
-      user
-        .addPastOrder(user.CurrentUserCart)
-        .then(() => {
-            Cart.create({name: new Date()}).then(cart=>{
-              user.setCurrentUserCart(cart)
-            })
-        })
+      user.addPastOrder(user.CurrentUserCart).then(() => {
+        Cart.create({ name: new Date() }).then(cart => {
+          user.setCurrentUserCart(cart);
+        });
+      })
     );
   });
 });
 
 router.get("/allMyInfo", (req, res, next) => {
- 
   User.findOne({
-    where: { name: req.user.name },
+    where: { id: req.user.id },
     include: [
       {
         model: Cart,
@@ -140,7 +141,6 @@ router.get("/allMyInfo", (req, res, next) => {
       }
     ]
   }).then(user => {
-    
     res.send(user);
   });
 });

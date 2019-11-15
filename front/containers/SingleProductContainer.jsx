@@ -96,8 +96,6 @@ class SingleProductContainer extends React.Component {
       });
   }
 
-  //YO
-
   addProduct(product) {
     this.props.fetchAndAddToCart(product, this.props.user);
   }

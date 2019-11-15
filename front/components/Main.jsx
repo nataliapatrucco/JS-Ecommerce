@@ -97,7 +97,7 @@ class Main extends Component {
             <Route exact path="/user" component={HomeContainer} />
           )}
         </Switch>
-        {/* <Footer /> */}
+       
       </div>
     );
   }
