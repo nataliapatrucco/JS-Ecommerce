@@ -39,6 +39,9 @@ router.delete("/:user", async function(req, res, next) {
 });
 
 router.post("/create", function(req, res, next) {
+  console.log("CREATINGPRODUCT", req.body)
+  req.body.name = req.body.name.toLowerCase()
+  console.log(req.body.name);
   Product.create(req.body)
     .then(product => {
       Category.findAll().then(categories => {

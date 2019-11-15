@@ -113,7 +113,7 @@ export default ({
                     <button
                       type="button"
                       className="close"
-                      id="editCruz"
+                      id="editClose"
                       data-dismiss="modal"
                       aria-label="Close"
                     >
@@ -233,6 +233,16 @@ export default ({
                     </small>
                   </li>
                   <li className="list-group-item">
+                  <div className="card card-body bg-dark my-5 text-light">
+                <button
+                  onClick={() => addProduct(selectedProduct)}
+                  type="button"
+                  className="btn btn-default text-light"
+                  id="editclose"
+                >
+                  Add to Cart
+                </button>
+              </div>
                     <strong>Product Reviews:</strong>
                     {reviews.map(review => {
                       return (
@@ -246,19 +256,10 @@ export default ({
                     })}
                   </li>
                 </ul>
+              
               </div>
             </div>
             <div className="row">
-              <div className="card card-body bg-dark my-5 text-light">
-                <button
-                  onClick={() => addProduct(selectedProduct)}
-                  type="button"
-                  className="btn btn-default text-light"
-                  id="editclose"
-                >
-                  Add to Cart
-                </button>
-              </div>
             </div>
           </form>
         )}

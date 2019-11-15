@@ -61,8 +61,10 @@ class SingleProductContainer extends React.Component {
 
     this.props.adminEditProduct(updatedProduct);
 
+    document.querySelector("#editClose").click();
+
     this.props.history.push(`/`);
-    document.querySelector("#editCruz").click();
+    
   }
 
   handleChangeName(event) {

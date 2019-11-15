@@ -12,6 +12,8 @@ export default function SearchResults({ catFilter, products, searchQuery }) {
       ))
     : null;
 
+    console.log("products", products)
+
   return (
     <div id="randomViewContainer">
       {products.length != 0 ? (
