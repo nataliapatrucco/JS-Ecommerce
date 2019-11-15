@@ -42,7 +42,7 @@ app.use("/api", routes);
 app.use("/*", function(req, res, next) {
   res.sendFile(path.join(__dirname, "./public/index.html"));
 });
-
+// aaa
 db.sync({ force: false })
   .then(() => {
     console.log(chalk.bgGreen(chalk.black("Connected to database." + "")));
