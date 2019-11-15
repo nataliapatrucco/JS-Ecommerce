@@ -39,6 +39,7 @@ class NavbarContainer extends Component {
 
     Axios.post("/api/admin/create", updatedProduct).then(() => {});
     document.querySelector("#editCruz").click();
+    window.location.reload()
   }
   handleChangeName(event) {
     this.setState({ name: event.target.value });

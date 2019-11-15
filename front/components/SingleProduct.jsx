@@ -22,6 +22,8 @@ export default ({
       
     return (
       <div id="singleView" className="container">
+        {console.log("ENTERSINLGEPRODUCT")}
+        {console.log(selectedProduct)}
         {user.userType == "admin" ? (
           <form>
             <div className="row">
@@ -122,13 +124,14 @@ export default ({
                   </div>
                   <div className="modal-body">
                     <form id="registerForm" onSubmit={handleSubmit}>
+                      {console.log("enterFOrm!!!!!!")}
                       <div className="form-group">
                         <label>Name</label>
                         <input
                           name="name"
                           type="text"
                           className="form-control"
-                          defaultValue={selectedProduct.name}
+                          value={selectedProduct.name}
                           onChange={handleChangeName}
                         />
                         <div className="form-group">
@@ -138,7 +141,7 @@ export default ({
                             name="price"
                             type="text"
                             className="form-control"
-                            defaultValue={selectedProduct.price}
+                            value={selectedProduct.price}
                           />
                         </div>
 
@@ -149,7 +152,7 @@ export default ({
                             name="description"
                             type="text"
                             className="form-control"
-                            defaultValue={selectedProduct.description}
+                            value={selectedProduct.description}
                           />
                         </div>
 
@@ -160,7 +163,7 @@ export default ({
                             name="Image"
                             type="text"
                             className="form-control"
-                            defaultValue={selectedProduct.image}
+                            value={selectedProduct.image}
                           />
                         </div>
                         <div className="form-group">
@@ -169,7 +172,7 @@ export default ({
                             name="Category"
                             type="text"
                             className="form-control"
-                            defaultValue={selectedProduct.category}
+                            value={selectedProduct.category}
                             onChange={handleChangeCategory}
                           />
                         </div>

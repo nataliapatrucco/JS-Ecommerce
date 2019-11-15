@@ -297,7 +297,7 @@ export default function Navbar(props) {
                               required
                             />
                           </div>
-                 
+
                           <div className="form-group">
                             <label>Category</label>
                             <input
@@ -320,7 +320,9 @@ export default function Navbar(props) {
                 </div>
               </div>
               <Link to="/admin/users">
-                <button className="btn btn-light">USERS</button>
+                <button className="btn btn-light" id="registerButton">
+                  USERS
+                </button>
               </Link>
             </div>
           ) : (
