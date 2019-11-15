@@ -648,7 +648,9 @@ function Navbar(props) {
     className: "btn btn-dark"
   }, "Send")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/admin/users"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "USERS"))) : " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "btn btn-light"
+  }, "USERS"))) : " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "cartButton"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ai__WEBPACK_IMPORTED_MODULE_1__["AiOutlineShoppingCart"], null)))));
 }
@@ -808,7 +810,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import { Grid, Row, Col } from "../node_modules/react-flexbox-grid";
 
 function SearchResults(_ref) {
   var catFilter = _ref.catFilter,
@@ -820,9 +821,7 @@ function SearchResults(_ref) {
   }) : null;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "randomViewContainer"
-  }, products.length != 0 ? // <Row>
-  //   <Col sm={4}>
-  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, filteredProducts.map(function (product) {
+  }, products.length != 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["CardDeck"], null, filteredProducts.map(function (product) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
       className: "card text-center",
       id: "productCard",
@@ -851,9 +850,7 @@ function SearchResults(_ref) {
       id: "plusBtn",
       className: "btn btn-light"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_ti__WEBPACK_IMPORTED_MODULE_4__["TiPlus"], null), " info"))));
-  })) : //   </Col>
-  // </Row>
-  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "UNFORTUNATELY WE DON'T GET RESULTS FOR YOUR SEARCH: ", searchQuery, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Please try again!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Tips for your search: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Check your spelling in case you had typing errors, for example \"Palangana\" instead of \"Pants.\""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Try again, looking for only one word."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Try again, looking for more generic terms - you can filter the results later."))));
+  }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "UNFORTUNATELY WE DON'T GET RESULTS FOR YOUR SEARCH: ", searchQuery, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Please try again!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Tips for your search: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Check your spelling in case you had typing errors, for example \"Palangana\" instead of \"Pants.\""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Try again, looking for only one word."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Try again, looking for more generic terms - you can filter the results later."))));
 }
 
 /***/ }),
@@ -872,8 +869,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-star-ratings */ "./node_modules/react-star-ratings/build/index.js");
 /* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_star_ratings__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_Review__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Review */ "./components/Review.jsx");
-/* harmony import */ var _store_reducers_productsReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/reducers/productsReducer */ "./store/reducers/productsReducer.jsx");
-
 
 
 
@@ -887,7 +882,8 @@ __webpack_require__.r(__webpack_exports__);
       handleChangePrice = _ref.handleChangePrice,
       handleChangeDescription = _ref.handleChangeDescription,
       handleChangeImage = _ref.handleChangeImage,
-      handleDelete = _ref.handleDelete;
+      handleDelete = _ref.handleDelete,
+      handleChangeCategory = _ref.handleChangeCategory;
 
   if (selectedProduct.image) {
     var urlImg = selectedProduct.image.slice(1);
@@ -1009,6 +1005,14 @@ __webpack_require__.r(__webpack_exports__);
       type: "text",
       className: "form-control",
       defaultValue: selectedProduct.image
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Categories"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      name: "Category",
+      type: "text",
+      className: "form-control",
+      defaultValue: selectedProduct.category,
+      onChange: handleChangeCategory
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "modal-footer"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1740,6 +1744,7 @@ function (_React$Component) {
     _this.handleChangeImage = _this.handleChangeImage.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
+    _this.handleChangeCategory = _this.handleChangeCategory.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1775,8 +1780,8 @@ function (_React$Component) {
       updatedProduct.rating = updatedProduct.rating * 2;
       updatedProduct.stock = this.state.stock || this.props.selectedProduct.stock;
       this.props.adminEditProduct(updatedProduct);
-      document.querySelector("#editCruz").click();
       this.props.history.push("/");
+      document.querySelector("#editCruz").click();
     }
   }, {
     key: "handleChangeName",
@@ -1804,6 +1809,13 @@ function (_React$Component) {
     value: function handleChangeImage(event) {
       this.setState({
         image: event.target.value
+      });
+    }
+  }, {
+    key: "handleChangeCategory",
+    value: function handleChangeCategory(event) {
+      this.setState({
+        category: event.target.value
       });
     }
   }, {
@@ -57078,7 +57090,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

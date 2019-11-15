@@ -365,7 +365,7 @@ export default function Navbar(props) {
                 </div>
               </div>
               <Link to="/admin/users">
-                <button>USERS</button>
+                <button className="btn btn-light">USERS</button>
               </Link>
             </div>
           ) : (

@@ -23,6 +23,7 @@ class SingleProductContainer extends React.Component {
     this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleChangeCategory = this.handleChangeCategory.bind(this);
   }
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id);
@@ -54,9 +55,9 @@ class SingleProductContainer extends React.Component {
     updatedProduct.stock = this.state.stock || this.props.selectedProduct.stock;
 
     this.props.adminEditProduct(updatedProduct);
-    document.querySelector("#editCruz").click();
 
     this.props.history.push(`/`);
+    document.querySelector("#editCruz").click();
   }
 
   handleChangeName(event) {
@@ -73,6 +74,10 @@ class SingleProductContainer extends React.Component {
 
   handleChangeImage(event) {
     this.setState({ image: event.target.value });
+  }
+
+  handleChangeCategory(event) {
+    this.setState({ category: event.target.value });
   }
 
   getReviews() {

@@ -1,7 +1,6 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 import Review from "../components/Review";
-import productsReducer from "../store/reducers/productsReducer";
 
 export default ({
   selectedProduct,
@@ -13,7 +12,8 @@ export default ({
   handleChangePrice,
   handleChangeDescription,
   handleChangeImage,
-  handleDelete
+  handleDelete,
+  handleChangeCategory
 }) => {
   if (selectedProduct.image) {
     let urlImg = selectedProduct.image.slice(1);
@@ -154,6 +154,17 @@ export default ({
                             defaultValue={selectedProduct.image}
                           />
                         </div>
+                        <div className="form-group">
+                          <label>Categories</label>
+                          <input
+                            name="Category"
+                            type="text"
+                            className="form-control"
+                            defaultValue={selectedProduct.category}
+                            onChange={handleChangeCategory}
+                          />
+                        </div>
+
                         <div className="modal-footer">
                           <button type="submit" className="btn btn-dark">
                             Send
