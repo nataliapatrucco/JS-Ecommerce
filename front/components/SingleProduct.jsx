@@ -16,15 +16,24 @@ export default ({
   handleChangeCategory
 }) => {
   if (selectedProduct.image) {
-    let urlImg = selectedProduct.image.slice(1);
+    let urlImg = 
+    selectedProduct.image[0] === '.' ?
+    selectedProduct.image.slice(1) : selectedProduct.image
+      
     return (
       <div id="singleView" className="container">
+        {console.log("ENTERSINLGEPRODUCT")}
+        {console.log(selectedProduct)}
         {user.userType == "admin" ? (
           <form>
             <div className="row">
               <div id="singleProdImg" className="col-8 card card-body">
                 <img
-                  src={`${window.location.origin}${urlImg}`}
+                  src={
+                    urlImg[0]=== '/' ? 
+                    `${window.location.origin}${urlImg}` :
+                    urlImg
+                    }
                   className="thumbnail"
                   alt="Image"
                 />
@@ -106,7 +115,7 @@ export default ({
                     <button
                       type="button"
                       className="close"
-                      id="editCruz"
+                      id="editClose"
                       data-dismiss="modal"
                       aria-label="Close"
                     >
@@ -115,13 +124,14 @@ export default ({
                   </div>
                   <div className="modal-body">
                     <form id="registerForm" onSubmit={handleSubmit}>
+                      {console.log("enterFOrm!!!!!!")}
                       <div className="form-group">
                         <label>Name</label>
                         <input
                           name="name"
                           type="text"
                           className="form-control"
-                          defaultValue={selectedProduct.name}
+                          value={selectedProduct.name}
                           onChange={handleChangeName}
                         />
                         <div className="form-group">
@@ -131,7 +141,7 @@ export default ({
                             name="price"
                             type="text"
                             className="form-control"
-                            defaultValue={selectedProduct.price}
+                            value={selectedProduct.price}
                           />
                         </div>
 
@@ -142,7 +152,7 @@ export default ({
                             name="description"
                             type="text"
                             className="form-control"
-                            defaultValue={selectedProduct.description}
+                            value={selectedProduct.description}
                           />
                         </div>
 
@@ -153,7 +163,7 @@ export default ({
                             name="Image"
                             type="text"
                             className="form-control"
-                            defaultValue={selectedProduct.image}
+                            value={selectedProduct.image}
                           />
                         </div>
                         <div className="form-group">
@@ -162,7 +172,7 @@ export default ({
                             name="Category"
                             type="text"
                             className="form-control"
-                            defaultValue={selectedProduct.category}
+                            value={selectedProduct.category}
                             onChange={handleChangeCategory}
                           />
                         </div>
@@ -195,7 +205,11 @@ export default ({
             <div className="row">
               <div id="singleProdImg" className="col-8 card card-body">
                 <img
-                  src={`${window.location.origin}${urlImg}`}
+                src={
+                    urlImg[0]=== '/' ? 
+                    `${window.location.origin}${urlImg}` :
+                    urlImg
+                    }
                   className="thumbnail"
                   alt="Image"
                 />
@@ -222,6 +236,16 @@ export default ({
                     </small>
                   </li>
                   <li className="list-group-item">
+                  <div className="card card-body bg-dark my-5 text-light">
+                <button
+                  onClick={() => addProduct(selectedProduct)}
+                  type="button"
+                  className="btn btn-default text-light"
+                  id="editclose"
+                >
+                  Add to Cart
+                </button>
+              </div>
                     <strong>Product Reviews:</strong>
                     {reviews.map(review => {
                       return (
@@ -235,19 +259,10 @@ export default ({
                     })}
                   </li>
                 </ul>
+              
               </div>
             </div>
             <div className="row">
-              <div className="card card-body bg-dark my-5 text-light">
-                <button
-                  onClick={() => addProduct(selectedProduct)}
-                  type="button"
-                  className="btn btn-default text-light"
-                  id="editclose"
-                >
-                  Add to Cart
-                </button>
-              </div>
             </div>
           </form>
         )}

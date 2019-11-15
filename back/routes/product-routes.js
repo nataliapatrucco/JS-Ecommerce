@@ -51,11 +51,15 @@ router.get("/", function(req, res) {
 router.get("/filtered/:query", function(req, res) {
   let search = req.params.query;
   let searchLow = search.toLowerCase();
+  console.log("SEARCH", search)
   Product.findAll({
     where: {
       name: { [Op.like]: `%${searchLow}%` }
     }
-  }).then(products => addRatingsAndSend(products, res));
+  }).then(products => {
+    console.log("PRODUCTS",products)
+    addRatingsAndSend(products, res)
+  });
 });
 
 //gets all products with category
@@ -101,6 +105,7 @@ router.post("/", function(req, res, next) {
 //edit product
 router.put("/:productId", function(req, res, next) {
   console.log(req.body);
+  req.body.name = req.body.name.toLowerCase()
   Product.update(req.body, { where: { id: req.params.productId } }).then(
     product => {
       res.send(product);

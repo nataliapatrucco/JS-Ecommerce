@@ -89,7 +89,7 @@ router.get("/me", function(req, res) {
 
 router.put("/allMyInfo", (req, res, next) => {
   User.findOne({
-    where: { name: req.user.name },
+    where: { id: req.user.id },
     include: [
       {
         model: Cart,
@@ -121,7 +121,7 @@ router.put("/allMyInfo", (req, res, next) => {
 
 router.get("/allMyInfo", (req, res, next) => {
   User.findOne({
-    where: { name: req.user.name },
+    where: { id: req.user.id },
     include: [
       {
         model: Cart,

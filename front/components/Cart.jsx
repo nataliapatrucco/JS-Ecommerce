@@ -1,5 +1,5 @@
 import React from "react";
-
+import {FaTrashAlt} from "react-icons/fa"
 import AlterQuantButton from "../components/AlterQuantButton";
 import Checkout from "../containers/CheckoutContainer";
 
@@ -33,9 +33,11 @@ export default function Cart({
                       quantRemove={quantRemove}
                     />
                     <button
-                      className="removeItemButton"
+                      className="removeItemButton btn btn-danger"
                       onClick={() => quantRemove(cartItem)}
-                    ></button>
+                    >
+                    <FaTrashAlt/>
+                    </button>
                     {price ? (
                       <p>
                         subtotal: ${" "}

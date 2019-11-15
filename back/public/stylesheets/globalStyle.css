@@ -63,6 +63,7 @@ body {
           box-sizing: content-box;
   padding: 1rem;
   border: 2px solid #c47464;
+  border-radius: 10px;
   color: #000;
   font-size: 16px;
   margin-top: 1vh;
@@ -88,6 +89,7 @@ body {
 
 #alterQuant {
   padding: 6px;
+  border-radius: 10px;
   border: 2px solid #a35963;
 }
 
@@ -106,9 +108,6 @@ body {
 }
 
 .removeItemButton {
-  border: 2px solid black;
-  background-color: red;
-  width: 30px;
-  height: 30px;
+  margin-left: 5px;
 }
 /*# sourceMappingURL=globalStyle.css.map */
