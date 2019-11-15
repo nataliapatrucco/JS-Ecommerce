@@ -14,7 +14,7 @@ Product_cart.init(
     },
     quantity: {
         type: S.INTEGER,
-        defaultValue: 0
+        defaultValue: 1
     }
   },
   { sequelize: db, modelName: "product_cart" }

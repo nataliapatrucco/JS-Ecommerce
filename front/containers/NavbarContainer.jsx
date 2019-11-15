@@ -14,8 +14,7 @@ class NavbarContainer extends Component {
     this.state = {
       email: "",
       password: "",
-      name: "",
-      wrongUser: ""
+      name: ""
     };
     this.handleLogIn = this.handleLogIn.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
@@ -41,7 +40,7 @@ class NavbarContainer extends Component {
     this.props.userLogOut();
     this.props.userLogOutCart();
     window.localStorage.clear();
-    //.then(() => this.props.history.push("/"));
+    this.props.history.push("/");
   }
   handleLogIn(event) {
     event.preventDefault();

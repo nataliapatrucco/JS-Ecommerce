@@ -206,23 +206,13 @@ export default function Navbar(props) {
         )}
         <div>
           {Object.keys(user).length ? (
-            <Link to="/user/id">
+            <Link to="/user/">
               <span id="helloUser">Hello {user.name}</span>
             </Link>
-          ) : null}
+          ) : (
+            ""
+          )}
 
-          {/* code for adding searchbar to navbar */}
-
-          {/* {props.location.pathname !== "/" && 
-          <input
-              onChange={props.handleChange}
-              className=" active-purple-3 active-purple-4 form-control navSearch"
-              type="text"
-              placeholder="search"
-              aria-label="Search"
-              style={{ textAlign: "center" }}
-            />
-          } */}
           <Link to="/cart">
             <button id="cartButton">
               <AiOutlineShoppingCart />

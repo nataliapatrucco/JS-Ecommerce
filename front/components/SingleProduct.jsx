@@ -39,8 +39,11 @@ export default ({ selectedProduct, addProduct, reviews }) => {
                 </li>
                 <li className="list-group-item">
                   <strong>Product Reviews:</strong>
-                  {reviews.map(review=>{
-                    return (<Review key={review.id} author={review.author} rating ={review.rating} comment ={review.comment}/>)
+                  {reviews.length && reviews.map(review=>{
+                    return ( <div key={review.id} >
+                      <Review  author={review.author} rating ={review.rating} comment ={review.comment}/>
+                    </div>
+                      )
                   })}
                 </li>
               </ul>
