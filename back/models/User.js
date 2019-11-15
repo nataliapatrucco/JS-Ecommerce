@@ -27,7 +27,7 @@ User.init(
       type: S.STRING
     },
     userType: {
-      type: S.ENUM("user", "admin", "root"),
+      type: S.ENUM("user", "admin"),
       defaultValue: "user"
     },
     address: {

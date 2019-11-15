@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchProducts } from '../store/actions/product';
-import Search from '../components/Search';
-import RandomView from '../components/RandomView';
-import { searchProducts } from '../store/actions/product';
-import { fetchAndAddToCart } from '../store/actions/cart';
-import { fetchProduct } from '../store/actions/product';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchProducts } from "../store/actions/product";
+import Search from "../components/Search";
+import RandomView from "../components/RandomView";
+import { searchProducts } from "../store/actions/product";
+import { fetchAndAddToCart } from "../store/actions/cart";
+import { fetchProduct } from "../store/actions/product";
 
 export class HomeContainers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchQuery: ''
+      searchQuery: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,7 +43,13 @@ export class HomeContainers extends Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
-        <RandomView handleAdd={this.handleAdd} products={this.props.products} />
+        <RandomView
+          user={this.props.user}
+          selectedProduct={this.props.selectedProduct}
+          handleSelect={this.handleSelect}
+          handleAdd={this.handleAdd}
+          products={this.props.products}
+        />
       </div>
     );
   }
@@ -62,7 +68,4 @@ const mapStateToProps = state => ({
   selectedProduct: state.products.selectedProduct
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeContainers);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainers);

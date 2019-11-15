@@ -11,7 +11,16 @@ export default function Navbar(props) {
     handleSubmitRegister,
     location,
     user,
-    wrongUser
+    wrongUser,
+    handleSubmitCreate,
+    handleChangePrice,
+    handleChangeName,
+    handleChangeStock,
+    handleChangeCategory,
+    handleChangeImage,
+    handleChangeActive,
+    handleChangeRaiting,
+    handleChangeDescription
   } = props;
 
   return (
@@ -212,19 +221,155 @@ export default function Navbar(props) {
           ) : (
             ""
           )}
+          {user.userType == "admin" ? (
+            <div>
+              <button
+                type="button"
+                className="btn btn-light"
+                data-toggle="modal"
+                id="registerButton"
+                data-target="#register"
+              >
+                CREATE
+              </button>
+              <div
+                className="modal fade"
+                id="register"
+                tabIndex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h2 className="modal-title" id="exampleModalLabel">
+                        Create product
+                      </h2>
+                      <button
+                        type="button"
+                        className="close"
+                        id="editCruz"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      <form id="registerForm" onSubmit={handleSubmitCreate}>
+                        <div className="form-group">
+                          <label>Name</label>
+                          <input
+                            name="name"
+                            type="text"
+                            className="form-control"
+                            required
+                            onChange={handleChangeName}
+                          />
+                          <div className="form-group">
+                            <label>Price</label>
+                            <input
+                              onChange={handleChangePrice}
+                              name="price"
+                              type="number"
+                              min="0"
+                              className="form-control"
+                              required
+                            />
+                          </div>
 
-          {/* code for adding searchbar to navbar */}
+                          <div className="form-group">
+                            <label>Description</label>
+                            <input
+                              onChange={handleChangeDescription}
+                              name="description"
+                              type="text"
+                              className="form-control"
+                              required
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label>Stock</label>
+                            <input
+                              onChange={handleChangeStock}
+                              name="stock"
+                              type="number"
+                              min="0"
+                              className="form-control"
+                              required
+                            />
+                          </div>
 
-          {/* {props.location.pathname !== "/" && 
-          <input
-              onChange={props.handleChange}
-              className=" active-purple-3 active-purple-4 form-control navSearch"
-              type="text"
-              placeholder="search"
-              aria-label="Search"
-              style={{ textAlign: "center" }}
-            />
-          } */}
+                          <div className="form-group">
+                            <label>Image</label>
+                            <input
+                              onChange={handleChangeImage}
+                              name="Image"
+                              type="text"
+                              className="form-control"
+                              required
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label>Raiting</label>
+                            <input
+                              onChange={handleChangeRaiting}
+                              name="raiting"
+                              type="number"
+                              min="0"
+                              max="10"
+                              className="form-control"
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label>Active:</label>
+                            <br></br>
+                            <label>
+                              <input
+                                type="checkbox"
+                                id="cbox1"
+                                value="true"
+                                onChange={handleChangeActive}
+                              />{" "}
+                              True
+                            </label>
+                            <input
+                              type="checkbox"
+                              id="cbox2"
+                              value="false"
+                              onChange={handleChangeActive}
+                            />{" "}
+                            <label for="cbox2">False</label>
+                          </div>
+                          <div className="form-group">
+                            <label>Category</label>
+                            <input
+                              onChange={handleChangeCategory}
+                              name="category"
+                              type="text"
+                              className="form-control"
+                            />
+                          </div>
+
+                          <div className="modal-footer">
+                            <button type="submit" className="btn btn-dark">
+                              Send
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <Link to="/admin/users">
+                <button className="btn btn-light">USERS</button>
+              </Link>
+            </div>
+          ) : (
+            " "
+          )}
           <Link to="/cart">
             <button id="cartButton">
               <AiOutlineShoppingCart />

@@ -20,8 +20,8 @@ export const fetchCart = user => dispatch => {
     return axios
       .get("/api/cart/me")
       .then(res => {
-       
-        return res.data})
+        return res.data;
+      })
       .then(cart => dispatch(setCart(cart)));
 
   return dispatch(
@@ -34,8 +34,7 @@ export const fetchAndAddToCart = (product, user) => dispatch => {
     return axios
       .post("/api/cart/addQuantity/", product)
       .then(res => {
-       
-        return res.data
+        return res.data;
       })
       .then(cart => dispatch(setCart(cart)));
   }
