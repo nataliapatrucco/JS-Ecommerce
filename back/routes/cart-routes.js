@@ -13,11 +13,20 @@ router.post("/checkout", (req, res) => {
     }
   });
 
+  const simplifyCart = cart => {
+    let newCart = [];
+    cart.forEach(e => newCart.push(`Product: ${e.name} - Total: ${e.price}`));
+    return newCart;
+  };
+
   const mailOptions = {
     from: "jsclothingp5@gmail.com",
     to: req.body.user.email,
     subject: "Your purchase at JS",
-    text: `${JSON.stringify(req.body.cart)}`
+
+    text: `We are processing your order. Your order: ${JSON.stringify(
+      simplifyCart(req.body.cart)
+    )}`
   };
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
